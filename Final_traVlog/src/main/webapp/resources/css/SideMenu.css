@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#menu {width:175px; height:1400px; float:left; position:absolute; z-index: 2; border-right: 1px solid #e89da2;}
+
+#menu ul {margin:0; padding:0; list-style:none; white-space:nowrap; text-align:left;  padding:1px 1px 0 1px;}
+
+#menu li {margin:0; padding:0; list-style:none;}
+#menu li {display:inline-block; display:inline;}
+#menu ul {position:absolute; left:-9999px;}
+#menu ul.level1 {position:absolute; left:0; top:0px;height: 100%;}
+
+
+#menu a {
+display:block; 
+font:normal 15px verdana,arial,sans-serif; 
+color:#000; 
+line-height:40px; 
+text-decoration:none;
+padding:10px 30px 10px 30px; 
+margin-top: 12px;
+text-align: center;} 
+
+#menu ul li:hover > ul {visibility:visible; left:100%; margin-top:-64px; margin-left:1px}
+
+#menu a:hover ul,
+#menu a:hover a:hover ul, 
+#menu a:hover a:hover a:hover ul {left:100%; visibility:visible;}
+#menu a:hover ul ul, 
+#menu a:hover a:hover ul ul {left:-9999px;}
+
+/* #menu li a.fly {border-bottom:2px solid ; }			메인메뉴 */
+#menu li:hover > a.fly {border-left:2px solid #e89da2; color: #e89da2;} /*메인메뉴 hover*/

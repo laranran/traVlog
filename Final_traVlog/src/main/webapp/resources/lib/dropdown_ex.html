@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Flat Color CSS Drop Menu</title>
+        <link rel="stylesheet" href="/SRC2/megamenu1/navbar_techandall.css"> <!-- Navigation CSS -->
+        <link href="/SRC2/megamenu1/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   		<script type="text/javascript">
+   	 // gnb
+
+   	 $(".gnb").each(function(){
+
+   	  //$("> li > ul", this).css({"display":"none"});
+
+   	  $("li li.on",this).parents("li").addClass("on");
+
+   	  $("> li, li li", this).on("mouseenter focusin",function(){
+
+   	   $(this).addClass("hv");
+
+   	  }).on("mouseleave focusout",function(){
+
+   	   $(this).removeClass("hv");
+
+   	  });
+
+   	  $(this).on("mouseenter focusin",function(){
+
+   	            //alert('aa');
+
+   	            $('.sub_mn').stop(true,true).animate({"height":"300px"},300);
+
+   	   $('.main_mnu_bg').addClass("on").stop(true,true).animate({"height":"215px"},200);
+
+   	  }).on("mouseleave",function(){
+
+   	            $('.sub_mn').stop(true,true).animate({"height":"0px"},200);
+
+   	   $('.main_mnu_bg').removeClass("on").stop(true,true).animate({"height":"0px"},300);
+
+   	  });
+
+   	 });
+
+   	  /*
+
+   	 $('*:not(".gnb a")').focus(function(){
+
+   	  $(".gnb").removeClass("hv")
+
+   	  $(".gnb").removeClass("on").stop(true,true).animate({"height":"65px"},200);
+
+   	 });
+
+   	  */
+   		
+   		</script>
+   		
+   		<style type="text/css">
+   		#gnb{height: 124px;background-color: #ffffff;}
+
+.main_gnb {background: url(/kr/_res/img/index/bg_top.gif) repeat-x;}
+
+.main_mn .mn_a{font-weight:bold;font-size:20px;padding:10px 65px;color:#000000;}
+
+.main_mn .sub_mn{padding:25px 0 0 35px; display: block;z-index:999999;height:0px;overflow:hidden;}
+
+.main_mn .sub_mn a{font-weight:bold;font-size:14px;line-height:23px;padding:0 0 0 30px;color:#000000;}
+
+.main_mn .sub_mn a:hover{color:#ff4800;text-decoration:underline;}
+
+.main_mn .sub_mn a.jw_selected{color:#ff4800;text-decoration:underline;}
+
+ul.sub_mn{top:125px;}
+
+ 
+
+.main_mnu_bg {
+
+    background: none repeat scroll 0 0 #ffffff;
+
+    opacity:0.8;
+
+    position: absolute;
+
+    top: 124px;
+
+    width: 100%;
+
+    z-index: 999;
+
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
+
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,.5);  
+
+}
+   		</style>
+    </head>
+
+<body bgcolor="#333333">
+
+
+<div class="lo_1500_left no_bg">
+
+ <!-- 밑으로 내려오는 배경 DIV-->
+
+ <div class="main_mnu_bg" style="height: 0px;"></div> 
+
+ <!-- 밑으로 내려오는 배경 DIV end -->
+
+ <div class="jwxe_root" style="height:124px; ">
+
+ 
+
+  <div id="gnb" class="jwxe_div jw-relative" style="left:562px; top:60px; width:880px; ">
+
+   <ul class="jwxe_ul main_mn gnb jwmnupulldown" style="height:65px; width:879px; ">
+
+    <li class="over">
+
+     <a class="jwxe_a jw-relative jw-fl-left mn_a over" id="jwxe_0741435" style="height:65px;" href="/kr/intro/intro.jsp">회사소개
+
+     </a>
+
+     <ul class="jwxe_ul jw-dsp-none sub_mn" style="top: 60px; height: 0px; width: 175px;">
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_0804710" style="width:120px;" href="/kr/intro/intro.jsp">기업 개요</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_0842304" style="width:120px;" href="/kr/intro/ceo_greeting.jsp">CEO 메세지</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1097614" style="width:120px;" href="/kr/intro/history.jsp">연혁</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1099065" style="width:120px;" href="/kr/intro/affiliate.jsp">계열사 소개</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1106712" style="width:120px;" href="/kr/intro/relation.jsp">관계사 소개</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1108475" style="width:120px;" href="/kr/intro/research.jsp">연구/개발</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1110151" style="width:120px;" href="/kr/intro/notice.jsp">공지사항</a>
+
+      </li>
+
+     </ul>
+
+    </li>
+
+    <li>
+
+     <a class="jwxe_a jw-relative jw-fl-left mn_a" id="jwxe_0744463" style="height:65px;" href="/kr/item/item01.jsp">제품소개</a>
+
+     <ul class="jwxe_ul jw-dsp-none sub_mn" style="left: 210px; top: 60px; height: 0px; width: 175px;">
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1149710" style="width:120px;" href="/kr/item/item01.jsp">가정용 밀가루</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1150395" style="width:120px;" href="/kr/item/item02_a.jsp">업소용 밀가루</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1150323" style="width:120px;" href="/kr/item/item03.jsp">프리믹스</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1149946" style="width:120px;" href="/kr/item/item04.jsp">파스타</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1150466" style="width:120px;" href="/kr/item/item05.jsp">국수</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1150491" style="width:120px;" href="/kr/item/item06.jsp">오일/소스</a>
+
+      </li>
+
+      <li>
+
+       <a class="jwxe_a jw-relative" id="jwxe_1150323" style="width:120px;" href="/kr/item/item07.jsp">공장투어</a>
+
+      </li>
+
+     </ul>
+
+    </li>
+
+   </ul>
+
+  </div>
+
+ 
+
+ </div>
+
+</div>
+
+ 
+    </body>
+</html>
+
+
+
