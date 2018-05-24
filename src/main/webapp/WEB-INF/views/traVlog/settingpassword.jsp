@@ -40,19 +40,20 @@ body {
 	<div class="usernick">닉네임</div>
 	<div class="useremail">dnsjas@naver.com</div>
 </div>
-
+<form action="">
 <div class="password">
-<label>이전 비밀번호</label>
-<input class="inputsize" id="orgpass" name="orgpass" type="password" required="required"><br>
-<label>현재 비밀번호</label> 
-<input class="inputsize" id="newpass1" name="newpass1" type="password" required="required"><br>
-<label>비밀번호 확인</label>
-<input class="inputsize" id="newpass2" name="newpass2" type="password" required="required"><br>
-
-
-
+	<label>이전 비밀번호</label>
+	<input class="inputsize" id="orgpass" name="orgpass" type="password" required="required"><br>
+	<label>현재 비밀번호</label> 
+	<input class="inputsize" id="newpass1" name="newpass1" type="password" required="required"><br>
+	<label>비밀번호 확인</label>
+	<input class="inputsize" id="newpass2" name="newpass2" type="password" required="required"><br>
+</div>
+<div class="btn">
+	<button class="passchange">비밀번호 변경</button>
 </div>
 
+</form>
 </div><!-- End content -->
 
 </div>

@@ -27,7 +27,7 @@ charset "UTF-8";
 /*password*/
 .userProfile{
 width: 600px;
-height: 200px;
+height: 250px;
 padding-top: 30px;
 margin-left: 100px;
 }
@@ -63,19 +63,42 @@ margin-left: 20px;
 margin-right: 20px;
 font-size: 17px;
 width: 200px;
+padding : 0 0 0 30px;
+float: left;
 }
 
 .inputsize  {
-	background: #ffffff;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	-khtml-border-radius: 3px;
-	border-radius: 3px;
-	outline: none;
-	padding: 5px;
-	width: 200px;
+background: #ffffff;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+-khtml-border-radius: 3px;
+border-radius: 3px;
+outline: none;
+padding: 5px;
+width: 200px;
+margin-bottom: 50px;
 }
 					
 form input:not([type=submit]):focus, {
-	background: #eaeaea;
+background: #eaeaea;
+}
+
+.btn{
+margin-left: 230px;
+margin-top: 30px;
+}
+
+.passchange{
+width: 200px;
+height: 30px;
+border-radius: 5px;
+background: #92A8D1;
+border :1px solid #92A8D1;
+color: white;
+}
+
+.passchange:hover{
+background: white;
+border :1px solid #92A8D1;
+color: #92A8D1;
 }

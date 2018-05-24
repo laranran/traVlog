@@ -15,6 +15,19 @@ body {
    background-size: cover;
 }
 
+.content {
+width: 350px; 
+height:300px; 
+padding-top: 200px;
+padding-left:350px;
+z-index: 99; 
+position: absolute;
+}
+
+.content-find {
+position: absolute;
+}
+
 .container  {
 min-height: 100%; 
 margin: 80px auto; 
@@ -23,22 +36,65 @@ height: 500px;
 }
 
 .content-op {
-   position: absolute;
-   width: 1000px;
-   height : 700px;
-   margin: 0 auto;
-   background-color: white;
-   opacity: 0.6;
+position: absolute;
+width: 1000px;
+height : 700px;
+margin: 0 auto;
+background-color: white;
+opacity: 0.6;
+z-index: -9;
 }
 
-.content {
-width : 350px; 
-height:300px; 
-padding-top: 200px; 
-padding-left:350px; 
-z-index: 99; 
-position: absolute;
+.leftcon{
+	width:500px;
+	height: 700px;
+	float: left;
 }
+.rightcon{
+	width:500px;
+	height: 700px;
+	float: right;
+}
+
+/*로그인 세부설정*/
+.put input {
+width:280px; 
+height: 30px; 
+margin-top: 10px; 
+text-align: center; 
+vertical-align: bottom;
+}
+
+.submit {
+width: 318px; 
+height: 40px; 
+text-align: center; 
+background-color: #92A8D1; 
+border: 1px solid #92A8D1; 
+margin-top: 10px; 
+border-radius: 12px; 
+color: white;
+}
+.button-wrap button { 
+width: 152px; 
+height: 40px; 
+margin-right: 10px; 
+background-color: #E89DA2; 
+border: 1px solid #E89DA2; 
+margin-top: 10px; 
+border-radius: 12px; 
+color: white;
+}
+
+.social img {
+width: 50px; 
+height: 50px; 
+margin-top : 10px; 
+vertical-align: bottom; 
+margin-left: 38px;
+}
+
+.social {width: 318px;}
 
 .put input {
 width:280px; 
@@ -96,4 +152,37 @@ cursor: pointer;
 
 .social img:hover {
 	cursor: pointer;
+}
+
+/*찾기 세부설정*/
+
+.content-find label{
+margin-left: 20px;
+margin-right: 20px;
+font-size: 17px;
+width: 100px;
+padding : 0 0 0 30px;
+float: left;
+}
+
+.inputsize  {
+background: #ffffff;
+-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+-khtml-border-radius: 3px;
+border-radius: 3px;
+outline: none;
+padding: 5px;
+width: 200px;
+margin-bottom: 50px;
+}
+					
+form input:not([type=submit]):focus, {
+background: #eaeaea;
+}
+
+.content-find strong{
+font-size: 30px;
+	
+	
 }
