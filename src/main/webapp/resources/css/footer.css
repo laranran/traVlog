@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+#footer {
+   position:relative;
+   bottom:0;
+   background-color: #fff;
+   border-top: 2px solid #ddd;
+   height: 80px;
+   background: #fafafa;
+   width: 100%;
+   padding: 10px;
+   font-family: 'Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   sans-serif, "돋움", Dotum, "굴림", Gulim;
+   margin-top: 20px;
+}
+
+.footer_inner {
+   position: relative;
+   width: 1090px;
+   margin: 0 auto;
+}
+.footer_inner ul {
+   overflow: hidden;
+   margin-bottom: 17px;
+}
+.footer_inner li {
+   float: left;
+}
+
+.footer_links{
+	width:630px;
+	margin: 0 auto;
+}
+
+.footer_links li {
+   padding-left: 40px;
+      
+}
+.footer_links li:first-child {
+   padding-left: 0
+}
+.footer_links a {
+   font-size: 14px;
+   color: #3c3c3c;
+}
+.footer_links a.point {
+   color: #e89da2;
+}
+.footer_links a:hover {
+   text-decoration: underline;
+}
