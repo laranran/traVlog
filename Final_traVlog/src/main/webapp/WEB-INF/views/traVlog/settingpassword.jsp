@@ -7,7 +7,7 @@
 <title>TraVlog 설정</title>
 
 <link href="/resources/css/main.css" rel="stylesheet">
-<link href="/resources/css/settingContainer.css" rel="stylesheet">
+<link href="/resources/css/setting.css" rel="stylesheet">
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -29,20 +29,35 @@ body {
 
 
 <div class="container"><!-- Begin #container -->
-<jsp:include page="/resources/util/Page/SettingSideMenu.jsp" />
 
 <div class="content-wrap">
-<div class="content-op"></div>
-
+<jsp:include page="/resources/util/Page/SettingSideMenu.jsp" />
+<div class="content-op">
 <div class="content">
 
 <div class="userProfile">
-		<img class="userimg" src="/resources/images/icon/user.png">
-		<div class="usernick">닉네임</div>
+	<img class="userimg" src="/resources/images/icon/user.png">
+	<div class="usernick">닉네임</div>
+	<div class="useremail">dnsjas@naver.com</div>
+</div>
+
+<div class="password">
+<label>이전 비밀번호</label>
+<input class="inputsize" id="orgpass" name="orgpass" type="password" required="required"><br>
+<label>현재 비밀번호</label> 
+<input class="inputsize" id="newpass1" name="newpass1" type="password" required="required"><br>
+<label>비밀번호 확인</label>
+<input class="inputsize" id="newpass2" name="newpass2" type="password" required="required"><br>
+
+
+
+</div>
+
+</div><!-- End content -->
+
 </div>
 
 
-</div><!-- End content -->
 
 </div> <!-- End content-wrap -->
 

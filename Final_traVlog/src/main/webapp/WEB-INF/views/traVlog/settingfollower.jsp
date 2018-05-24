@@ -7,7 +7,7 @@
 <title>TraVlog 설정</title>
 
 <link href="/resources/css/main.css" rel="stylesheet">
-<link href="/resources/css/settingContainer.css" rel="stylesheet">
+<link href="/resources/css/setting.css" rel="stylesheet">
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -29,15 +29,15 @@ body {
 
 
 <div class="container"><!-- Begin #container -->
-<jsp:include page="/resources/util/Page/SettingSideMenu.jsp" />
 
 <div class="content-wrap">
-<div class="content-op"></div>
-
+<jsp:include page="/resources/util/Page/SettingSideMenu.jsp" />
+<div class="content-op">
 <div class="content">
     
 
 </div><!-- End content -->
+</div>
 
 </div> <!-- End content-wrap -->
 

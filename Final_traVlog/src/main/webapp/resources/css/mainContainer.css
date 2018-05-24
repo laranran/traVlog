@@ -16,12 +16,12 @@
 	float: left;
 	width: 900px;
 	height: 1300px;
+	border-right: 1px solid #5e89da;
 }
 
 .content-wrap .right{
-    position: relative;
-	float: right;
-	border-left: 1px solid #5e89da;
+    position: fixed;
+    margin-left: 900px;
 	width: 290px;
 	height: 1300px;
 	
