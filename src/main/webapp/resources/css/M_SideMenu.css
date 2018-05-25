@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+
+#menu {width:150px; margin-top:-8px; height:100%; float:left; position:absolute;}
+
+#menu ul {margin:0; padding:0; list-style:none; white-space:nowrap; text-align:left;  padding:1px 1px 0 1px;}
+
+#menu li {margin:0; padding:0; list-style:none;}
+#menu li {display:inline-block; display:inline;}
+#menu ul {position:absolute; left:-9999px;}
+#menu ul.level1 {position:absolute; left:0; top:0px; border : #f1c40f; height: 100%;}
+
+
+#menu a {display:block; font:normal 11px verdana,arial,sans-serif; color:#000; line-height:22px; text-decoration:none;padding:10px 30px 10px 30px; margin-top: 10px; margin-bottom: 10px;} 
+
+#menu ul li:hover > ul {visibility:visible; left:100%; margin-top:-64px; margin-left:1px}
+
+#menu a:hover ul,
+#menu a:hover a:hover ul, 
+#menu a:hover a:hover a:hover ul {left:100%; visibility:visible;}
+#menu a:hover ul ul, 
+#menu a:hover a:hover ul ul {left:-9999px;}
+
+#menu li a.fly {background: white; border:1px solid #ddd; }			/*메인메뉴*/
+#menu li:hover > a.fly {backsground:#ffb505; color: white;} /*메인메뉴 hover*/
+#menu ul li:hover > ul a {background: white; width: 70x; }	/*메인메뉴 hover 시 하위메뉴*/
+#menu ul li:hover > ul:hover a:hover {background:#ffb505; color: white; border:1px solid #ddd;}	/*메인메뉴 hover 시 하위메뉴*/

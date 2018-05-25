@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- dtd를 이용해 어떤 태그를 이용해야 하는지 지정
+	 설정 내용을 보관하기 위해 사용한다. -->
+
+<tiles-definitions>
+	<definition name="tilesbase" template="/WEB-INF/tiles/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/layout/header.jsp" />
+		<put-attribute name="body" />
+	</definition>	 
+
+	<definition name="Manage_Page/*" extends="tilesbase">
+		<put-attribute name="body" value="/WEB-INF/views/Manage_Page/{1}.jsp"/>
+	</definition>
+	
+</tiles-definitions>

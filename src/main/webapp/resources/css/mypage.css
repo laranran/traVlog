@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+/* container */
+.container  {min-height: 100%; margin-left: 160px;}
+.content-wrap {
+   position: relative;
+   width: 1200px;
+   height : 1300px;
+   margin: 10px auto;
+   background-color: white;
+   opacity: 0.6;
+}
+
+.content-wrap .top{
+	position: relative;
+	width: 1200px;
+    height : 250px;
+}
+
+.content-wrap .buttom{
+	position: relative;
+	margin-top : 10px;
+	border-top: 1px solid #5e89da;
+	width: 1200px;
+    height : 1020px;
+}
+
+/*세부 설정*/
+.userProfile{
+padding-top: 30px;
+width: 600px;
+height: 220px;
+float: left;
+}
+
+.userimg{
+position: absolute;
+float:left;
+width:150px; 
+height:150px;
+margin-left: 20px;
+margin-right: 20px;
+}
+.profilebtn{
+position: absolute;
+width: 130px;
+height: 25px;
+margin-top: 160px;
+margin-left: 29px;
+background-color: white;
+border: 1px solid #92A8D1;
+border-radius: 5px;
+}
+.profilebtn:hover {
+	cursor: pointer;
+}
+.usernick {
+float:left;
+margin-top: 15px;
+margin-left: 200px;
+font-size: 30px;
+width:245px;
+}
+.messageimg{
+margin-top:10px;
+width: 50px;
+height: 50px;
+}
+.userinfo{
+float:left;
+margin-top: 15px;
+margin-left: 200px;
+width: 300px;
+height: 120px;
+overflow-x:hidden;
+overflow-y:hidden;
+}
+.userfollower{
+margin-top: 90px;
+width: 600px;
+height: 90px;
+float: right;
+}
+.userfollower strong{
+font-size: 30px;
+}
+.userfollower span{
+font-size: 16px;
+
+}
+.userfollower div{
+width: 80px;
+float: left;
+margin-left: 50px;
+text-align: center;
+}
+.settingimg{
+margin-top:10px;
+width: 50px;
+height: 50px;
+}
