@@ -26,6 +26,15 @@
 	
 	<dependencies>
 	
+	<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+		<!-- AJAX에서 JSON사용하기위한거 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+		
+		
 	<!-- lombok -->
 	<dependency>
 	    <groupId>org.projectlombok</groupId>
