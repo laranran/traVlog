@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import mvc.dto.Hashtag;
 import mvc.dto.Member;
 import mvc.service.MemberService;
 import spring.board.email.Email;
@@ -32,6 +33,8 @@ public class BoardController {
 	EmailSender emailSender;
 	@Autowired
 	Email email;
+	@Autowired
+	Hashtag hashtag;
 	
 	
 	@RequestMapping(value = "/Manage_Page/home.do", method = RequestMethod.GET)

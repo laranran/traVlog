@@ -6,7 +6,7 @@
    position: relative;
    width: 1200px;
    height : 1300px;
-   margin: 10px auto;
+   margin: 60px auto;
    background-color: white;
    opacity: 0.6;
 }
@@ -15,14 +15,40 @@
 	position: relative;
 	float: left;
 	width: 900px;
-	height: 1300px;
-	border-right: 1px solid #5e89da;
+	height: 100%;
+	background-color: #eeeeee;
 }
 
 .content-wrap .right{
-    position: fixed;
+    position: absolute;
+    float:right;
     margin-left: 900px;
 	width: 290px;
-	height: 1300px;
+	height: 100%;
+	background-color: #dddddd;
 	
+}
+.content-wrap .fix{
+    position: fixed;
+	width: 290px;
+	height: 900px;
+	
+}
+
+.fix .user{
+margin-top: 20px;
+width:290px;
+height: 95px;
+}
+
+.fix .hashTag{
+border-top:2px solid #606060;
+width:290px;
+height: 450px;
+}
+
+.fix .follower{
+border-top:2px solid #606060;
+width:290px;
+height: 450px;
 }
