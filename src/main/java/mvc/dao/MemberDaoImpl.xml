@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mvc.dao.MemberDao">
+	<select id="idcheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMID=#{memid}
+	</select>
+	<select id="nickcheck" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMNICK=#{memnick}
+	</select>
+	<select id="memberCount" parameterType="mvc.dto.Member" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMID=#{memid} AND MEMPW=#{mempw}
+	</select>
+	
+	<select id="getMemberOne" parameterType="mvc.dto.Member" resultType="mvc.dto.Member">
+		SELECT * FROM MEMBER WHERE MEMID=#{memid} AND MEMPW=#{mempw}
+	</select>
+	<insert id="createMember" parameterType="mvc.dto.Member">
+		INSERT INTO MEMBER(MEMID,MEMPW,MEMAGE,MEMNAME,MEMNICK,MEMEMAIL,MEMPHONE,MEMSEX)
+		VALUES(#{memid},#{mempw},#{memage},#{memname},#{memnick},#{mememail},#{memphone},#{memsex})
+	</insert>
+</mapper>
