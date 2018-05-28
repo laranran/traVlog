@@ -5,6 +5,28 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
+	<!-- gmail -->
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="travlogad@gmail.com" />
+        <property name="password" value="tttt0619" />
+       
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+               
+            </props>
+        </property>
+       
+    </bean>
+    <bean id="email" class="spring.board.email.Email">
+    </bean>
+    <bean id="emailSender" class="spring.board.email.EmailSender">
+    </bean>
+
 	<!-- dataSourceSpied 설정 : DB 접속정보 -->
 	<bean id="dataSourceSpied" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>

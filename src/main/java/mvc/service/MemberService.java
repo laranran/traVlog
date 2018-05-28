@@ -1,5 +1,7 @@
 package mvc.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,13 @@ public class MemberService {
 
 	public int nickcheck(String memnick) {
 		return memberDao.nickcheck(memnick);
+	}
+
+	public String findId(Map<String, Object> paramMap) {
+		return memberDao.findId(paramMap);
+	}
+	
+	public String findPw(Map<String, Object> paramMap) {
+		return memberDao.findPw(paramMap);
 	}
 }
