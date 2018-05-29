@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,23 +57,39 @@
 		</div>
 		
 		<div class="right">
-		<div class="fix">
 			<div class="user">
 			<img class="userimg" src="/resources/images/icon/user.png">
 			<span class="id">아이디</span><br>
 			<span class="nick">닉네임</span>
 			</div>
 			
-			<div class="hashTag">
 			<strong>인기 해시태그</strong><br>
-			<p> 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바</p>
+			<div class="hashTag">
+				<table class="topTag">
+	            <c:forEach items="${tagList}" var="tag">
+                <tbody>
+                    <tr>
+                        <td class="tagname"><a href="#" class="tagA">#${tag.tagname}</a></td>
+                        <td class="taghit">${tag.taghit}</td>
+                    </tr>
+                </tbody>
+	            </c:forEach>
+	        	</table>
 			</div>
 			
+			<strong>인기 사용자</strong><br>
 			<div class="follower">
-			<strong>인기 </strong><br>
-			<p>닉오아이스도 스며들어 풍부하게 장식하는 하는 약동하다.</p>
+			<table class="topMember">
+	            <c:forEach items="${memberList}" var="mem">
+                <tbody>
+                    <tr>
+                        <td class="memnick"><a href="#" class="memA">${mem.memnick}</a></td>
+                        <td class="memfollower">${mem.memfollower}</td>
+                    </tr>
+                </tbody>
+	            </c:forEach>
+	        	</table>
 			</div>
-		</div>
 		</div>
 
 	</div>	<!-- // End content-wrap -->

@@ -11,6 +11,11 @@ public class Member {
 	private String memname;
 	private String mememail;
 	private String memphone;
+	
+	//포스팅 팔로워 팔로잉 수 추가
+    private int memposting;
+    private int memfollwing;
+    private int memfollower;
 
 	public int getMemage() {
 		return memage;
@@ -74,6 +79,30 @@ public class Member {
 
 	public void setMemphone(String memphone) {
 		this.memphone = memphone;
+	}
+	
+	public int getMemposting() {
+		return memposting;
+	}
+
+	public void setMemposting(int memposting) {
+		this.memposting = memposting;
+	}
+
+	public int getMemfollwing() {
+		return memfollwing;
+	}
+
+	public void setMemfollwing(int memfollwing) {
+		this.memfollwing = memfollwing;
+	}
+
+	public int getMemfollower() {
+		return memfollower;
+	}
+
+	public void setMemfollower(int memfollower) {
+		this.memfollower = memfollower;
 	}
 
 	public String toString() {

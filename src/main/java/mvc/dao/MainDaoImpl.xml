@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mvc.dao.MainDao">
+	
+	<select id="topHash" resultType="mvc.dto.Hashtag">
+		<![CDATA[
+			SELECT * FROM (
+			    SELECT rownum rnum, T.* FROM (
+			        SELECT tagname, taghit
+			        FROM TB_HASHTAG
+			        ORDER BY taghit DESC
+			    ) T
+			    ORDER BY rnum
+			) R
+			WHERE R.rnum <= 10
+		]]>
+	</select>
+	
+	<select id="topMember" resultType="mvc.dto.Member">
+		<![CDATA[
+			SELECT * FROM (
+			    SELECT rownum rnum, T.* FROM (
+			        SELECT memnick, memfollower
+			        FROM TB_member
+			        ORDER BY memfollower DESC
+			    ) T
+			    ORDER BY rnum
+			) R
+			WHERE R.rnum <= 10
+		]]>
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -68,7 +68,7 @@ $(document).ready(function(){
 	<div class="leftcon">
 		<div>
 		<strong>아이디 찾기</strong>
-		<p>아래에 등록하신 이름과 이메일 주소를 입력해 주시면<br> 아이디를 알려드리겠습니다.</p>
+		<p>아래에 등록하신 이름과 이메일 주소를 입력해 주시면<br> 아이디를 입력하신 메일로 전송해드리겠습니다.</p>
 		<form action="/traVlog/findid.do" id="findid" method="post">
 			<label>이름</label>
 			<input class="inputsize" id="idmemname" name="idmemname" type="text" required="required"><br>
@@ -84,7 +84,7 @@ $(document).ready(function(){
 	<div class="rightcon">
 	<div>
 		<strong>비밀번호 찾기</strong>
-		<p>아래에 등록하신 이름과 아이디, 이메일 주소를 입력해주시면<br> 비밀번호를 알려드리겠습니다.</p>
+		<p>아래에 등록하신 이름과 아이디, 이메일 주소를 입력해주시면<br> 비밀번호를 입력하신 메일로 전송해드리겠습니다.</p>
 		<form action="/traVlog/findpw.do" id="findpw" method="post">
 			<label>이름</label>
 			<input class="inputsize" id="pwmemname" name="pwmemname" type="text" required="required"><br>

@@ -20,35 +20,53 @@
 }
 
 .content-wrap .right{
-    position: absolute;
-    float:right;
+    position: relative;
     margin-left: 900px;
 	width: 290px;
 	height: 100%;
-	background-color: #dddddd;
-	
-}
-.content-wrap .fix{
-    position: fixed;
-	width: 290px;
-	height: 900px;
-	
-}
+s}
 
 .fix .user{
 margin-top: 20px;
 width:290px;
-height: 95px;
+height: 60px;
 }
 
 .fix .hashTag{
 border-top:2px solid #606060;
 width:290px;
-height: 450px;
+min-height: 100px;
+max-height: 200px;
+overflow-y: scroll;
+overflow-x: hidden;
 }
 
 .fix .follower{
 border-top:2px solid #606060;
 width:290px;
-height: 450px;
+min-height: 100px;
+max-height: 200px;
+overflow-y: scroll;
+overflow-x: hidden;
 }
+
+.hashTag .tagA{
+color: #0a62ff;
+}
+
+.hashTag .tagA:hover{
+font-style: italic;	
+}
+
+.follower .memA{
+color: black;
+font-weight: bold;
+}
+
+.follower .memA:hover{
+font-style: italic;	
+}
+
+
+
+

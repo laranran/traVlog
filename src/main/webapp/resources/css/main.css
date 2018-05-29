@@ -122,33 +122,50 @@ a.hoverline:hover {
 .userimg{
 position: relative;
 float: left;
-width: 70px;
-height: 70px;
+width: 50px;
+height: 50px;
 margin-left: 5px;
 margin-right: 5px;
 }
 
 .user .id{
-font-size: 20px;
+font-size: 17px;
 font-weight: bold;
 }
 
 .user .nick{
-font-size: 16px;
+font-size: 13px;
 }
 
 .fix strong {
 float:left;
-margin-top: 15px;
+margin-top: 25px;
 margin-left: 15px;
+margin-bottom: 15px;
 font-size: 15px;
 width: 280px;
 }
 
-.fix p {
-float:left;
-margin-top: 5px;
-margin-left: 15px;
-font-size: 12px;
-width: 260px;
+.topTag{
+	margin-left: 30px;
+}
+.topTag .tagname{
+	font-size:15px;
+	width: 200px;
+
+}
+.topTag .taghit{
+	font-size:11px;
+}
+
+.topMember{
+	margin-left: 30px;
+}
+.topMember .memnick{
+	font-size:15px;
+	width: 200px;
+
+}
+.topMember .memfollower{
+	font-size:11px;
 }

@@ -1,5 +1,6 @@
 package mvc.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mvc.dto.Hashtag;
 import mvc.dto.Member;
+import mvc.service.MainService;
 import mvc.service.MemberService;
 import spring.board.email.Email;
 import spring.board.email.EmailSender;
@@ -30,13 +32,13 @@ public class BoardController {
 	@Autowired
 	MemberService memberService;
 	@Autowired
+	MainService mainService;
+	@Autowired
 	EmailSender emailSender;
 	@Autowired
 	Email email;
-	@Autowired
-	Hashtag hashtag;
 	
-	
+
 	@RequestMapping(value = "/Manage_Page/home.do", method = RequestMethod.GET)
 	public String ManageHome() {
 		logger.info("관리자페이지 GET요청");
@@ -58,7 +60,7 @@ public class BoardController {
 			session.setAttribute("memid", sessionMember.getMemid());
 			session.setAttribute("memname", sessionMember.getMemname());
 			
-			return "traVlog/main";
+			return "redirect:/traVlog/main.do";
 			
 		} else {
 			model.addAttribute("msg","비밀번호가 맞지 않거나 없는 아이디 입니다.");
@@ -79,12 +81,23 @@ public class BoardController {
 //	}
 	
 	@RequestMapping(value = "/traVlog/main.do", method = RequestMethod.GET)
-	public void main() {
-		
-		
+	public String main(Model model) {
 		logger.info("메인페이지 GET요청");
+		
+		//인기 해시태그
+		ArrayList<Hashtag> tagList = mainService.topHash();
+		
+		//인기 사용자
+		ArrayList<Hashtag> memList = mainService.topMember();
+		
+		
+		model.addAttribute("tagList", tagList);
+		model.addAttribute("memberList", memList);
+		
+		return "traVlog/main";
 	}
-
+	
+	
 	@RequestMapping(value = "/traVlog/settingprofile.do", method = RequestMethod.GET)
 	public void settingProfile() {
 		logger.info("세팅페이지 프로필 GET요청");
@@ -115,7 +128,9 @@ public class BoardController {
         String id=memberService.findId(paramMap);
         System.out.println(id);
         if(id!=null) {
-            email.setContent(name+"님의 아이디는 "+id+" 입니다.");
+            email.setContent("[traVlog] 아이디를 확인해주세요.\n "
+            		+ "본 메일은 아이디 확인을 위해 발송되는 메일입니다.\n\n\n "
+            		+ name+"님의 아이디는 "+id+" 입니다.");
             email.setReceiver(e_mail);
             email.setSubject("[traVlog] "+name+"님 아이디 찾기 메일입니다.");
             emailSender.SendEmail(email);
@@ -143,7 +158,10 @@ public class BoardController {
         String pw=memberService.findPw(paramMap);
         System.out.println(pw);
         if(pw!=null) {
-            email.setContent(name+"님의 비밀번호는 "+pw+" 입니다.");
+            email.setContent("[traVlog] 비밀번호를 변경해주세요.\n "
+            		+ "본 메일은 비밀번호 확인을 위해 발송되는 메일입니다.\n "
+            		+ "보안을 위해 비밀번호를 변경하는 것을 추천합니다.\n\n\n"
+            		+ name+"님의 비밀번호는 "+pw+" 입니다.");
             email.setReceiver(e_mail);
             email.setSubject("[traVlog] "+name+"님 비밀번호 찾기 메일입니다.");
             emailSender.SendEmail(email);
