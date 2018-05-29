@@ -5,20 +5,20 @@
 
 <mapper namespace="mvc.dao.MemberDao">
 	<select id="idcheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEMID=#{memid}
+		SELECT COUNT(*) FROM TB_MEMBER WHERE MEMID=#{memid}
 	</select>
 	<select id="nickcheck" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEMNICK=#{memnick}
+		SELECT COUNT(*) FROM TB_MEMBER WHERE MEMNICK=#{memnick}
 	</select>
 	<select id="memberCount" parameterType="mvc.dto.Member" resultType="int">
-		SELECT COUNT(*) FROM MEMBER WHERE MEMID=#{memid} AND MEMPW=#{mempw}
+		SELECT COUNT(*) FROM TB_MEMBER WHERE MEMID=#{memid} AND mempassword=#{mempassword}
 	</select>
 	
 	<select id="getMemberOne" parameterType="mvc.dto.Member" resultType="mvc.dto.Member">
-		SELECT * FROM MEMBER WHERE MEMID=#{memid} AND MEMPW=#{mempw}
+		SELECT * FROM TB_MEMBER WHERE MEMID=#{memid} AND mempassword=#{mempassword}
 	</select>
 	<insert id="createMember" parameterType="mvc.dto.Member">
-		INSERT INTO MEMBER(MEMID,MEMPW,MEMAGE,MEMNAME,MEMNICK,MEMEMAIL,MEMPHONE,MEMSEX)
-		VALUES(#{memid},#{mempw},#{memage},#{memname},#{memnick},#{mememail},#{memphone},#{memsex})
+		INSERT INTO TB_MEMBER(MEMID,MEMPASSWORD,MEMAGE,MEMNICK,MEMEMAIL,MEMPHONE,MEMSEX)
+		VALUES(#{memid},#{mempassword},#{memage},#{memnick},#{mememail},#{memphone},#{memsex})
 	</insert>
 </mapper>

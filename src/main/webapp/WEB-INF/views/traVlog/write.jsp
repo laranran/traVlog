@@ -5,13 +5,65 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TraVlog</title>
-
+<!-- 달력 CSS -->
+<link rel="stylesheet" href="/resources/rangecalendar/css/normalize.css">
+<link rel="stylesheet" href="/resources/rangecalendar/css/style.css">
+<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,100,100italic' rel='stylesheet' type='text/css'>
+<!-- 달력CSS끝 -->
 <link href="/resources/css/main.css" rel="stylesheet">
 <link href="/resources/css/mainContainer.css" rel="stylesheet">
+<!-- Naver SmartEditor -->
+<script type="text/javascript"
+ src="/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- Bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+function submitContents(elClickedObj) {
+	// 에디터의 내용이 textarea에 적용된다.
+	oEditors.getById["bodcontent"].exec("UPDATE_CONTENTS_FIELD", []);
 
+	try {
+		elClickedObj.form.submit();
+	} catch (e) {
+	}
+	
+}
+$(document).ready(function() {
+	$("#c").css("display","none");
+	$("#btnWrite").click(function() {
+		var startdate=$("#sel1text").text();
+		var enddate=$("#sel2text").text();
+		console.log(startdate+","+enddate);
+		var inputStartDate=$('<input type="hidden" name="startdate" />');
+		inputStartDate.attr('value',startdate);
+		
+		var inputEndDate=$('<input type="hidden" name="enddate" />');
+		inputEndDate.attr('value',enddate);
+		
+		$("#boardform").append(inputStartDate);
+		$("#boardform").append(inputEndDate);
+		
+		submitContents($(this));
+	});
+	
+	$("#btnCalender").click(function(){
+		if($("#default").css("display") == "none"){   
+	        $("#default").css("display", "block");
+	        $("#c").css("display", "none");
+	        $("#btnCalender").html("일정추가하기");
+	    } else {  
+	        $("#default").css("display", "none");
+	        $("#c").css("display", "block");
+	        $("#btnCalender").html("돌아가기");
+	    } 
+	});
+
+});
+</script>
 <style type="text/css">
 body {
    background-image: url('/resources/images/BackGround/main.jpg');
@@ -30,43 +82,73 @@ body {
 <div id="container"><!-- Begin #container -->
 	<div class="content-wrap">
 		<div class="center">
+		<form id="boardform"action="/traVlog/write.do" method="POST" enctype="multipart/form-data">
+			<div id="default">
+				<div class="form-group">
+					<label for="bodname">작성자</label> <input type="text" id="bodname"
+						name="bodname" value="${memnick }" readonly="readonly"
+						class="form-control" />
+				</div>
+				<div class="form-group">
+					<label for="bodtitle">제목</label> <input type="text" id="bodtitle"
+						name="bodtitle" class="form-control"   required="required"/>
+				</div>
+				<div class="form-group">
+					<label for="bodcontent">본문</label><br>
+					<textarea style="width:1000px; height:700px; " id="bodcontent" name="bodcontent"  required="required"></textarea>
+					<br>
+					<label for="bodhashtag">태그</label>
+					<input type="text"  style="width:600px;" id="bodhashtag" name="bodhashtag" placeholder="#아무말#헤헤#테스트" /><br><br>
+					<label for="upload">첨부파일</label>
+					<input type="file" id="upload" name="upload" multiple /> <br>
+				</div>
+			</div>
+				<div id="c">
+				
+				<!--<input type="text" class="date">-->
+				
+				<div id="calHelp">
+					<div class="first active"><i>A</i> <b>여행시작</b><b id="sel1text"></b></div><div class="disabled"><i>B</i><b>여행끝</b> <b id="sel2text"></b></div>
+				</div>
+				<div id="disp"><div id="prev" class="nav">←</div><div id="month">Hello world</div><div id="next" class="nav">→</div></div>
+				<div id="cal"></div>
+				</div><!-- /#c -->
+				<br>
+				<!-- 날짜 보내기 -->
+				<div style="display:none;">
+<!-- 					<input type="date" id="startDate" name="startdate">$("#sel1text").text()</input> -->
+<!-- 					<input type="date" id="endDate" name="enddate" >$("#sel2text").text()</input><br><br> -->
+				</div>
+			<button id="btnWrite" class="center-block">작성완료</button>
+		</form>
+			<button id="btnCalender" class="center-block">일정 추가하기</button>
 		
-		더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다. 하는 눈에 따뜻한 미묘한 인간의 행복스럽고 아름다우냐? 바이며, 희망의 이상의 우리의 있음으로써 살 어디 뜨거운지라, 불러 황금시대다. 것은 우는 현저하게 천고에 얼마나 그들은 가는 황금시대다. 자신과 품에 우리 이 찬미를 싹이 맺어, 봄바람이다. 것이 밥을 인간의 실로 어디 꽃이 이것은 있다. 황금시대를 있으며, 동산에는 생생하며, 생명을 두기 있는 황금시대다. 못하다 같이, 풀밭에 창공에 사막이다. 오아이스도 소담스러운 이상은 노년에게서 얼음이 웅대한 그리하였는가? 이상 산야에 목숨을 말이다. 얼음 있을 기관과 귀는 이 듣는다.
-		더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
 		</div>
 				
 	</div>	<!-- // End content-wrap -->
 	</div> <!-- End container -->
 	
 </div>	<!-- // End #wrap -->
+
+		<!-- <textarea> 태그 아래쪽에 스마트에디터 초기화코드 삽입 -->
+		<script type="text/javascript">
+			var oEditors = [];
+			nhn.husky.EZCreator.createInIFrame({
+				oAppRef : oEditors,
+				elPlaceHolder : "bodcontent",
+				sSkinURI : "/resources/smarteditor/SmartEditor2Skin.html",
+				fCreator : "createSEditor2",
+				htParams : {
+					bUseToolbar : true, // 툴바 사용여부
+					bUseVerticalResizer : false, //입력창 크기 조절바
+					bUseModeChanger : true
+				//모드 탭
+				}
+			});
+		</script>
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+		<script src="/resources/rangecalendar/js/index.js"></script>
 </body>
 
 </html>

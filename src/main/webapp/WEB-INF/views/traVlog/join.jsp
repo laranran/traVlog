@@ -41,7 +41,7 @@
 						checkid=false;
 					}else{
 						$("#warning").html("사용 가능한 아이디입니다.");
-						$("#mempw").focus();
+						$("#mempassword").focus();
 						checkid=true;
 						checkAll();
 					}
@@ -59,9 +59,9 @@
 				$("#pwd1").focus();
 			}else{
 				$("#pwd2").blur(function() {
-					var memPw1 = $("#pwd1").val();
-					var memPw2 = $("#pwd2").val();
-					if (memPw1 == memPw2) {
+					var mempassword1 = $("#pwd1").val();
+					var mempassword2 = $("#pwd2").val();
+					if (mempassword1 == mempassword2) {
 // 						$("#joinbtn").attr("disabled",false);
 						$("#warning").html("비밀번호 확인 완료.");
 						checkpw = true;
@@ -139,7 +139,7 @@
   </li>
   <li>
     <label for="pwd2" class="labelsize">비밀번호 확인</label>
-    <input class="inputsize" id="pwd2" name="mempw" type="password" required="required">
+    <input class="inputsize" id="pwd2" name="mempassword" type="password" required="required">
   </li>  
   <li>
     <label for="nick" class="labelsize">닉네임</label>
@@ -155,10 +155,6 @@
 <fieldset>
 <legend>개인 정보</legend>
 <ol>
-  <li>
-    <label for="fullname" class="labelsize">이름</label>
-    <input class="inputsize" id="fullname" name="memname" type="text" placeholder="5자미만 공백없이" required="required">
-  </li>
   <li>
     <label for="email" class="labelsize">메일 주소</label>
     <input class="inputsize" id="email" name="mememail" type="email" placeholder="abcd@domain.com" required="required" autocomplete="off">

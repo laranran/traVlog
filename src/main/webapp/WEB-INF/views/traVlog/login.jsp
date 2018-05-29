@@ -39,7 +39,7 @@
          </div>
          <div class="put">
          <img alt="마이페이지" src="/resources/images/login/pass.png" height="30px">
-         <input type="password" name="mempw" id="mempw" placeholder="Your password"><p></p>
+         <input type="password" name="mempassword" id="mempassword" placeholder="Your password"><p></p>
          </div>
          
          <div class="submit-wrap">

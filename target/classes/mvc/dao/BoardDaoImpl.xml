@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mvc.dao.BoardDao">
+	<select id="getBoardNo" parameterType="mvc.dto.Board" resultType="int">
+		select bodno from TB_BOARD where bodtitle = #{bodtitle} AND bodcontent = #{bodcontent}
+	</select>
+	<insert id="insertBoard" parameterType="mvc.dto.Board">
+		insert into TB_BOARD(BODNO,BODTITLE,BODCONTENT,BODHASHTAG,BODDATE,BODRECOMMEND,BODNAME)
+		values(UP_BODNO_SEQ.nextval,#{bodtitle},#{bodcontent},#{bodhashtag}
+		,sysdate,0,#{bodname})
+	</insert>
+	<insert id="insertFile" parameterType="mvc.dto.Files">
+		insert into TB_FILES(BODNO,FILORIGINFILE,FILSAVEFILE,FILSIZE,FILDATE)
+		values(#{bodno},#{filoriginfile},#{filsavefile},#{filsize},sysdate)
+	</insert>
+	<select id="checkHashTag" parameterType="mvc.dto.HashTag" resultType="int">
+		SELECT COUNT(*) FROM TB_HASHTAG WHERE TAGNAME=#{tagname}	
+	</select>
+	<insert id="insertHashTag" parameterType="mvc.dto.HashTag">
+		INSERT INTO TB_HASHTAG(TAGNO,TAGNAME,TAGHIT,TAGOPEN)
+		VALUES(UP_TAGNO_SEQ.NEXTVAL, #{tagname},0,'open')
+	</insert>
+	<update id="updateHashTagHit" parameterType="mvc.dto.HashTag">
+		UPDATE TB_HASHTAG SET TAGHIT = TAGHIT+1 WHERE TAGNAME=#{tagname}
+	</update>	
+</mapper>
