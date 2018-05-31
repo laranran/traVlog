@@ -16,7 +16,6 @@
 	float: left;
 	width: 900px;
 	height: 100%;
-	background-color: #eeeeee;
 }
 
 .content-wrap .right{
@@ -24,15 +23,15 @@
     margin-left: 900px;
 	width: 290px;
 	height: 100%;
-s}
+}
 
-.fix .user{
+.right .user{
 margin-top: 20px;
 width:290px;
 height: 60px;
 }
 
-.fix .hashTag{
+.right .hashTag{
 border-top:2px solid #606060;
 width:290px;
 min-height: 100px;
@@ -41,7 +40,7 @@ overflow-y: scroll;
 overflow-x: hidden;
 }
 
-.fix .follower{
+.right .follower{
 border-top:2px solid #606060;
 width:290px;
 min-height: 100px;

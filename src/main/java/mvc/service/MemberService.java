@@ -1,5 +1,6 @@
 package mvc.service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,9 @@ public class MemberService {
 	public String findPw(Map<String, Object> paramMap) {
 		return memberDao.findPw(paramMap);
 	}
+
+	public ArrayList<Member> MemberInfo(String memid) {
+		return memberDao.MemberInfo(memid);
+	}
+
 }

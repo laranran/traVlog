@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import mvc.dto.FollowingRec;
 import mvc.dto.Hashtag;
 import mvc.dto.Member;
 import mvc.service.MainService;
@@ -38,7 +39,7 @@ public class BoardController {
 	@Autowired
 	Email email;
 	
-
+	
 	@RequestMapping(value = "/Manage_Page/home.do", method = RequestMethod.GET)
 	public String ManageHome() {
 		logger.info("관리자페이지 GET요청");
@@ -81,16 +82,22 @@ public class BoardController {
 //	}
 	
 	@RequestMapping(value = "/traVlog/main.do", method = RequestMethod.GET)
-	public String main(Model model) {
+	public String main(Member member, HttpSession session, Model model) {
 		logger.info("메인페이지 GET요청");
+		//로그인한 사용자 아이디 가져오기
+		String memid = (String) session.getAttribute("memid");
+		logger.info(memid);
+		
+		//사용자 정보 가져오기
+		ArrayList<Member> memberInfo = memberService.MemberInfo(memid);
 		
 		//인기 해시태그
 		ArrayList<Hashtag> tagList = mainService.topHash();
 		
 		//인기 사용자
-		ArrayList<Hashtag> memList = mainService.topMember();
+		ArrayList<Member> memList = mainService.topMember();
 		
-		
+		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberList", memList);
 		
@@ -221,5 +228,39 @@ public class BoardController {
 			map.put("count", count);
 			logger.info("중복체크값"+count);
 			return map;
+		}
+		
+
+		@RequestMapping(value = "/traVlog/followerfind.do", method = RequestMethod.GET)
+		public String followerFind(Member member, HttpSession session, Model model) {
+			logger.info("친구찾기 GET요청");
+
+			//현재 로그인중인 사람의 id를 가지고 오기..
+			String memid = (String) session.getAttribute("memid");
+			logger.info(memid);
+
+			//추천친구 가져오기
+			ArrayList<FollowingRec> recList = mainService.recommend(memid);
+			int cntRec = mainService.countRecMember(memid);
+			
+			//추천친구가 없다면 인기 사용자 가져오기!
+			ArrayList<Member> memList = mainService.topMember();
+			
+			
+			//나의 팔로워 가져오기
+			ArrayList<FollowingRec> folList = mainService.follower(memid);
+			int cntFol = mainService.countFolMember(memid);
+			
+			//팔로워가 없다면 관리자 계정 추천하기
+			ArrayList<FollowingRec> adList = mainService.admin();
+			
+			model.addAttribute("cntRec", cntRec);
+			model.addAttribute("recList", recList);
+			model.addAttribute("memList", memList);
+			model.addAttribute("cntFol", cntFol);
+			model.addAttribute("folList", folList);
+			model.addAttribute("adList", adList);
+			
+			return "traVlog/followerFind";
 		}
 }

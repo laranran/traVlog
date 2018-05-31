@@ -30,5 +30,9 @@
 		SELECT mempassword from TB_MEMBER where memname=#{pwmemname} AND memid=#{pwmemid} AND mememail=#{pwmememail}
 	</select>
 	
+	<select id="MemberInfo" parameterType="String" resultType="mvc.dto.Member">
+		Select memid, memnick From tb_member where memid =#{memid}
+	</select>
+	
 	
 </mapper>

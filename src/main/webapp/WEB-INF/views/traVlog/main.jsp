@@ -13,9 +13,38 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+<script type="text/javascript">
+ var stmnLEFT = 10; // 오른쪽 여백 
+ var stmnGAP1 = 0; // 위쪽 여백 
+ var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+ var stmnBASE = 10; // 스크롤 시작위치 
+ var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+ var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
+ var stmnTimer; 
+ 
+ function RefreshStaticMenu() { 
+  var stmnStartPoint, stmnEndPoint; 
+  stmnStartPoint = parseInt(document.getElementById('STATICMENU').style.top, 10); 
+  stmnEndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + stmnGAP2; 
+  if (stmnEndPoint < stmnGAP1) stmnEndPoint = stmnGAP1; 
+  if (stmnStartPoint != stmnEndPoint) { 
+   stmnScrollAmount = Math.ceil( Math.abs( stmnEndPoint - stmnStartPoint ) / 15 ); 
+   document.getElementById('STATICMENU').style.top = parseInt(document.getElementById('STATICMENU').style.top, 10) + ( ( stmnEndPoint<stmnStartPoint ) ? -stmnScrollAmount : stmnScrollAmount ) + 'px'; 
+   stmnRefreshTimer = stmnScrollSpeed; 
+   }
+  stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed); 
+  } 
+ function InitializeStaticMenu() {
+  document.getElementById('STATICMENU').style.right = stmnLEFT + 'px';  //처음에 오른쪽에 위치. left로 바꿔도.
+  document.getElementById('STATICMENU').style.top = document.body.scrollTop + stmnBASE + 'px'; 
+  RefreshStaticMenu();
+  }
+</script>
+
+
 </head>
 
-<body>
+<body onload="InitializeStaticMenu();">
 <div id="wrap">
 		
 <jsp:include page="/resources/util/Page/header.jsp" />
@@ -23,44 +52,30 @@
 <div id="container"><!-- Begin #container -->
 	<div class="content-wrap">
 		<div class="main">
-		
-		더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다. 하는 눈에 따뜻한 미묘한 인간의 행복스럽고 아름다우냐? 바이며, 희망의 이상의 우리의 있음으로써 살 어디 뜨거운지라, 불러 황금시대다. 것은 우는 현저하게 천고에 얼마나 그들은 가는 황금시대다. 자신과 품에 우리 이 찬미를 싹이 맺어, 봄바람이다. 것이 밥을 인간의 실로 어디 꽃이 이것은 있다. 황금시대를 있으며, 동산에는 생생하며, 생명을 두기 있는 황금시대다. 못하다 같이, 풀밭에 창공에 사막이다. 오아이스도 소담스러운 이상은 노년에게서 얼음이 웅대한 그리하였는가? 이상 산야에 목숨을 말이다. 얼음 있을 기관과 귀는 이 듣는다.
-		더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
-
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
+			<div class="board">
+				<div class="memInfo">
+				<img class="userimg" src="/resources/images/icon/user.png">
+				<strong class="nick">글쓴사람 닉네임</strong><br>
+				<img alt="신고하기" src="/resource/images/icon/user.png">
+				</div>
+				
+				<div><img></div>
+				<div class="content">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras egestas ligula tellus, ut hendrerit nisi pharetra a. Ut ultrices hendrerit ultricies. Ut nulla mauris, mollis ut feugiat at, dapibus ut arcu. Curabitur consectetur id nisl id tempor. Curabitur congue, libero ut tincidunt malesuada, diam massa rhoncus enim, ut aliquet elit felis sed erat. Ut posuere lorem nulla, at eleifend nisi tristique id. Maecenas quis mauris mattis, vestibulum urna ac, laoreet felis. Mauris ullamcorper, ante sed efficitur vulputate, sem enim consequat elit, eget vestibulum lectus nibh feugiat risus. Nulla ultrices sit amet neque ac luctus. Donec mauris lorem, dictum at turpis at, congue cursus mi. Fusce faucibus mauris in laoreet faucibus. Vivamus molestie est in auctor faucibus. Mauris aliquet, velit ac molestie hendrerit, erat nibh porta nisl, in rutrum leo enim et metus. Nunc iaculis feugiat lorem, at lobortis tellus porta vel. Quisque eu ligula eu nisi mattis feugiat.
+				Integer lobortis eros sit amet justo condimentum, quis pellentesque ex vulputate. Etiam hendrerit tempus urna, a imperdiet erat ornare non. Nullam tincidunt dolor sed orci pharetra rhoncus. Sed lacinia nec dolor vitae ultrices. In nec dolor magna. Quisque lacinia leo eu porttitor bibendum. Nunc dignissim dui nec nisi faucibus ornare. Aliquam finibus, velit at accumsan porttitor, libero orci dapibus eros, sed fermentum tortor lorem quis quam. Fusce posuere, ante eget sollicitudin fermentum, massa libero gravida lectus, sit amet pulvinar augue tellus nec felis. Maecenas laoreet metus non ex maximus finibus. Curabitur sit amet est at urna porta viverra eget sit amet quam. Vivamus euismod, quam id faucibus viverra, nibh nunc fermentum velit, nec ultricies urna ipsum a velit. Aliquam nibh lectus, porttitor sed quam tristique, aliquam pretium massa. Mauris ultricies convallis rutrum. Donec justo dui, efficitur et consectetur eu, maximus eget ex.
+				Nunc risus nulla, fermentum vel scelerisque quis, suscipit quis nulla. Mauris suscipit augue quis pellentesque lacinia. Sed ut nulla purus. Pellentesque et ante velit. Phasellus hendrerit urna ac mattis semper. Morbi eget porta ligula. Cras in cursus leo, at commodo lacus. Suspendisse nec maximus eros, vitae tempus nulla. In non lorem iaculis, bibendum ante tristique, dignissim dui. Aliquam erat volutpat. Vivamus fringilla justo ante, vitae rhoncus mi facilisis auctor. Praesent eget elit mauris. Etiam ut tortor tempus, posuere massa a, aliquam nisl. Aliquam erat volutpat. Cras gravida risus quis tellus congue interdum.
+				</div>
+			</div>
+				
 		</div>
 		
-		<div class="right">
+		<div class="right" id="STATICMENU">
 			<div class="user">
+			<c:forEach items="${memberInfo}" var="member">
 			<img class="userimg" src="/resources/images/icon/user.png">
-			<span class="id">아이디</span><br>
-			<span class="nick">닉네임</span>
+			<span class="nick">${member.memnick}</span><br>
+			<span class="id">${member.memid}</span>
+			</c:forEach>
 			</div>
 			
 			<strong>인기 해시태그</strong><br>

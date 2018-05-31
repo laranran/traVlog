@@ -115,6 +115,21 @@ a.hoverline:hover {
    clear: both;
 }
 
+/*main board*/
+
+.board{
+	width: 750px;
+    border: 1px solid black;
+    margin: 30px auto;
+}
+
+.memInfo strong{
+	padding-top: 15px;
+    display: block;
+    color: black;
+    width: 250px;
+    font-size: 15px;
+}
 
 
 /*right navigation*/
@@ -128,16 +143,16 @@ margin-left: 5px;
 margin-right: 5px;
 }
 
-.user .id{
+.user .nick{
 font-size: 17px;
 font-weight: bold;
 }
 
-.user .nick{
+.user .id{
 font-size: 13px;
 }
 
-.fix strong {
+.right strong {
 float:left;
 margin-top: 25px;
 margin-left: 15px;
@@ -169,3 +184,13 @@ width: 280px;
 .topMember .memfollower{
 	font-size:11px;
 }
+
+#STATICMENU { 
+margin: 0pt; 
+padding: 0pt;  
+position: absolute; 
+right: 0px; 
+top: 0px;
+}
+
+
