@@ -3,6 +3,7 @@ package mvc.dao;
 import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
+import mvc.dto.LatLng;
 
 public interface BoardDao {
 
@@ -21,5 +22,12 @@ public interface BoardDao {
 	public void insertHashTag(HashTag hash);
 	//해시태그 조회수 업데이트
 	public void updateHashTagHit(HashTag hash);
+
+	//좌표 입력
+	public void insertLatLng(LatLng latLng);
+
+	//게시글에 여행날짜 업데이트하기.
+	//날짜 없이 입력할 경우 insertBoard실행
+	public void updateDates(Board board);
 
 }

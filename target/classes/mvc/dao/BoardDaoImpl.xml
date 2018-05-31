@@ -26,4 +26,11 @@
 	<update id="updateHashTagHit" parameterType="mvc.dto.HashTag">
 		UPDATE TB_HASHTAG SET TAGHIT = TAGHIT+1 WHERE TAGNAME=#{tagname}
 	</update>	
+	<insert id="insertLatLng" parameterType="mvc.dto.LatLng">
+		INSERT INTO TB_POSITION(BODNO,POSITIONX,POSITIONY)
+		VALUES(#{bodno},#{positionx},#{positiony})
+	</insert>
+	<update id="updateDates" parameterType="mvc.dto.Board">
+		UPDATE TB_BOARD SET STARTDATE = #{startdate}, ENDDATE = #{enddate} where BODNO = #{bodno}
+	</update>
 </mapper>

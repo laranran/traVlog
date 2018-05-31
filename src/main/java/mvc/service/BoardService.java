@@ -7,6 +7,7 @@ import mvc.dao.BoardDao;
 import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
+import mvc.dto.LatLng;
 
 @Service
 public class BoardService {
@@ -38,6 +39,14 @@ public class BoardService {
 
 	public void updateHashTagHit(HashTag hash) {
 		boardDao.updateHashTagHit(hash);
+	}
+
+	public void insertLatLng(LatLng latLng) {
+		boardDao.insertLatLng(latLng);
+	}
+
+	public void updateDates(Board board) {
+		boardDao.updateDates(board);
 	}
 	
 }
