@@ -6,7 +6,7 @@
    position: relative;
    width: 1200px;
    height : 1300px;
-   margin: 10px auto;
+   margin: 60px auto;
    background-color: white;
    opacity: 0.6;
 }
@@ -15,14 +15,57 @@
 	position: relative;
 	float: left;
 	width: 900px;
-	height: 1300px;
-	border-right: 1px solid #5e89da;
+	height: 100%;
 }
 
 .content-wrap .right{
-    position: fixed;
+    position: relative;
     margin-left: 900px;
 	width: 290px;
-	height: 1300px;
-	
+	height: 100%;
 }
+
+.right .user{
+margin-top: 20px;
+width:290px;
+height: 60px;
+}
+
+.right .hashTag{
+border-top:2px solid #606060;
+width:290px;
+min-height: 100px;
+max-height: 200px;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+
+.right .follower{
+border-top:2px solid #606060;
+width:290px;
+min-height: 100px;
+max-height: 200px;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+
+.hashTag .tagA{
+color: #0a62ff;
+}
+
+.hashTag .tagA:hover{
+font-style: italic;	
+}
+
+.follower .memA{
+color: black;
+font-weight: bold;
+}
+
+.follower .memA:hover{
+font-style: italic;	
+}
+
+
+
+

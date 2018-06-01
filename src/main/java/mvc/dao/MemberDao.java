@@ -1,5 +1,8 @@
 package mvc.dao;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import mvc.dto.Member;
 
 public interface MemberDao {
@@ -14,4 +17,10 @@ public interface MemberDao {
 	public int idcheck(String memid);
 
 	public int nickcheck(String memnick);
+
+	public String findId(Map<String, Object> paramMap);
+	
+	public String findPw(Map<String, Object> paramMap);
+
+	public ArrayList<Member> MemberInfo(String memid);
 }
