@@ -2,13 +2,13 @@ package mvc.dao;
 
 import java.util.ArrayList;
 
-import mvc.dto.Hashtag;
 import mvc.dto.Member;
 import mvc.dto.FollowingRec;
+import mvc.dto.HashTag;
 
 public interface MainDao {
 
-	public ArrayList<Hashtag> topHash();
+	public ArrayList<HashTag> topHash();
 
 	public ArrayList<Member> topMember();
 

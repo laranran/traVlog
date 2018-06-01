@@ -11,17 +11,6 @@
 		SELECT COUNT(*) FROM TB_MEMBER WHERE MEMNICK=#{memnick}
 	</select>
 	<select id="memberCount" parameterType="mvc.dto.Member" resultType="int">
-<<<<<<< HEAD
-		SELECT COUNT(*) FROM TB_MEMBER WHERE MEMID=#{memid} AND MEMPASSWORD=#{mempw}
-	</select>
-	
-	<select id="getMemberOne" parameterType="mvc.dto.Member" resultType="mvc.dto.Member">
-		SELECT * FROM TB_MEMBER WHERE MEMID=#{memid} AND MEMPASSWORD=#{mempw}
-	</select>
-	<insert id="createMember" parameterType="mvc.dto.Member">
-		INSERT INTO TB_MEMBER(MEMID,MEMPASSWORD,MEMAGE,MEMNAME,MEMNICK,MEMEMAIL,MEMPHONE,MEMSEX)
-		VALUES(#{memid},#{mempw},#{memage},#{memname},#{memnick},#{mememail},#{memphone},#{memsex})
-=======
 		SELECT COUNT(*) FROM TB_MEMBER WHERE MEMID=#{memid} AND mempassword=#{mempassword}
 	</select>
 	

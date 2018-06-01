@@ -1,11 +1,8 @@
 package mvc.controller;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
 import java.io.File;
 import java.io.IOException;
->>>>>>> 671cabd260e65bbc51f5a8b508deb65e5af4a3db
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,14 +22,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-<<<<<<< HEAD
 import org.springframework.web.servlet.ModelAndView;
 
 import mvc.dto.FollowingRec;
-import mvc.dto.Hashtag;
 import mvc.dto.Member;
 import mvc.service.MainService;
-=======
 import org.springframework.web.multipart.MultipartFile;
 
 import mvc.dto.Board;
@@ -41,7 +35,6 @@ import mvc.dto.HashTag;
 import mvc.dto.LatLng;
 import mvc.dto.Member;
 import mvc.service.BoardService;
->>>>>>> 671cabd260e65bbc51f5a8b508deb65e5af4a3db
 import mvc.service.MemberService;
 import spring.board.email.Email;
 import spring.board.email.EmailSender;
@@ -49,9 +42,7 @@ import spring.board.email.EmailSender;
 @Controller
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-<<<<<<< HEAD
-	@Autowired
-	MemberService memberService;
+
 	@Autowired
 	MainService mainService;
 	@Autowired
@@ -59,11 +50,9 @@ public class BoardController {
 	@Autowired
 	Email email;
 	
-=======
 	@Autowired MemberService memberService;
 	@Autowired BoardService boardService;
 	@Autowired ServletContext context;
->>>>>>> 671cabd260e65bbc51f5a8b508deb65e5af4a3db
 	
 	@RequestMapping(value = "/Manage_Page/home.do", method = RequestMethod.GET)
 	public String ManageHome() {
@@ -118,7 +107,7 @@ public class BoardController {
 		ArrayList<Member> memberInfo = memberService.MemberInfo(memid);
 		
 		//인기 해시태그
-		ArrayList<Hashtag> tagList = mainService.topHash();
+		ArrayList<HashTag> tagList = mainService.topHash();
 		
 		//인기 사용자
 		ArrayList<Member> memList = mainService.topMember();

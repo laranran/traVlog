@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mvc.dto.Hashtag;
 import mvc.dto.Member;
 import mvc.dto.FollowingRec;
+import mvc.dto.HashTag;
 import mvc.dao.MainDao;
 
 @Service
@@ -15,7 +15,7 @@ public class MainService {
 	@Autowired MainDao mainDao;
 	
 
-	public ArrayList<Hashtag> topHash() {
+	public ArrayList<HashTag> topHash() {
 		return mainDao.topHash();
 	}
 
@@ -40,7 +40,6 @@ public class MainService {
 	public int countFolMember(String memid) {
 		return mainDao.countFolMember(memid);
 	}
-
 
 	public ArrayList<FollowingRec> admin() {
 		return mainDao.admin();
