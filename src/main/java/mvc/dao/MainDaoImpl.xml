@@ -5,7 +5,7 @@
 
 <mapper namespace="mvc.dao.MainDao">
 	
-	<select id="topHash" resultType="mvc.dto.Hashtag">
+	<select id="topHash" resultType="mvc.dto.HashTag">
 		<![CDATA[
 			SELECT * FROM (
 			    SELECT rownum rnum, T.* FROM (
