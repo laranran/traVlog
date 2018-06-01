@@ -59,7 +59,25 @@
 				<img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
 				</div>
 				
-				<div><img></div>
+				<div class="boardInfo">
+				<strong class="title">글 제목!</strong>
+				<span class="Bdate">
+				<img class="userimg" src="/resources/images/icon/calender.png">
+				2018.05.23 
+				<img class="userimg" src="/resources/images/icon/airplane.png">
+				2018.06.19</span>
+				</div>
+				
+				<div class="boardImg">
+				<img class="userimg" src="/resources/images/icon/airplane.png">
+				
+				</div>
+				
+				<div class="icon">
+				<img class="like" width="30px;" src="/resources/images/icon/like.png">
+				<img class="comm" width="30px;" src="/resources/images/icon/calender.png">
+				<img class="pick" width="30px;" src="/resources/images/icon/calender.png">
+				</div>
 				<div class="content">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras egestas ligula tellus, ut hendrerit nisi pharetra a. Ut ultrices hendrerit ultricies. Ut nulla mauris, mollis ut feugiat at, dapibus ut arcu. Curabitur consectetur id nisl id tempor. Curabitur congue, libero ut tincidunt malesuada, diam massa rhoncus enim, ut aliquet elit felis sed erat. Ut posuere lorem nulla, at eleifend nisi tristique id. Maecenas quis mauris mattis, vestibulum urna ac, laoreet felis. Mauris ullamcorper, ante sed efficitur vulputate, sem enim consequat elit, eget vestibulum lectus nibh feugiat risus. Nulla ultrices sit amet neque ac luctus. Donec mauris lorem, dictum at turpis at, congue cursus mi. Fusce faucibus mauris in laoreet faucibus. Vivamus molestie est in auctor faucibus. Mauris aliquet, velit ac molestie hendrerit, erat nibh porta nisl, in rutrum leo enim et metus. Nunc iaculis feugiat lorem, at lobortis tellus porta vel. Quisque eu ligula eu nisi mattis feugiat.
 				Integer lobortis eros sit amet justo condimentum, quis pellentesque ex vulputate. Etiam hendrerit tempus urna, a imperdiet erat ornare non. Nullam tincidunt dolor sed orci pharetra rhoncus. Sed lacinia nec dolor vitae ultrices. In nec dolor magna. Quisque lacinia leo eu porttitor bibendum. Nunc dignissim dui nec nisi faucibus ornare. Aliquam finibus, velit at accumsan porttitor, libero orci dapibus eros, sed fermentum tortor lorem quis quam. Fusce posuere, ante eget sollicitudin fermentum, massa libero gravida lectus, sit amet pulvinar augue tellus nec felis. Maecenas laoreet metus non ex maximus finibus. Curabitur sit amet est at urna porta viverra eget sit amet quam. Vivamus euismod, quam id faucibus viverra, nibh nunc fermentum velit, nec ultricies urna ipsum a velit. Aliquam nibh lectus, porttitor sed quam tristique, aliquam pretium massa. Mauris ultricies convallis rutrum. Donec justo dui, efficitur et consectetur eu, maximus eget ex.

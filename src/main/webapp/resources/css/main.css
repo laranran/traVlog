@@ -123,6 +123,22 @@ a.hoverline:hover {
     margin: 30px auto;
 }
 
+.memInfo{
+	height: 50px;
+}
+
+.boardInfo{
+	height: 50px;
+}
+
+.boardImg{
+	width: 750px;
+	height: 750px;
+	border: 1px solid black;
+}
+
+
+
 .memInfo strong{
 	padding-top: 15px;
     display: inline-block;
@@ -137,6 +153,18 @@ a.hoverline:hover {
 	margin: 10px;
 }
 
+.boardInfo .title{
+    width: 350px;
+    border-right: 1px solid #808080;
+    font-size: 25px;
+    display: inline-block;
+    margin-left: 10px;	
+    height: 40px;
+}
+
+.boardInfo .Bdate{
+	
+}
 /*right navigation*/
 
 .userimg{
