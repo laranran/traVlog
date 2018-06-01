@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 Manifest-Version: 1.0
 Built-By: YoungKi
 Build-Jdk: 1.8.0_151
 Created-By: Maven Integration for Eclipse
 
+=======
+Manifest-Version: 1.0
+Built-By: user1
+Build-Jdk: 1.8.0_151
+Created-By: Maven Integration for Eclipse
+
+>>>>>>> 8b4299d5373ce4fe3f194204bf12dadeaf7503d8

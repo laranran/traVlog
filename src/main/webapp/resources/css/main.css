@@ -3,7 +3,7 @@
 /* 전체 스타일 설정 */
 .header *, .footer * 
 {
-   font-family: 'Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim
 }
 * {
@@ -16,11 +16,8 @@ html {
 body {
    height: 100%;
    font-size: 75%;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
-   background-image: url('/resources/images/BackGround/main.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
    
 }
 img {
@@ -49,7 +46,7 @@ p, acronym, address, big, small, cite, code, dfn, em, kbd, pre, samp,
 h1, h2, h3, h4, h5, h6 {
    font-size: 1em;
    letter-spacing: -1px;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
 }
 big {
@@ -65,7 +62,7 @@ input, select {
    vertical-align: middle;
    font-size: 1em;
    color: #767676;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
 }
 /*input[type="password"] { color:#555;}*/
@@ -75,7 +72,7 @@ input::-ms-clear {
 textarea {
    border: 1px solid #d9d9d9;
    font-size: 12px;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
    resize: none;
    box-sizing: border-box;
@@ -117,3 +114,88 @@ a.hoverline:hover {
 .clear {
    clear: both;
 }
+
+/*main board*/
+
+.board{
+	width: 750px;
+    border: 1px solid black;
+    margin: 30px auto;
+}
+
+.memInfo strong{
+	padding-top: 15px;
+    display: inline-block;
+    color: black;
+    font-size: 15px;
+}
+
+.board .claim{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+}
+
+/*right navigation*/
+
+.userimg{
+position: relative;
+float: left;
+width: 50px;
+height: 50px;
+margin-left: 5px;
+margin-right: 5px;
+}
+
+.user .nick{
+font-size: 17px;
+font-weight: bold;
+}
+
+.user .id{
+font-size: 13px;
+}
+
+.right strong {
+float:left;
+margin-top: 25px;
+margin-left: 15px;
+margin-bottom: 15px;
+font-size: 15px;
+width: 280px;
+}
+
+.topTag{
+	margin-left: 30px;
+}
+.topTag .tagname{
+	font-size:15px;
+	width: 200px;
+
+}
+.topTag .taghit{
+	font-size:11px;
+}
+
+.topMember{
+	margin-left: 30px;
+}
+.topMember .memnick{
+	font-size:15px;
+	width: 200px;
+
+}
+.topMember .memfollower{
+	font-size:11px;
+}
+
+#STATICMENU { 
+margin: 0pt; 
+padding: 0pt;  
+position: absolute; 
+right: 0px; 
+top: 0px;
+}
+
+

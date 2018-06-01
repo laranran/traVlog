@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/* container */
+.container  {min-height: 100%; margin-left: 160px;}
+.content-wrap {
+   position: relative;
+   width: 1200px;
+   margin: 60px auto;
+   background-color: white;
+   opacity: 0.6;
+}
+
+.content-wrap .left{
+	position: relative;
+	float: left;
+	width: 600px;
+	border-right: 2px solid #808080;
+}
+
+.content-wrap .right{
+    position: relative;
+    margin-left: 600px;
+	width: 600px;
+}
+
+.left_content{
+	width: 500px;
+	margin-top: 50px;	
+}
+
+.right_content{
+	width: 500px;
+	margin-top: 50px;	
+}
+
+/*세부 설정*/
+.title{
+	font-size: 25px;
+	position: relative;
+	float: left;
+	width: 588px;
+	text-align: center;	
+	padding-bottom: 20px;
+    border-bottom: 2px solid black;
+    margin-left: 5px;
+}
+
+.Rimg img{
+	width: 100px;
+	height: 100px;
+}
+.left_content .nick{
+	font-size: 15px;
+	font-weight: bold;
+}
+.Rnick .recA{
+color:#393939;
+font-weight:bold;
+text-decoration: none;
+}
+
+.Rnick .recA:hover{
+font-style: italic;	
+}
+
+.memnick .memA{
+color: #393939;
+font-weight:bold;
+text-decoration: none;
+}
+
+.memnick .memA:hover{
+font-style: italic;	
+}
+
+.left_content span{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    font-size: 17px;
+    position: relative;
+    display: block;
+}
+
+.right_content span{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    font-size: 17px;
+    position: relative;
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
