@@ -25,9 +25,9 @@
 			    SELECT rownum rnum, T.* FROM (
 			        SELECT memnick, memfollower
 			        FROM TB_member
-			        ORDER BY memfollower DESC
+			        ORDER BY memfollower DESC NULLS LAST
 			    ) T
-			    ORDER BY rnum
+			    ORDER BY rnum 
 			) R
 			WHERE R.rnum <= 10
 		]]>

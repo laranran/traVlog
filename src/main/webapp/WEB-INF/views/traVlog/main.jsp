@@ -55,8 +55,8 @@
 			<div class="board">
 				<div class="memInfo">
 				<img class="userimg" src="/resources/images/icon/user.png">
-				<strong class="nick">글쓴사람 닉네임</strong><br>
-				<img alt="신고하기" src="/resource/images/icon/user.png">
+				<strong class="nick">글쓴사람 닉네임</strong>
+				<img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
 				</div>
 				
 				<div><img></div>
