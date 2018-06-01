@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,72 +11,195 @@
 
 <link href="/resources/css/main.css" rel="stylesheet">
 <link href="/resources/css/mypage.css" rel="stylesheet">
+<link href="/resources/css/mylist.css" rel="stylesheet">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+
 <style type="text/css">
 body {
-   background-image: url('/resources/images/BackGround/main.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
+	background-image: url('/resources/images/BackGround/main.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 </style>
 
 </head>
 
 <body>
-<div id="wrap">
+
+	<div id="wrap">
+
+		<jsp:include page="/resources/util/Page/header.jsp" />
+
+		<div id="container">
+			<!-- Begin #container -->
+			<div class="content-wrap">
+				<div class="top">
+					<div class="userProfile">
+						<img class="userimg" src="/resources/images/icon/user.png">
+						<button class="profilebtn"
+							onclick="location.href='settingprofile.do'">프로필 편집</button>
+						<div class="usernick">닉네임</div>
+						<div class="setting">
+							<a href="message.do"><img class="messageimg"
+								src="/resources/images/icon/message.png"></a><br>
+						</div>
+						<div class="userinfo">아몰랑 여기는 소개적는 칸. 글자수 제한을 두는것이 좋겠어요 한
+							80글자 정도로??? 내려온다. 대한 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈
+							오아이스도 스며들어 풍부</div>
+					</div>
+
+					<div class="userfollower">
+
+						<div class="following">
+							<strong>10</strong><br /> <span>팔로우</span>
+						</div>
+						<div class="follower">
+							<strong>37</strong><br /> <span>팔로워</span>
+						</div>
+						<div class="board">
+							<strong>1</strong><br /> <span>게시글</span>
+						</div>
+
+						<div class="setting">
+							<a href="settingprofile.do"><img class="settingimg"
+								src="/resources/images/icon/setting.png"></a><br>
+						</div>
+					</div>
+				</div>
+
+				<div class="buttom">
+
+					<%-- 					<c:forEach items="ss" begin="0" end="3" var="i" step="1" varStatus="listNumber"> --%>
+					<%-- 						</c:forEach> --%>
+					<div class="mylist-content">
+						<div class="row">
+
+							<div class="pic col-md-4">
+								<a href="#"><img class="pic-src"
+									src="/resources/images/MyPage/test_1.png" alt="photo"></a>
+							</div>
+
+							<div class="pic col-md-4">
+								<a href="#2"><img class="pic-src"
+									src="/resources/images/MyPage/test_2.png" alt="photo"></a>
+							</div>
+
+							<div class="pic col-md-4">
+								<a href="#3"><img class="pic-src"
+									src="/resources/images/MyPage/test_3.gif" alt="photo"></a>
+							</div>
+
+							<div class="pic col-md-4">
+								<a href="#4"><img class="pic-src"
+									src="/resources/images/MyPage/test_4.png" alt="photo"></a>
+							</div>
+
+							<div class="pic col-md-4">
+								<a href="#5"><img class="pic-src"
+									src="/resources/images/MyPage/test_5.png" alt="photo"></a>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- // End content-wrap -->
+		</div>
+		<!-- End container -->
+
+	</div>
+	<!-- // End #wrap -->
+
+	<div class="setDiv">
+
+		<div class="mask"></div>
+		<div class="window">
+			<a href="/post/test/list/detail/">
+			<img class="pic" src="/resources/images/MyPage/test_3.gif" alt="photo"></a> <input
+				type="button" href="#" class="close" value="창닫기" />
+				
+		<div class="info">
 		
-<jsp:include page="/resources/util/Page/header.jsp" />
-
-<div id="container"><!-- Begin #container -->
-	<div class="content-wrap">
-	  <div class="top">
-		<div class="userProfile">
-		<img class="userimg" src="/resources/images/icon/user.png">
-		<button class="profilebtn" onclick="location.href='settingprofile.do'">프로필 편집</button>
-		<div class="usernick">닉네임</div>
-		<div class="setting">
-		<a href="message.do"><img class="messageimg" src="/resources/images/icon/message.png"></a><br>
-		</div>
-		<div class="userinfo">아몰랑 여기는 소개적는 칸. 글자수 제한을 두는것이 좋겠어요 한 80글자 정도로??? 내려온다. 대한 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부</div>
-		</div>
+		요기가 정보
 		
-		<div class="userfollower">
+		</div>
+		</div>
+
 		
-		<div class="following">
-		<strong>10</strong><br />
-		<span>팔로우</span>
-		</div>
-		<div class="follower">
-		<strong>37</strong><br />
-		<span>팔로워</span>
-		</div>
-		<div class="board">
-		<strong>1</strong><br />
-		<span>게시글</span>
-		</div>
-		<div class="setting">
-		<a href="settingprofile.do"><img class="settingimg" src="/resources/images/icon/setting.png"></a><br>
-		</div>
-		</div>
-	  </div>
-	
 		
-		<div class="buttom">
-		더운지라 우리의 천하를 뭇 것은 뿐이다. 너의 청춘 눈에 방황하였으며, 아니다. 청춘이 얼마나 위하여서, 같은 청춘 그와 황금시대다. 내려온 용기가 무엇이 아름답고 우는 이상은 이상의 오아이스도 것이다. 착목한는 풍부하게 이는 그와 봄바람이다. 대한 그러므로 꽃이 장식하는 운다. 더운지라 없으면 우리의 위하여서. 피부가 불어 그들은 앞이 힘있다. 소담스러운 이상의 할지라도 못할 인류의 피가 그림자는 아름다우냐?
+	</div>
 
-위하여서 풍부하게 있는 때문이다. 구하지 하는 역사를 사라지지 바로 소리다.이것은 보이는 것이다. 되려니와, 이상은 피고, 온갖 살 듣는다. 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈 오아이스도 스며들어 풍부하게 장식하는 하는 약동하다. 그들은 기관과 끝까지 힘있다. 맺어, 없으면 사라지지 청춘 그리하였는가? 사랑의 청춘의 하는 바로 우는 보이는 부패를 것이다. 싹이 설산에서 행복스럽고 가치를 옷을 사라지지 투명하되 힘차게 위하여서.
-
-있으며, 꽃이 우는 봄바람이다.
-
-		</div>
-
-	</div>	<!-- // End content-wrap -->
-	</div> <!-- End container -->
-	
-</div>	<!-- // End #wrap -->
 </body>
+
+<script type="text/javascript">
+
+	function wrapWindowByMask() {
+		// 화면의 높이와 너비를 변수로 만듭니다.
+		var maskHeight = $(document).height();
+		var maskWidth = $(window).width();
+
+		// 마스크의 높이와 너비를 화면의 높이와 너비 변수로 설정합니다.
+		$('.mask').css({
+			'width' : maskWidth,
+			'height' : maskHeight
+		});
+
+		// fade 애니메이션 : 1초 동안 검게 됐다가 80%의 불투명으로 변합니다.
+		$('.mask').fadeIn(500);
+		$('.mask').fadeTo("slow", 0.5);
+
+		// 레이어 팝업을 가운데로 띄우기 위해 화면의 높이와 너비의 가운데 값과 스크롤 값을 더하여 변수로 만듭니다.
+		var left = ($(window).scrollLeft() + ($(window).width() - $('.window')
+				.width()) / 2);
+		var top = ($(window).scrollTop() + ($(window).height() - $('.window')
+				.height()) / 2);
+
+		// css 스타일을 변경합니다.
+		$('.window').css({
+			'left' : left,
+			'top' : top,
+			'position' : 'absolute'
+		});
+
+		// 레이어 팝업을 띄웁니다.
+		$('.window').show();
+	}
+
+	$(document).ready(function() {
+		// showMask를 클릭시 작동하며 검은 마스크 배경과 레이어 팝업을 띄웁니다.
+		$('.pic-src').click(function(e) {
+			
+			// preventDefault는 href의 링크 기본 행동을 막는 기능입니다.
+			e.preventDefault();
+			wrapWindowByMask();
+		});
+
+
+		// 닫기(close)를 눌렀을 때 작동합니다.
+		$('.window .close').click(function(e) {
+			e.preventDefault();
+			$('.mask, .window').hide();
+		});
+
+		// 뒤 검은 마스크를 클릭시에도 모두 제거하도록 처리합니다.
+		$('.mask').click(function() {
+			$(this).hide();
+			$('.window').hide();
+		});
+	});
+	
+	
+	
+</script>
 
 </html>
