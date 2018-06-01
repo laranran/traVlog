@@ -181,8 +181,6 @@ public class BoardController {
 		//날짜 가져오기 및 날짜 넣기
 		if(board.getStartdate() != null && board.getEnddate() != null) {
 			Board insertDateBoard = new Board();
-//			logger.info("시작일"+board.getStartdate());
-//			logger.info("마지막일"+board.getEnddate());
 			
 			insertDateBoard.setBodno(boardService.getBoardNo(board));
 			insertDateBoard.setStartdate(board.getStartdate());
@@ -200,7 +198,7 @@ public class BoardController {
 		if(latLng != null) {
 			latLng.setBodno(boardService.getBoardNo(board));
 			position = latLng.getPosition();
-			
+			//가져오는 좌표값의 괄호 ( )를 없애기
 				position = position.replace("(", "");
 				position = position.replace(")", "");
 				logger.info("전부 받는 좌표 값은?"+position);

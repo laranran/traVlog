@@ -26,16 +26,6 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<style>
-#map {
-	width: 80%;
-	height: 600px;
-	display: none;
-	margin: auto;
-	border: 10px solid #92A8D1;
-}
-</style>
 <script type="text/javascript">
 
 
@@ -190,6 +180,13 @@ body {
    background-repeat: no-repeat;
    background-size: cover;
 }
+#map {
+	width: 80%;
+	height: 600px;
+	display: none;
+	margin: auto;
+	border: 10px solid #92A8D1;
+}
 </style>
 
 </head>
@@ -207,20 +204,20 @@ body {
 				<div class="form-group">
 					<label for="bodname">작성자</label> <input type="text" id="bodname"
 						name="bodname" value="${memnick }" readonly="readonly"
-						class="form-control" style="width:80%;"/>
+						class="form-control" style="width:70%;"/>
 				</div>
 				<div class="form-group">
 					<label for="bodtitle">제목</label> <input type="text" id="bodtitle"
-						name="bodtitle" class="form-control" style="width:80%;"   required="required"/>
+						name="bodtitle" class="form-control" style="width:70%;"   required="required"/>
 				</div>
 				<div class="form-group">
 					<label for="bodcontent">본문</label><br>
-					<textarea style="width:1000px; height:700px; " id="bodcontent" name="bodcontent"  required="required"></textarea>
+					<textarea style="width:850px; height:700px; " id="bodcontent" name="bodcontent"  required="required"></textarea>
 					<br>
 					<label for="bodhashtag">태그</label>
-					<input type="text" class="form-control" style="width:600px; display: inline;" id="bodhashtag" 
+					<input type="text" class="form-control" style="width:500px; display: inline;" id="bodhashtag" 
 						name="bodhashtag" placeholder="#아무말#헤헤#테스트" />
-					<label for="upload" style="margin-left:60px;">첨부파일</label> 
+					<label for="upload" style="margin-left:50px;">첨부파일</label> 
 					<input type="file" id="upload" name="upload" style="display: inline; " multiple /> <br>
 				</div>
 				<p>여행 기간<br>
