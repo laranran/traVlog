@@ -30,8 +30,13 @@
          <input type="text" name="memid" id="memid" placeholder="Your id"><p></p>
          </div>
          <div class="put">
+<<<<<<< HEAD
          <img src="/resources/images/login/pass.png" height="30px">
          <input type="password" name="mempw" id="mempw" placeholder="Your password"><p></p>
+=======
+         <img alt="마이페이지" src="/resources/images/login/pass.png" height="30px">
+         <input type="password" name="mempassword" id="mempassword" placeholder="Your password"><p></p>
+>>>>>>> 671cabd260e65bbc51f5a8b508deb65e5af4a3db
          </div>
          
          <div class="submit-wrap">
