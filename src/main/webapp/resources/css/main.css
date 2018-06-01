@@ -3,7 +3,7 @@
 /* 전체 스타일 설정 */
 .header *, .footer * 
 {
-   font-family: 'Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim
 }
 * {
@@ -16,7 +16,7 @@ html {
 body {
    height: 100%;
    font-size: 75%;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
    
 }
@@ -46,7 +46,7 @@ p, acronym, address, big, small, cite, code, dfn, em, kbd, pre, samp,
 h1, h2, h3, h4, h5, h6 {
    font-size: 1em;
    letter-spacing: -1px;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
 }
 big {
@@ -62,7 +62,7 @@ input, select {
    vertical-align: middle;
    font-size: 1em;
    color: #767676;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
 }
 /*input[type="password"] { color:#555;}*/
@@ -72,7 +72,7 @@ input::-ms-clear {
 textarea {
    border: 1px solid #d9d9d9;
    font-size: 12px;
-   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
    resize: none;
    box-sizing: border-box;
@@ -125,12 +125,17 @@ a.hoverline:hover {
 
 .memInfo strong{
 	padding-top: 15px;
-    display: block;
+    display: inline-block;
     color: black;
-    width: 250px;
     font-size: 15px;
 }
 
+.board .claim{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+}
 
 /*right navigation*/
 
