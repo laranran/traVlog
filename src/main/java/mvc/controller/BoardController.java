@@ -73,7 +73,11 @@ public class BoardController {
 			Member sessionMember = memberService.getMemberOne(member);
 			// 로그인 .. memberService 가져오고 아이디와 이름 세션 생성
 			session.setAttribute("memid", sessionMember.getMemid());
+			
 			session.setAttribute("memnick", sessionMember.getMemnick());
+			
+			System.out.println("로그인한 아이디"+session.getAttribute("memid"));
+			System.out.println("로그인한 닉네임"+ session.getAttribute("memnick"));
 			
 			return "redirect:/traVlog/main.do";
 			
@@ -131,7 +135,9 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/traVlog/mypage.do", method = RequestMethod.GET)
-	public void mypage() {
+	public void mypage(Model model,HttpSession session) {
+		String nick = (String) session.getAttribute("memnick");
+		model.addAttribute("nick", nick);
 		logger.info("마이페이지 GET요청");
 	}
 	

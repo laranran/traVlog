@@ -46,14 +46,13 @@ body {
 						<img class="userimg" src="/resources/images/icon/user.png">
 						<button class="profilebtn"
 							onclick="location.href='settingprofile.do'">프로필 편집</button>
-						<div class="usernick">닉네임</div>
+						<div class="usernick">${nick }</div>
 						<div class="setting">
-					
+						<a href="report.do?memnick=${nick }"><img class="reportimg"
+								src="/resources/images/icon/report.png"></a>
 							<a href="getmessage.do"><img class="messageimg"
 								src="/resources/images/icon/message.png"></a><br>
 								
-									<a href="report.do"><img class="reportimg"
-								src="/resources/images/icon/report.png"></a><br>
 						</div>
 						<div class="userinfo">아몰랑 여기는 소개적는 칸. 글자수 제한을 두는것이 좋겠어요 한
 							80글자 정도로??? 내려온다. 대한 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈

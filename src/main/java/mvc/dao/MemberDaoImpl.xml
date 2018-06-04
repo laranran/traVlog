@@ -35,5 +35,12 @@
 		Select memid, memnick From tb_member where memid =#{memid}
 	</select>
 	
+	<insert id="report" parameterType="mvc.dto.Report">
+	INSERT
+	 INTO TB_USERCLAIM(USERclmno,clmfromid,CLMTOID,clmdate,CLMCONTENT) values(claim_1.nextval, #{clmfromid},#{clmtoid}, sysdate,#{clmcontent})
+
+	</insert>
+	
+	
 	
 </mapper>

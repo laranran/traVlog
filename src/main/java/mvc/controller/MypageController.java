@@ -131,9 +131,9 @@ public class MypageController {
 		
 	//신고하기
 		@RequestMapping(value="/traVlog/report.do",method=RequestMethod.GET)
-		public void repor() {
-			System.out.println("리포트...");
-		
+		public void repor(Member member,Model model) {
+			System.out.println("신고할 사용자 아이디 : "+member);
+			model.addAttribute("member", member);
 		}
 		
 		
@@ -141,7 +141,6 @@ public class MypageController {
 		public String report(Report report, HttpSession session) {
 			logger.info("신고됐나");
 			System.out.println("신고는?: "+ report);
-			report.setClmname("clmname");
 			memberService.report(report);
 				return "redirect:/traVlog/mypage.do";
 		}
@@ -160,7 +159,10 @@ public class MypageController {
 			
 		}
 		
-
+		@RequestMapping(value="/traVlog/otherpage.do")
+		public void otherpage() {
+			
+		}
 	
 	
 	

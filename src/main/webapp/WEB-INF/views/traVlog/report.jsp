@@ -30,14 +30,16 @@
 
 
 	<form action="/traVlog/report.do" method="post">
+	<input type="hidden" name="clmtoid" value="${member.memnick }"/>
+	<input type="hidden" name="clmfromid" value="${sessionScope.memnick }"/>
+	<select name="clmcontent">
 
+			<option value=1>스팸</option>
+			<option value=2>스팸2</option>
+		<option value=3>스팸3</option>
+		<option value=4>스팸4</option>
 
-			<h6>스팸</h6>
-			<h6>음란물</h6>
-			<h6>욕설</h6>
-			<h6>사기</h6>
-
-
+</select>
  	<input type="submit" value="확인">
 
 

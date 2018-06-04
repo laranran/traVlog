@@ -5,33 +5,30 @@ import java.sql.Date;
 public class Report{
 
 
-			private int clmno;
-			private int  bodno; 
-			private String clmname; 
+			private int userclmno;
+
+			private String clmfromid; 
+			private String clmtoid; 
 			private Date clmdate; 
-			private int clmreason; 
-			private int clmcondition;
-		
-			
-			
-			public int getClmno() {
-				
-				return clmno;
+			private int clmcontent; 
+			private int clming;
+			public int getUserclmno() {
+				return userclmno;
 			}
-			public void setClmno(int clmno) {
-				this.clmno = clmno;
+			public void setUserclmno(int userclmno) {
+				this.userclmno = userclmno;
 			}
-			public int getBodno() {
-				return bodno;
+			public String getClmfromid() {
+				return clmfromid;
 			}
-			public void setBodno(int bodno) {
-				this.bodno = bodno;
+			public void setClmfromid(String clmfromid) {
+				this.clmfromid = clmfromid;
 			}
-			public String getClmname() {
-				return clmname;
+			public String getClmtoid() {
+				return clmtoid;
 			}
-			public void setClmname(String clmname) {
-				this.clmname = clmname;
+			public void setClmtoid(String clmtoid) {
+				this.clmtoid = clmtoid;
 			}
 			public Date getClmdate() {
 				return clmdate;
@@ -39,30 +36,28 @@ public class Report{
 			public void setClmdate(Date clmdate) {
 				this.clmdate = clmdate;
 			}
-			public int getClmreason() {
-				return clmreason;
+			public int getClmcontent() {
+				return clmcontent;
 			}
-			public void setClmreason(int clmreason) {
-				this.clmreason = clmreason;
+			public void setClmcontent(int clmcontent) {
+				this.clmcontent = clmcontent;
 			}
-			public int getClmcondition() {
-				return clmcondition;
+			public int getClming() {
+				return clming;
 			}
-			public void setClmcondition(int clmcondition) {
-				this.clmcondition = clmcondition;
+			public void setClming(int clming) {
+				this.clming = clming;
 			}
 			@Override
 			public String toString() {
-				return "Report [clmno=" + clmno + ", bodno=" + bodno + ", clmname=" + clmname + ", clmdate=" + clmdate
-						+ ", clmreason=" + clmreason + ", clmcondition=" + clmcondition + ", getClmno()=" + getClmno()
-						+ ", getBodno()=" + getBodno() + ", getClmname()=" + getClmname() + ", getClmdate()="
-						+ getClmdate() + ", getClmreason()=" + getClmreason() + ", getClmcondition()="
-						+ getClmcondition() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-						+ ", toString()=" + super.toString() + "]";
-			} 
-		
-	
-	
-	
-	
+				return "Report [userclmno=" + userclmno + ", clmfromid=" + clmfromid + ", clmtoid=" + clmtoid
+						+ ", clmdate=" + clmdate + ", clmcontent=" + clmcontent + ", clming=" + clming
+						+ ", getUserclmno()=" + getUserclmno() + ", getClmfromid()=" + getClmfromid()
+						+ ", getClmtoid()=" + getClmtoid() + ", getClmdate()=" + getClmdate() + ", getClmcontent()="
+						+ getClmcontent() + ", getClming()=" + getClming() + "]";
+			}
+
+			
 }
+			
+		
