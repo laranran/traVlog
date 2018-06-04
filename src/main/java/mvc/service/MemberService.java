@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mvc.dao.MemberDao;
+import mvc.dao.MessageDao;
 import mvc.dto.Member;
+import mvc.dto.Message;
+import mvc.dto.Report;
 
 @Service
 public class MemberService {
 	@Autowired MemberDao memberDao;
+	@Autowired MessageDao messageDao;
 	
 	//1이면 데이타 일치, 0이면 데이타 없음
 	public int memberCheck(Member member) {
@@ -46,4 +50,47 @@ public class MemberService {
 		return memberDao.MemberInfo(memid);
 	}
 
-}
+		/*// 프로필 보기
+		   public Member getprofile(Member member) {
+		      return memberDao.getProfile(member);
+		   }
+		   
+		   // 프로필 작성
+		   public Member settingprofile(Member member) {
+		      return memberDao.settingprofile(member);
+		   }
+		   */
+		
+		
+
+		   
+		   public void sendingmessage(Message message) {
+			  messageDao.sendingmessage(message);
+		   }
+		/*public void reportProc(Member member,Report report) {
+			return memberDao.reportProc(member,report);
+		}	*/
+
+		public void report(Report report) {
+			memberDao.report(report);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+

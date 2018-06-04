@@ -48,7 +48,7 @@ body {
 							onclick="location.href='settingprofile.do'">프로필 편집</button>
 						<div class="usernick">닉네임</div>
 						<div class="setting">
-							<a href="message.do"><img class="messageimg"
+							<a href="getmessage.do"><img class="messageimg"
 								src="/resources/images/icon/message.png"></a><br>
 						</div>
 						<div class="userinfo">아몰랑 여기는 소개적는 칸. 글자수 제한을 두는것이 좋겠어요 한

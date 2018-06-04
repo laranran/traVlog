@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import mvc.dto.Member;
+import mvc.dto.Report;
 
 public interface MemberDao {
 	
@@ -23,4 +24,6 @@ public interface MemberDao {
 	public String findPw(Map<String, Object> paramMap);
 
 	public ArrayList<Member> MemberInfo(String memid);
+
+	public void report(Report report);
 }
