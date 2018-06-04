@@ -1,5 +1,7 @@
 package mvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
 
 @Service
 public class BoardService {
@@ -47,6 +50,11 @@ public class BoardService {
 
 	public void updateDates(Board board) {
 		boardDao.updateDates(board);
+	}
+
+	public List<Board> getBoardListByFollow(Member boardMember) {
+		// TODO Auto-generated method stub
+		return boardDao.getBoardListByFollow(boardMember);
 	}
 	
 }

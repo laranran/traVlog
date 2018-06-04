@@ -21,24 +21,60 @@
  var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
  var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
  var stmnTimer; 
- 
- function RefreshStaticMenu() { 
-  var stmnStartPoint, stmnEndPoint; 
-  stmnStartPoint = parseInt(document.getElementById('STATICMENU').style.top, 10); 
-  stmnEndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + stmnGAP2; 
-  if (stmnEndPoint < stmnGAP1) stmnEndPoint = stmnGAP1; 
-  if (stmnStartPoint != stmnEndPoint) { 
-   stmnScrollAmount = Math.ceil( Math.abs( stmnEndPoint - stmnStartPoint ) / 15 ); 
-   document.getElementById('STATICMENU').style.top = parseInt(document.getElementById('STATICMENU').style.top, 10) + ( ( stmnEndPoint<stmnStartPoint ) ? -stmnScrollAmount : stmnScrollAmount ) + 'px'; 
-   stmnRefreshTimer = stmnScrollSpeed; 
-   }
-  stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed); 
-  } 
- function InitializeStaticMenu() {
-  document.getElementById('STATICMENU').style.right = stmnLEFT + 'px';  //처음에 오른쪽에 위치. left로 바꿔도.
-  document.getElementById('STATICMENU').style.top = document.body.scrollTop + stmnBASE + 'px'; 
-  RefreshStaticMenu();
-  }
+	
+	function RefreshStaticMenu() {
+		var stmnStartPoint, stmnEndPoint;
+		stmnStartPoint = parseInt(
+				document.getElementById('STATICMENU').style.top, 10);
+		stmnEndPoint = Math.max(document.documentElement.scrollTop,
+				document.body.scrollTop)
+				+ stmnGAP2;
+		if (stmnEndPoint < stmnGAP1)
+			stmnEndPoint = stmnGAP1;
+		if (stmnStartPoint != stmnEndPoint) {
+			stmnScrollAmount = Math.ceil(Math
+					.abs(stmnEndPoint - stmnStartPoint) / 15);
+			document.getElementById('STATICMENU').style.top = parseInt(document
+					.getElementById('STATICMENU').style.top, 10)
+					+ ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+							: stmnScrollAmount) + 'px';
+			stmnRefreshTimer = stmnScrollSpeed;
+		}
+		stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+	}
+	function InitializeStaticMenu() {
+		document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
+		document.getElementById('STATICMENU').style.top = document.body.scrollTop
+				+ stmnBASE + 'px';
+		RefreshStaticMenu();
+	}
+
+// 	boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
+	var count = ${count};
+	$(document).ready(function () {
+		$(document).scroll(function() {
+	    var maxHeight = $(document).height();
+	    var currentScroll = $(window).scrollTop() + $(window).height();
+
+	    if (maxHeight <= currentScroll) {
+	        // Append next contents
+	        console.log(${count});
+	      $.ajax({
+	        type:'GET',
+	        url:'/traVlog/addBoardList.do',
+	       	dataType:'html',
+	       	data:{"count":count},
+	       	success : function(data){
+	       		$("#main").html(data);
+	       		count += 2;
+	       		console.log(count);
+	       	},error:function(data){
+	       		alert("실패");
+	       	}
+	      });
+	    }
+	  });
+	});
 </script>
 
 
@@ -51,40 +87,48 @@
 
 <div id="container"><!-- Begin #container -->
 	<div class="content-wrap">
-		<div class="main">
+		<div class="main" id="main">
+		<!-- BoardList 시작 -->
+			
+			<c:forEach items="${boardList }" var="board" varStatus="listNumber" begin="0" end="${count }">
+<%-- 			<c:forEach items="${boardList }" var="board" varStatus="listNumber">	 --%>
 			<div class="board">
 				<div class="memInfo">
 				<img class="userimg" src="/resources/images/icon/user.png">
-				<strong class="nick">글쓴사람 닉네임</strong>
+				<strong class="nick">${board.bodname }</strong>
 				<img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
 				</div>
 				
+				
 				<div class="boardInfo">
-				<strong class="title">글 제목!</strong>
-				<span class="Bdate">
-				<img class="userimg" src="/resources/images/icon/calender.png">
-				2018.05.23 
-				<img class="userimg" src="/resources/images/icon/airplane.png">
-				2018.06.19</span>
+				<strong class="title">${board.bodtitle }</strong>
+				<c:if test="${board.startdate != null && board.enddate!=null }">
+					<span class="Bdate">
+					<img class="calender" src="/resources/images/icon/calender.png">
+					${board.startdate }
+					<img class="airplane" src="/resources/images/icon/airplane.png">
+					${board.enddate }</span>
+				</c:if>
 				</div>
 				
 				<div class="boardImg">
-				<img class="userimg" src="/resources/images/icon/airplane.png">
-				
+<%-- 				<c:if test="${board.imageList != null }"> --%>
+					<img class="contentImg"  src="/resources/images/BackGround/login.jpg">
+<%--  				</c:if> --%>
 				</div>
 				
 				<div class="icon">
 				<img class="like" width="30px;" src="/resources/images/icon/like.png">
 				<img class="comm" width="30px;" src="/resources/images/icon/calender.png">
-				<img class="pick" width="30px;" src="/resources/images/icon/calender.png">
+				<img class="pin" width="30px;" src="/resources/images/icon/pin.png">
 				</div>
 				<div class="content">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras egestas ligula tellus, ut hendrerit nisi pharetra a. Ut ultrices hendrerit ultricies. Ut nulla mauris, mollis ut feugiat at, dapibus ut arcu. Curabitur consectetur id nisl id tempor. Curabitur congue, libero ut tincidunt malesuada, diam massa rhoncus enim, ut aliquet elit felis sed erat. Ut posuere lorem nulla, at eleifend nisi tristique id. Maecenas quis mauris mattis, vestibulum urna ac, laoreet felis. Mauris ullamcorper, ante sed efficitur vulputate, sem enim consequat elit, eget vestibulum lectus nibh feugiat risus. Nulla ultrices sit amet neque ac luctus. Donec mauris lorem, dictum at turpis at, congue cursus mi. Fusce faucibus mauris in laoreet faucibus. Vivamus molestie est in auctor faucibus. Mauris aliquet, velit ac molestie hendrerit, erat nibh porta nisl, in rutrum leo enim et metus. Nunc iaculis feugiat lorem, at lobortis tellus porta vel. Quisque eu ligula eu nisi mattis feugiat.
-				Integer lobortis eros sit amet justo condimentum, quis pellentesque ex vulputate. Etiam hendrerit tempus urna, a imperdiet erat ornare non. Nullam tincidunt dolor sed orci pharetra rhoncus. Sed lacinia nec dolor vitae ultrices. In nec dolor magna. Quisque lacinia leo eu porttitor bibendum. Nunc dignissim dui nec nisi faucibus ornare. Aliquam finibus, velit at accumsan porttitor, libero orci dapibus eros, sed fermentum tortor lorem quis quam. Fusce posuere, ante eget sollicitudin fermentum, massa libero gravida lectus, sit amet pulvinar augue tellus nec felis. Maecenas laoreet metus non ex maximus finibus. Curabitur sit amet est at urna porta viverra eget sit amet quam. Vivamus euismod, quam id faucibus viverra, nibh nunc fermentum velit, nec ultricies urna ipsum a velit. Aliquam nibh lectus, porttitor sed quam tristique, aliquam pretium massa. Mauris ultricies convallis rutrum. Donec justo dui, efficitur et consectetur eu, maximus eget ex.
-				Nunc risus nulla, fermentum vel scelerisque quis, suscipit quis nulla. Mauris suscipit augue quis pellentesque lacinia. Sed ut nulla purus. Pellentesque et ante velit. Phasellus hendrerit urna ac mattis semper. Morbi eget porta ligula. Cras in cursus leo, at commodo lacus. Suspendisse nec maximus eros, vitae tempus nulla. In non lorem iaculis, bibendum ante tristique, dignissim dui. Aliquam erat volutpat. Vivamus fringilla justo ante, vitae rhoncus mi facilisis auctor. Praesent eget elit mauris. Etiam ut tortor tempus, posuere massa a, aliquam nisl. Aliquam erat volutpat. Cras gravida risus quis tellus congue interdum.
+				${board.bodcontent }
 				</div>
 			</div>
-				
+			</c:forEach>
+			<!-- boardList 끝 -->
+			
 		</div>
 		
 		<div class="right" id="STATICMENU">

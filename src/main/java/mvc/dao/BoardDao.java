@@ -1,9 +1,12 @@
 package mvc.dao;
 
+import java.util.List;
+
 import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
 
 public interface BoardDao {
 
@@ -29,5 +32,7 @@ public interface BoardDao {
 	//게시글에 여행날짜 업데이트하기.
 	//날짜 없이 입력할 경우 insertBoard실행
 	public void updateDates(Board board);
+
+	public List<Board> getBoardListByFollow(Member boardMember);
 
 }

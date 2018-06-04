@@ -175,11 +175,6 @@ $(document).ready(function() {
 });
 </script>
 <style type="text/css">
-body {
-   background-image: url('/resources/images/BackGround/main.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-}
 #map {
 	width: 80%;
 	height: 600px;
