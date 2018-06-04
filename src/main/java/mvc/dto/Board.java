@@ -17,7 +17,9 @@ public class Board {
 	//여행 시작일, 마지막일 추가
 	private Date startdate;
 	private Date enddate;
-	
+
+	//추천인 추가
+	private String recommendnick;
 	
 	public Date getStartdate() {
 		return startdate;
@@ -94,6 +96,14 @@ public class Board {
 		this.bodname = bodname;
 	}
 	
+	public String getRecommendnick() {
+		return recommendnick;
+	}
+
+	public void setRecommendnick(String recommendnick) {
+		this.recommendnick = recommendnick;
+	}
+
 	@Override
 	public String toString() {
 		return "BOARD =[ "

@@ -22,14 +22,6 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
-<style type="text/css">
-body {
-	background-image: url('/resources/images/BackGround/main.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-}
-</style>
-
 </head>
 
 <body>
@@ -64,7 +56,7 @@ body {
 						<div class="follower">
 							<strong>37</strong><br /> <span>팔로워</span>
 						</div>
-						<div class="board">
+						<div class="boardImg">
 							<strong>1</strong><br /> <span>게시글</span>
 						</div>
 

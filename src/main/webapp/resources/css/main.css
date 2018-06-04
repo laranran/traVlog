@@ -3,7 +3,7 @@
 /* 전체 스타일 설정 */
 .header *, .footer * 
 {
-   font-family: 'JejuGothic', '제주고딕','Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'Noto Sans KR', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim
 }
 * {
@@ -16,9 +16,9 @@ html {
 body {
    height: 100%;
    font-size: 75%;
-   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
-   
+   background-color: #fafafa !important;
 }
 img {
    border: 0;
@@ -32,22 +32,11 @@ form, fieldset {
 ul, ol, li {
    list-style: none;
 }
-ul, ol, li, a, table, td, th, p, dl, dd, dt, strong, span, div {
-   font-size: 1em;
-   line-height: 1.5;
-   word-spacing: -1px;
-}
 
 p, acronym, address, big, small, cite, code, dfn, em, kbd, pre, samp,
    sub, sup, tt, var {
    font-weight: normal;
    font-style: normal;
-}
-h1, h2, h3, h4, h5, h6 {
-   font-size: 1em;
-   letter-spacing: -1px;
-   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
-      sans-serif, "돋움", Dotum, "굴림", Gulim;
 }
 big {
    font-size: 1.125em;
@@ -60,9 +49,8 @@ sub {
 }
 input, select {
    vertical-align: middle;
-   font-size: 1em;
    color: #767676;
-   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
 }
 /*input[type="password"] { color:#555;}*/
@@ -72,7 +60,7 @@ input::-ms-clear {
 textarea {
    border: 1px solid #d9d9d9;
    font-size: 12px;
-   font-family: 'JejuGothic', '제주고딕','NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
+   font-family: 'NanumGothic', '맑은고딕', 'Malgun Gothic', 'MGothic',
       sans-serif, "돋움", Dotum, "굴림", Gulim;
    resize: none;
    box-sizing: border-box;
@@ -110,120 +98,20 @@ a.hoverline:hover {
    text-decoration: underline
 }
 
+#wrap{
+	border-bottom: 1px solid #bfbfbf;
+    height: 115px;
+    background-color: white;
+}
+.container  {min-height: 100%; margin-left: 160px;}
+
+.content-wrap {
+   position: relative;
+   width: 1200px;
+   margin: 60px auto;
+}
+
 /* clear */
 .clear {
    clear: both;
 }
-
-/*main board*/
-
-.board{
-	width: 750px;
-    border: 1px solid black;
-    margin: 30px auto;
-}
-
-.memInfo{
-	height: 50px;
-}
-
-.boardInfo{
-	height: 50px;
-}
-
-.boardImg{
-	width: 750px;
-	height: 750px;
-	border: 1px solid black;
-}
-
-
-
-.memInfo strong{
-	padding-top: 15px;
-    display: inline-block;
-    color: black;
-    font-size: 15px;
-}
-
-.board .claim{
-	float: right;
-	width: 30px;
-	height: 30px;
-	margin: 10px;
-}
-
-.boardInfo .title{
-    width: 350px;
-    border-right: 1px solid #808080;
-    font-size: 25px;
-    display: inline-block;
-    margin-left: 10px;	
-    height: 40px;
-}
-
-.boardInfo .Bdate{
-	
-}
-/*right navigation*/
-
-.userimg{
-position: relative;
-float: left;
-width: 50px;
-height: 50px;
-margin-left: 5px;
-margin-right: 5px;
-}
-
-.user .nick{
-font-size: 17px;
-font-weight: bold;
-}
-
-.user .id{
-font-size: 13px;
-}
-
-.right strong {
-float:left;
-margin-top: 25px;
-margin-left: 15px;
-margin-bottom: 15px;
-font-size: 15px;
-width: 280px;
-}
-
-.topTag{
-	margin-left: 30px;
-}
-.topTag .tagname{
-	font-size:15px;
-	width: 200px;
-
-}
-.topTag .taghit{
-	font-size:11px;
-}
-
-.topMember{
-	margin-left: 30px;
-}
-.topMember .memnick{
-	font-size:15px;
-	width: 200px;
-
-}
-.topMember .memfollower{
-	font-size:11px;
-}
-
-#STATICMENU { 
-margin: 0pt; 
-padding: 0pt;  
-position: absolute; 
-right: 0px; 
-top: 0px;
-}
-
-

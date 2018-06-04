@@ -1,5 +1,7 @@
 package mvc.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
 
 @Service
 public class BoardService {
@@ -47,6 +50,33 @@ public class BoardService {
 
 	public void updateDates(Board board) {
 		boardDao.updateDates(board);
+	}
+
+	public List<Board> getBoardListByFollow(Member boardMember) {
+		return boardDao.getBoardListByFollow(boardMember);
+	}
+	
+	public boolean recommendCheck(Board board) {
+		System.out.println(board);
+		if( boardDao.selectCountRecommend(board) > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean recommend(Board board) {
+		if( recommendCheck(board) ) {
+			boardDao.deleteRecommend(board);
+			return false;
+		} else {
+			boardDao.insertRecommend(board);
+			return true;
+		}
+	}
+	
+	public int getRecommend(Board board) {
+		return boardDao.selectTotalRecommend(board);
 	}
 	
 }

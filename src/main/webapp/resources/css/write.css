@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+#map {
+	width: 80%;
+	height: 600px;
+	display: none;
+	margin: auto;
+	border: 10px solid #92A8D1;
+}
+
+#default{
+	width: 855px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+
+.bodtitle{
+	display: inline-block;
+	width: 600px;
+	margin-bottom: 10px;
+}
+.bodname{
+	display: inline-block;
+	width: 250px; 
+	margin-bottom: 10px;
+}
+
+.Tdate strong{
+	padding-bottom: 10px;
+	display: inline-block;
+    }
+
+#bodcontentCss{
+	margin-top: 10px;
+}
+
+#default label{
+	width:100px;
+}
+
+#btnWrite{
+width: 150px;
+height: 30px;
+margin: 10px auto; 
+background-color: white;
+border: 1px solid #92A8D1;
+border-radius: 5px;
+}
+#btnWrite:hover {
+	background-color: #92A8D1;
+	border: 1px solid #92A8D1;
+	color:white;
+	cursor: pointer;
+}
+
+#btnCalender{
+width: 150px;
+height: 30px;
+margin: 20px auto; 
+background-color: white;
+border: 1px solid #92A8D1;
+border-radius: 5px;
+}
+#btnCalender:hover {
+	background-color: #92A8D1;
+	border: 1px solid #92A8D1;
+	color:white;
+	cursor: pointer;
+}
+
+
+
+
+
+
