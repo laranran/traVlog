@@ -1,9 +1,12 @@
 package mvc.dao;
 
+import java.util.List;
+
 import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
 
 public interface BoardDao {
 
@@ -29,5 +32,18 @@ public interface BoardDao {
 	//게시글에 여행날짜 업데이트하기.
 	//날짜 없이 입력할 경우 insertBoard실행
 	public void updateDates(Board board);
+	
+	public List<Board> getBoardListByFollow(Member boardMember);
 
+	/* 작성자가 추천한 글번호인지 조회 */
+	public int selectCountRecommend(Board board);
+	
+	/*추천 삽입 */
+	public void insertRecommend(Board board);
+	
+	/*추천 삭제  */
+	public void deleteRecommend(Board board);
+	
+	/*총 추천 수 구하기 */
+	public int selectTotalRecommend(Board board);
 }
