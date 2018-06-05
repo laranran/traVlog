@@ -117,6 +117,8 @@ public class BoardController {
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
 		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
 		
+		System.out.println(boardList.get(0).toString());
+		
 		//일단 3개만 출력하기 위해 count도 보냄
 		int count = 2;
 		//가져오기 끝
@@ -436,8 +438,8 @@ public class BoardController {
 		
 		@RequestMapping(value="/traVlog/recommend.do", method=RequestMethod.GET)
 		public void boardRecommend(Board board,	Writer writer, HttpSession session) {
-			System.out.println("board:"+board);
-			board.setRecommendnick(((Member)session.getAttribute("memnick")).getMemnick());
+			logger.info("board:"+board);
+			board.setMemnick( (String)session.getAttribute("memnick") );
 
 			boolean result = boardService.recommend(board);
 			

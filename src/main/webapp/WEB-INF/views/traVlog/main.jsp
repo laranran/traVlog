@@ -49,6 +49,47 @@
 // 		RefreshStaticMenu();
 // 	}
 
+function recommend(a){
+		var bodno = a;
+		$.ajax({
+	 		type: "get"
+	 		, url: "/traVlog/recommend.do"
+	 		, dataType: "json"
+	 		, data: {
+				bodno: bodno
+	 		}
+	 		, success: function(data) {
+	 			alert("ajax성공");
+	 			console.log(data);
+
+	 			if(data.result) {
+	 				$(".like").prop("src", "/resources/images/icon/liked.png");
+	 			} else {
+	 				$(".like").prop("src", "/resources/images/icon/like.png");
+	 			}
+	 			console.log(data.recommend);
+ 				$("#recommend").html(data.recommend);
+	 			
+// 	 			var jsonData = {};
+// 	 			try{
+// 	 				jsonData = JSON.parse(data);
+// 	 			}catch(e){
+// 	 				jsonData.result = false;
+// 	 			}
+// 				console.log(jsonData);
+				
+// 	 			if(jsonData.result) {
+// 	 				$(".like").prop("src", "/resources/images/icon/like.png");
+// 	 			}
+	 		}
+	 		, error: function(e) {
+	 			alert("ajax에러");
+	 			console.log(e.responseText);
+	 		}
+	 	});
+		
+}
+
 // 	boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
 	$(document).ready(function () {
 		
@@ -67,6 +108,7 @@
 	       	contentType: "application/json; charset=UTF-8",
 	       	success : function(data){
 	       		alert("성공");
+	       		
 	       	},error:function(data){
 	       		alert("실패");
 	       	}
@@ -75,49 +117,51 @@
 	    }
 	  });
 		
-		if(${recommend eq true}) {
-			$("#btnRecommend")
-				.toggleClass("btn-danger")
-				.text("추천 취소");
-		} else {
-			$("#btnRecommend")
-				.toggleClass("btn-primary")
-				.text("추천");
-		}
-		
-		$("#btnRecommend").click(function() {
-			$.ajax({
-				type: "get"
-				, url: "/traVlog/recommend.do"
-				, dataType: "json"
-				, data: {
-					memid: '${sessionScope.memid}'
-					, boardno: '${board.bodno }'
-				}
-				, success: function(data) {
-					console.log(data);
-					if(data.result) {
-						$("#btnRecommend")
-							.text("추천 취소")
-							.toggleClass("btn-primary")
-							.toggleClass("btn-danger");
-					} else {
-						$("#btnRecommend")
-							.text("추천")
-							.toggleClass("btn-danger")
-							.toggleClass("btn-primary");
-					}
-					$("#recommend").text(data.recommend);
-				}
-				, error: function(e) {
-					console.log(e.responseText);
-				}
-			});
-		});	
-	});
 	
-</script>
+		
+		
+	});
 
+// 		if(${recommend eq true}) {
+// 			$(".btnRecommend")
+// 				.toggleClass("btn-danger")
+// 				.text("추천 취소");
+// 		} else {
+// 			$(".btnRecommend")
+// 				.toggleClass("btn-primary")
+// 				.text("추천");
+// 		}
+// function recommend(bodno) {
+// // 		$(".recommendImg").prop("src", "/resources/images/icon/liked.png");
+	
+// 		$.ajax({
+// 		type: "get"
+// 		, url: "/traVlog/recommend.do"
+// 		, dataType: "json"
+// 		, data: {
+// 			memnick: '${sessionScope.memnick}'
+// 			, bodno: bodno
+// 		}
+// 		, success: function(data) {
+// 			console.log(data);
+// 			if(data.result) {
+// 				$("#btnRecommend")
+// 					.text("추천 취소")
+// 					.toggleClass("btn-primary")
+// 					.toggleClass("btn-danger");
+// 			} else {
+// 				$("#btnRecommend")
+// 					.text("추천")
+// 					.toggleClass("btn-danger")
+// 					.toggleClass("btn-primary");
+// 			}
+// 			$("#recommend").text(data.recommend);
+// 		}
+// 		, error: function(e) {
+// 			console.log(e.responseText);
+// 		}
+// 	});
+</script>
 
 </head>
 
@@ -134,7 +178,8 @@
 			<c:forEach items="${boardList }" var="board" varStatus="listNumber" begin="0" end="2">
 <%-- 			<c:forEach items="${boardList }" var="board" varStatus="listNumber">	 --%>
 			<div class="board">
-				<div class="memInfo">
+				<input type="hidden" id="bodno_${board.bodno }" name="bodno" value="${board.bodno }">
+				<div class="memInfo"> 
 				<img class="userimg" src="/resources/images/icon/user.png">
 				<strong class="nick">${board.bodname }</strong>
 				<img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
@@ -159,15 +204,21 @@
 				</div>
 				
 				<div class="icon">
-				<button id="btnRecommend">
-				<img class="like" width="30px;" src="/resources/images/icon/like.png">
-				<img class="like" width="30px;" src="/resources/images/icon/liked.png">
+
+				<button class="btnRecommend" onclick="recommend(${board.bodno });">
+				<c:if test="${board.isExistsLikeData eq '1'}">
+				<img id="like" class="like" width="30px;" src="/resources/images/icon/liked.png" >
+				</c:if>
+				<c:if test="${board.isExistsLikeData eq '0'}">
+				<img id="like" class="like" width="30px;" src="/resources/images/icon/like.png">
+				</c:if>
 				</button>
+
 				<button><img class="comm" width="30px;" src="/resources/images/icon/comment.png"></button>
 				<button><img class="pin" width="30px;" src="/resources/images/icon/pin.png"></button>
 				</div>
 				<div class="Bcontent">
-				<label>좋아요 <span id="recommend">${recommendCnt } 개</span></label>
+				<label>좋아요 <span id="recommend">${board.recommendCnt } 개</span></label>
 				${board.bodcontent }
 				</div>
 			</div>

@@ -35,27 +35,44 @@
 	</update>
 	
 	<select id="getBoardListByFollow" parameterType="mvc.dto.Member" resultType="mvc.dto.Board">
-	SELECT b.* FROM TB_BOARD b WHERE BODNAME IN 
-	( SELECT f.FLWID FROM TB_FOLLOW f WHERE f.MEMID= #{memid} )OR bodname=#{memnick} 
-	ORDER BY BODDATE DESC
+		SELECT
+			b.*,
+			(	SELECT count(*)
+				FROM tb_recommend r
+				WHERE r.recName = #{memnick }
+					AND r.bodno = b.bodno
+			) AS isExistsLikeData,
+			(	SELECT count(*)
+				FROM tb_recommend r
+				WHERE r.bodno = b.bodno
+			) AS recommendCnt
+		FROM TB_BOARD b
+		WHERE
+			BODNAME IN (
+				SELECT f.FLWID
+				FROM TB_FOLLOW f
+				WHERE f.MEMID= #{memid}
+			)
+			OR bodname=#{memnick}
+		ORDER BY BODDATE DESC
 	</select> 
 	
 	<select id="selectCountRecommend" parameterType="mvc.dto.Board"
 		resultType="int">
-		SELECT COUNT(*) FROM tb_recommend WHERE recnick=#{memnick } AND boardno=#{boardno }
+		SELECT COUNT(*) FROM tb_recommend WHERE recName=#{memnick } AND bodno=#{bodno }
 	</select>
 	
 	<insert id="insertRecommend" parameterType="mvc.dto.Board">
-		INSERT INTO tb_recommend (recnick, boardno) VALUES( #{memnick }, #{boardno } )
+		INSERT INTO tb_recommend (recName, bodno) VALUES( #{memnick }, #{bodno } )
 	</insert>
 	
 	<delete id="deleteRecommend" parameterType="mvc.dto.Board">
-		DELETE FROM tb_recommend WHERE recnick = #{memnick } AND boardno = #{boardno }
+		DELETE FROM tb_recommend WHERE recName = #{memnick } AND bodno = #{bodno }
 	</delete>
 	
 	<select id="selectTotalRecommend" parameterType="mvc.dto.Board"
 		resultType="int">
-		SELECT COUNT(*) FROM tb_recommend WHERE boardno = #{boardno }
+		SELECT COUNT(*) FROM tb_recommend WHERE bodno = #{bodno }
 	</select>
 	
 	
