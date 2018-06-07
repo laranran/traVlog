@@ -21,7 +21,7 @@
 <script type="text/javascript">
 
 
-IMP.request_pay({
+/* IMP.request_pay({
     pg : 'html5_inicis',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
@@ -45,7 +45,7 @@ IMP.request_pay({
     }
 
     alert(msg);
-});
+}); */
 
 </script>
 
@@ -66,7 +66,7 @@ body {
 </head>
 
 <body>
-
+<h1>몰겠다</h1>
 	<div id="wrap">
 
 	<jsp:include page="/resources/util/Page/header.jsp" />
