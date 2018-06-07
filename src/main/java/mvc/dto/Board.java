@@ -21,6 +21,12 @@ public class Board {
 	//추천인 추가
 	private String memnick;
 	private int recommendCnt;
+
+	private int isExistsLikeData;
+	
+	//보관 추가
+	private int pinCnt;
+	private int isExistsPinData;
 	
 	public int getRecommendCnt() {
 		return recommendCnt;
@@ -29,8 +35,6 @@ public class Board {
 	public void setRecommendCnt(int recommendCnt) {
 		this.recommendCnt = recommendCnt;
 	}
-
-	private int isExistsLikeData; 
 	
 	//무한 스크롤을 위한 number 추가
 	private int rnum;
@@ -125,6 +129,22 @@ public class Board {
 
 	public void setIsExistsLikeData(int isExistsLikeData) {
 		this.isExistsLikeData = isExistsLikeData;
+	}
+
+	public int getPinCnt() {
+		return pinCnt;
+	}
+
+	public void setPinCnt(int pinCnt) {
+		this.pinCnt = pinCnt;
+	}
+
+	public int getIsExistsPinData() {
+		return isExistsPinData;
+	}
+
+	public void setIsExistsPinData(int isExistsPinData) {
+		this.isExistsPinData = isExistsPinData;
 	}
 
 	@Override

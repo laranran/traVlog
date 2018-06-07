@@ -44,7 +44,16 @@
 			(	SELECT count(*)
 				FROM tb_recommend r
 				WHERE r.bodno = b.bodno
-			) AS recommendCnt
+			) AS recommendCnt,
+			(	SELECT count(*)
+				FROM tb_keep k
+				WHERE k.kepnick = #{memnick }
+					AND k.bodno = b.bodno
+			) AS isExistsPinData,
+			(	SELECT count(*)
+				FROM tb_keep k
+				WHERE k.bodno = b.bodno
+			) AS pinCnt
 		FROM TB_BOARD b
 		WHERE
 			BODNAME IN (
@@ -56,6 +65,7 @@
 		ORDER BY BODDATE DESC
 	</select> 
 	
+	<!-- 추천 -->
 	<select id="selectCountRecommend" parameterType="mvc.dto.Board"
 		resultType="int">
 		SELECT COUNT(*) FROM tb_recommend WHERE recName=#{memnick } AND bodno=#{bodno }
@@ -73,5 +83,24 @@
 		resultType="int">
 		SELECT COUNT(*) FROM tb_recommend WHERE bodno = #{bodno }
 	</select>
-
+	
+	<!-- 보관 -->
+	<select id="selectCountPin" parameterType="mvc.dto.Board"
+		resultType="int">
+		SELECT COUNT(*) FROM tb_keep WHERE kepNick=#{memnick } AND bodno=#{bodno }
+	</select>
+	
+	<insert id="insertPin" parameterType="mvc.dto.Board">
+		INSERT INTO tb_keep (kepnick, bodno) VALUES( #{memnick }, #{bodno } )
+	</insert>
+	
+	<delete id="deletePin" parameterType="mvc.dto.Board">
+		DELETE FROM tb_keep WHERE kepnick = #{memnick } AND bodno = #{bodno }
+	</delete>
+	
+	<select id="selectPin" parameterType="mvc.dto.Board"
+		resultType="int">
+		SELECT COUNT(*) FROM tb_keep WHERE bodno = #{bodno }
+	</select>
+	
 </mapper>

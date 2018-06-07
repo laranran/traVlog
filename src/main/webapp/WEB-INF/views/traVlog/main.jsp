@@ -96,71 +96,69 @@
      });
    });
    
-
-
    function recommend(a){
-   		var bodno = a;
-   		console.log("bodno : "+bodno);
-   		$.ajax({
-   	 		type: "get"
-   	 		, url: "/traVlog/recommend.do"
-   	 		, dataType: "json"
-   	 		, data: {
-   				bodno: bodno
-   	 		}
-   	 		, success: function(data) {
-   	 			alert("ajax성공");
-   	 			console.log(data);
+	   var bodno = a;
+	      console.log("bodno : "+bodno);
+	      $.ajax({
+	          type: "get"
+	          , url: "/traVlog/recommend.do"
+	          , dataType: "json"
+	          , data: {
+	            bodno: bodno
+	          }
+	          , success: function(data) {
+	             alert("ajax성공");
+	             console.log(data);
 
-   	 			if(data.result) {
-   	 				$(".like_"+a).prop("src", "/resources/images/icon/liked.png");
-   	 			} else {
-   	 				$(".like_"+a).prop("src", "/resources/images/icon/like.png");
-   	 			}
-   	 			console.log("AJAX a : "+a);
-   	 			console.log(data.recommend);
-    				$("#recommend_"+a).html(data.recommend);
-   	 			
-   	 		}
-   	 		, error: function(e) {
-   	 			alert("ajax에러");
-   	 			console.log(e.responseText);
-   	 		}
-   	 	});
-   		
-   }
+	             if(data.result) {
+	                $("#like_"+a).prop("src", "/resources/images/icon/liked.png");
+	             } else {
+	                $("#like_"+a).prop("src", "/resources/images/icon/like.png");
+	             }
+	             console.log("AJAX a : "+a);
+	             console.log(data.recommend);
+	             $("#recommend_"+a).html(data.recommend);
+	             
+	          }
+	          , error: function(e) {
+	             alert("ajax에러");
+	             console.log(e.responseText);
+	          }
+	       });
+	      
+	}
 
-//    function pin(a){
-//    	var bodno = a;
-//    	console.log("bodno : "+bodno);
-//    	$.ajax({
-//     		type: "get"
-//     		, url: "/traVlog/pin.do"
-//     		, dataType: "json"
-//     		, data: {
-//    			bodno: bodno
-//     		}
-//     		, success: function(data) {
-//     			alert("ajax성공");
-//     			console.log(data);
+	function pin(a){
+	   var bodno = a;
+	   console.log("bodno : "+bodno);
+	   $.ajax({
+	       type: "get"
+	       , url: "/traVlog/pin.do"
+	       , dataType: "json"
+	       , data: {
+	         bodno: bodno
+	       }
+	       , success: function(data) {
+	          alert("ajax성공");
+	          console.log(data);
 
-//     			if(data.result) {
-//     				$(".pin_"+a).prop("src", "/resources/images/icon/pined.png");
-//     			} else {
-//     				$(".pin_"+a).prop("src", "/resources/images/icon/pin.png");
-//     			}
-//     			console.log("AJAX a : "+a);
-//     			console.log(data.pin);
-//    				$("#pin_"+a).html(data.pin);
-    			
-//     		}
-//     		, error: function(e) {
-//     			alert("ajax에러");
-//     			console.log(e.responseText);
-//     		}
-//     	});
-   	
-//    }
+	          if(data.result) {
+	             $("#pin_"+a).prop("src", "/resources/images/icon/pined.png");
+	          } else {
+	             $("#pin_"+a).prop("src", "/resources/images/icon/pin.png");
+	          }
+	          console.log("AJAX a : "+a);
+	          console.log(data.pin);
+	            $("#pin_"+a).html(data.pin);
+	          
+	       }
+	       , error: function(e) {
+	          alert("ajax에러");
+	          console.log(e.responseText);
+	       }
+	    });
+	   
+	}
 </script>
 
 
@@ -204,34 +202,34 @@
             </div>
             
 <div class="icon">
-				<!-- 좋아요 기능  -->
-				<button id="recoBtn_${board.bodno}" class="btnRecommend" onclick="recommend(${board.bodno });">
-				<c:if test="${board.isExistsLikeData eq '1'}">
-				<img id="like_${board.bodno}" class="like" width="30px;" src="/resources/images/icon/liked.png" >
-				</c:if>
-				<c:if test="${board.isExistsLikeData eq '0'}">
-				<img id="like_${board.bodno}" class="like" width="30px;" src="/resources/images/icon/like.png">
-				</c:if>
-				</button>
+            <!-- 좋아요 기능  -->
+            <button id="recoBtn_${board.bodno}" class="btnRecommend" onclick="recommend(${board.bodno });">
+            <c:if test="${board.isExistsLikeData eq '1'}">
+            <img id="like_${board.bodno}" class="like" width="30px;" src="/resources/images/icon/liked.png" >
+            </c:if>
+            <c:if test="${board.isExistsLikeData eq '0'}">
+            <img id="like_${board.bodno}" class="like" width="30px;" src="/resources/images/icon/like.png">
+            </c:if>
+            </button>
 
-				<button><img class="comm" width="30px;" src="/resources/images/icon/comment.png"></button>
-				
-<!-- 				보관기능 -->
-<%-- 				<button id="pinBtn_${board.bodno}" class="btnPin" onclick="pin(${board.bodno });"> --%>
-<%-- 				<c:if test="${board.isExistsPinData eq '1'}"> --%>
-<%-- 				<img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pined.png" > --%>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${board.isExistsPinData eq '0'}"> --%>
-<%-- 				<img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pin.png"> --%>
-<%-- 				</c:if> --%>
-<!-- 				</button> -->
-				
-				</div>
-				<div class="Bcontent">
-				<label>좋아요 <span id="recommend_${board.bodno }">${board.recommendCnt } 개</span></label>
-				${board.bodcontent }
-				</div>
-			</div>
+            <button><img class="comm" width="30px;" src="/resources/images/icon/comment.png"></button>
+            
+            <!-- 보관기능 -->
+            <button id="pinBtn_${board.bodno}" class="btnPin" onclick="pin(${board.bodno });">
+            <c:if test="${board.isExistsPinData eq '1'}">
+            <img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pined.png" >
+            </c:if>
+            <c:if test="${board.isExistsPinData eq '0'}">
+            <img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pin.png">
+            </c:if>
+            </button>
+            
+            </div>
+            
+            <div class="content">
+            ${board.bodcontent }
+            </div>
+         </div>
          </c:forEach>
          <!-- boardList 끝 -->
          
