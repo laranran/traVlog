@@ -129,11 +129,6 @@ public class BoardController {
 	public void settingPass() {
 		logger.info("세팅페이지 비밀번호 변경 GET요청");
 	}
-
-	@RequestMapping(value = "/traVlog/mypage.do", method = RequestMethod.GET)
-	public void mypage() {
-		logger.info("마이페이지 GET요청");
-	}
 	
 	@RequestMapping(value = "/traVlog/mylist.do", method = RequestMethod.GET)
 	public void mylist() {
