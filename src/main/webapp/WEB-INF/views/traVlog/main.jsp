@@ -252,6 +252,8 @@ function RefreshStaticMenu() {
 				</button>
 				
 				</div>
+				
+				
 				<div class="Bcontent">
 				<label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
 				${board.bodcontent }
