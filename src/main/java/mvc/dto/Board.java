@@ -19,8 +19,18 @@ public class Board {
 	private Date enddate;
 
 	//추천인 추가
-	private String recommendnick;
-	
+	private String memnick;
+	private int recommendCnt;
+	public int getRecommendCnt() {
+		return recommendCnt;
+	}
+
+	public void setRecommendCnt(int recommendCnt) {
+		this.recommendCnt = recommendCnt;
+	}
+
+	private int isExistsLikeData; 
+
 	public Date getStartdate() {
 		return startdate;
 	}
@@ -96,12 +106,21 @@ public class Board {
 		this.bodname = bodname;
 	}
 	
-	public String getRecommendnick() {
-		return recommendnick;
+
+	public String getMemnick() {
+		return memnick;
 	}
 
-	public void setRecommendnick(String recommendnick) {
-		this.recommendnick = recommendnick;
+	public void setMemnick(String memnick) {
+		this.memnick = memnick;
+	}
+
+	public int getIsExistsLikeData() {
+		return isExistsLikeData;
+	}
+
+	public void setIsExistsLikeData(int isExistsLikeData) {
+		this.isExistsLikeData = isExistsLikeData;
 	}
 
 	@Override
@@ -114,7 +133,8 @@ public class Board {
 				+", BODDATE : "+boddate
 				+", BODRECOMMEND : "+bodrecommend
 				+", start,end date : "+startdate+","+enddate
-				+", BODNAME : "+bodname + " ]";
+				+", BODNAME : "+bodname
+				+", ISEXISTSLIKEDATE :"+isExistsLikeData+"]";
 	}
 
 	public List<MultipartFile> getUpload() {
