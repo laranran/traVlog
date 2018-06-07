@@ -140,6 +140,12 @@ font-style: italic;
 .icon img:hover{
 	cursor: pointer;
 }
+
+.icon button{
+	border: none;
+	background-color: unset;
+}
+
 /*right navigation*/
 
 .userimg{
