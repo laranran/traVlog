@@ -46,4 +46,12 @@ public interface BoardDao {
 	
 	/*총 추천 수 구하기 */
 	public int selectTotalRecommend(Board board);
+	/*핀 삽입*/
+	public void deletePin(Board board);
+	/*핀 삭제*/
+	public void insertPin(Board board);
+	/*핀 여부 구하기*/
+	public int selectPin(Board board);
+	/*핀 개수 구하기*/
+	public int selectCountPin(Board board);
 }

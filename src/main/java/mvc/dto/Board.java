@@ -21,6 +21,12 @@ public class Board {
 	//추천인 추가
 	private String memnick;
 	private int recommendCnt;
+	private int isExistsLikeData;
+	
+	//보관 추가
+	private int pinCnt;
+	private int isExistsPinData;
+	
 	public int getRecommendCnt() {
 		return recommendCnt;
 	}
@@ -29,7 +35,6 @@ public class Board {
 		this.recommendCnt = recommendCnt;
 	}
 
-	private int isExistsLikeData; 
 
 	public Date getStartdate() {
 		return startdate;
@@ -121,6 +126,22 @@ public class Board {
 
 	public void setIsExistsLikeData(int isExistsLikeData) {
 		this.isExistsLikeData = isExistsLikeData;
+	}
+
+	public int getPinCnt() {
+		return pinCnt;
+	}
+
+	public void setPinCnt(int pinCnt) {
+		this.pinCnt = pinCnt;
+	}
+
+	public int getIsExistsPinData() {
+		return isExistsPinData;
+	}
+
+	public void setIsExistsPinData(int isExistsPinData) {
+		this.isExistsPinData = isExistsPinData;
 	}
 
 	@Override

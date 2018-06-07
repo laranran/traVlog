@@ -451,4 +451,20 @@ public class BoardController {
 				e.printStackTrace();
 			}
 		}
+		
+		@RequestMapping(value="/traVlog/pin.do", method=RequestMethod.GET)
+		public void boardPin(Board board, Writer writer, HttpSession session) {
+			logger.info("board:"+board);
+			board.setMemnick( (String)session.getAttribute("memnick") );
+
+			boolean result = boardService.pin(board);
+			
+			int pin = boardService.getPin(board);
+			
+			try {
+				writer.write("{\"result\":"+result+", \"pin\":"+pin+"}");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 }

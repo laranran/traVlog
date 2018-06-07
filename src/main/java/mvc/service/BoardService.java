@@ -78,5 +78,28 @@ public class BoardService {
 	public int getRecommend(Board board) {
 		return boardDao.selectTotalRecommend(board);
 	}
+
+	public boolean pin(Board board) {
+		if( pinCheck(board) ) {
+			boardDao.deletePin(board);
+			return false;
+		} else {
+			boardDao.insertPin(board);
+			return true;
+		}
+	}
+
+	private boolean pinCheck(Board board) {
+		System.out.println(board);
+		if( boardDao.selectCountPin(board) > 0 ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int getPin(Board board) {
+		return boardDao.selectPin(board);
+	}
 	
 }

@@ -14,43 +14,44 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
-//  var stmnLEFT = 10; // 오른쪽 여백 
-//  var stmnGAP1 = 0; // 위쪽 여백 
-//  var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
-//  var stmnBASE = 10; // 스크롤 시작위치 
-//  var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
-//  var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
-//  var stmnTimer; 
+ var stmnLEFT = 10; // 오른쪽 여백 
+ var stmnGAP1 = 0; // 위쪽 여백 
+ var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+ var stmnBASE = 10; // 스크롤 시작위치 
+ var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+ var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
+ var stmnTimer; 
 	
-// 	function RefreshStaticMenu() {
-// 		var stmnStartPoint, stmnEndPoint;
-// 		stmnStartPoint = parseInt(
-// 				document.getElementById('STATICMENU').style.top, 10);
-// 		stmnEndPoint = Math.max(document.documentElement.scrollTop,
-// 				document.body.scrollTop)
-// 				+ stmnGAP2;
-// 		if (stmnEndPoint < stmnGAP1)
-// 			stmnEndPoint = stmnGAP1;
-// 		if (stmnStartPoint != stmnEndPoint) {
-// 			stmnScrollAmount = Math.ceil(Math
-// 					.abs(stmnEndPoint - stmnStartPoint) / 15);
-// 			document.getElementById('STATICMENU').style.top = parseInt(document
-// 					.getElementById('STATICMENU').style.top, 10)
-// 					+ ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
-// 							: stmnScrollAmount) + 'px';
-// 			stmnRefreshTimer = stmnScrollSpeed;
-// 		}
-// 		stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
-// 	}
-// 	function InitializeStaticMenu() {
-// 		document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
-// 		document.getElementById('STATICMENU').style.top = document.body.scrollTop
-// 				+ stmnBASE + 'px';
-// 		RefreshStaticMenu();
-// 	}
+	function RefreshStaticMenu() {
+		var stmnStartPoint, stmnEndPoint;
+		stmnStartPoint = parseInt(
+				document.getElementById('STATICMENU').style.top, 10);
+		stmnEndPoint = Math.max(document.documentElement.scrollTop,
+				document.body.scrollTop)
+				+ stmnGAP2;
+		if (stmnEndPoint < stmnGAP1)
+			stmnEndPoint = stmnGAP1;
+		if (stmnStartPoint != stmnEndPoint) {
+			stmnScrollAmount = Math.ceil(Math
+					.abs(stmnEndPoint - stmnStartPoint) / 15);
+			document.getElementById('STATICMENU').style.top = parseInt(document
+					.getElementById('STATICMENU').style.top, 10)
+					+ ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+							: stmnScrollAmount) + 'px';
+			stmnRefreshTimer = stmnScrollSpeed;
+		}
+		stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+	}
+	function InitializeStaticMenu() {
+		document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
+		document.getElementById('STATICMENU').style.top = document.body.scrollTop
+				+ stmnBASE + 'px';
+		RefreshStaticMenu();
+	}
 
 function recommend(a){
 		var bodno = a;
+		console.log("bodno : "+bodno);
 		$.ajax({
 	 		type: "get"
 	 		, url: "/traVlog/recommend.do"
@@ -63,24 +64,14 @@ function recommend(a){
 	 			console.log(data);
 
 	 			if(data.result) {
-	 				$(".like").prop("src", "/resources/images/icon/liked.png");
+	 				$(".like").attr("src", "/resources/images/icon/liked.png");
 	 			} else {
-	 				$(".like").prop("src", "/resources/images/icon/like.png");
+	 				$(".like").attr("src", "/resources/images/icon/like.png");
 	 			}
+	 			console.log("AJAX a : "+a);
 	 			console.log(data.recommend);
- 				$("#recommend").html(data.recommend);
+ 				$("#recommend_"+a).html(data.recommend);
 	 			
-// 	 			var jsonData = {};
-// 	 			try{
-// 	 				jsonData = JSON.parse(data);
-// 	 			}catch(e){
-// 	 				jsonData.result = false;
-// 	 			}
-// 				console.log(jsonData);
-				
-// 	 			if(jsonData.result) {
-// 	 				$(".like").prop("src", "/resources/images/icon/like.png");
-// 	 			}
 	 		}
 	 		, error: function(e) {
 	 			alert("ajax에러");
@@ -88,6 +79,38 @@ function recommend(a){
 	 		}
 	 	});
 		
+}
+
+function pin(a){
+	var bodno = a;
+	console.log("bodno : "+bodno);
+	$.ajax({
+ 		type: "get"
+ 		, url: "/traVlog/pin.do"
+ 		, dataType: "json"
+ 		, data: {
+			bodno: bodno
+ 		}
+ 		, success: function(data) {
+ 			alert("ajax성공");
+ 			console.log(data);
+
+ 			if(data.result) {
+ 				$("#pin_"+a).prop("src", "/resources/images/icon/pined.png");
+ 			} else {
+ 				$("#pin_"+a).prop("src", "/resources/images/icon/pin.png");
+ 			}
+ 			console.log("AJAX a : "+a);
+ 			console.log(data.pin);
+				$("#pin_"+a).html(data.pin);
+ 			
+ 		}
+ 		, error: function(e) {
+ 			alert("ajax에러");
+ 			console.log(e.responseText);
+ 		}
+ 	});
+	
 }
 
 // 	boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
@@ -117,55 +140,14 @@ function recommend(a){
 	    }
 	  });
 		
-	
-		
 		
 	});
 
-// 		if(${recommend eq true}) {
-// 			$(".btnRecommend")
-// 				.toggleClass("btn-danger")
-// 				.text("추천 취소");
-// 		} else {
-// 			$(".btnRecommend")
-// 				.toggleClass("btn-primary")
-// 				.text("추천");
-// 		}
-// function recommend(bodno) {
-// // 		$(".recommendImg").prop("src", "/resources/images/icon/liked.png");
-	
-// 		$.ajax({
-// 		type: "get"
-// 		, url: "/traVlog/recommend.do"
-// 		, dataType: "json"
-// 		, data: {
-// 			memnick: '${sessionScope.memnick}'
-// 			, bodno: bodno
-// 		}
-// 		, success: function(data) {
-// 			console.log(data);
-// 			if(data.result) {
-// 				$("#btnRecommend")
-// 					.text("추천 취소")
-// 					.toggleClass("btn-primary")
-// 					.toggleClass("btn-danger");
-// 			} else {
-// 				$("#btnRecommend")
-// 					.text("추천")
-// 					.toggleClass("btn-danger")
-// 					.toggleClass("btn-primary");
-// 			}
-// 			$("#recommend").text(data.recommend);
-// 		}
-// 		, error: function(e) {
-// 			console.log(e.responseText);
-// 		}
-// 	});
 </script>
 
 </head>
 
-<body>
+<body onload="InitializeStaticMenu()">
 <div id="wrap">
 		
 <jsp:include page="/resources/util/Page/header.jsp" />
@@ -204,21 +186,31 @@ function recommend(a){
 				</div>
 				
 				<div class="icon">
-
-				<button class="btnRecommend" onclick="recommend(${board.bodno });">
+				<!-- 좋아요 기능  -->
+				<button id="recoBtn_${board.bodno}" class="btnRecommend" onclick="recommend(${board.bodno });">
 				<c:if test="${board.isExistsLikeData eq '1'}">
-				<img id="like" class="like" width="30px;" src="/resources/images/icon/liked.png" >
+				<img id="like_${board.bodno}" class="like" width="30px;" src="/resources/images/icon/liked.png" >
 				</c:if>
 				<c:if test="${board.isExistsLikeData eq '0'}">
-				<img id="like" class="like" width="30px;" src="/resources/images/icon/like.png">
+				<img id="like_${board.bodno}" class="like" width="30px;" src="/resources/images/icon/like.png">
 				</c:if>
 				</button>
 
 				<button><img class="comm" width="30px;" src="/resources/images/icon/comment.png"></button>
-				<button><img class="pin" width="30px;" src="/resources/images/icon/pin.png"></button>
+				
+				<!-- 보관기능 -->
+				<button id="pinBtn_${board.bodno}" class="btnPin" onclick="pin(${board.bodno });">
+				<c:if test="${board.isExistsPinData eq '1'}">
+				<img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pined.png" >
+				</c:if>
+				<c:if test="${board.isExistsPinData eq '0'}">
+				<img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pin.png">
+				</c:if>
+				</button>
+				
 				</div>
 				<div class="Bcontent">
-				<label>좋아요 <span id="recommend">${board.recommendCnt } 개</span></label>
+				<label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
 				${board.bodcontent }
 				</div>
 			</div>
