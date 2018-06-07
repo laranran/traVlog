@@ -41,6 +41,13 @@
 
 	</insert>
 	
+	<insert id="advertising" parameterType="mvc.dto.Advertising">
+	INSERT INTO TB_ADVERTISING(advno,advid,advname,advprice,advdate) values(adver_seq.nextval, #{advid}, #{advname},#{advprice},sysdate)
+	
+	</insert>
+	
+	
+	
 	
 	
 </mapper>

@@ -57,9 +57,10 @@ border-radius: 5px;
 .usernick {
 float:left;
 margin-top: 15px;
-margin-left: 200px;
+margin-left: 150px;
 font-size: 30px;
 width:245px;
+text-align: center;
 }
 .messageimg{
 margin-top:10px;

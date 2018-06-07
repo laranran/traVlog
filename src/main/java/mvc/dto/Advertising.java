@@ -14,6 +14,13 @@ public class Advertising {
 	private Date advend ;
 	private String advcontent; 
 	private String  advfile;
+	private String advname;
+	public String getAdvname() {
+		return advname;
+	}
+	public void setAdvname(String advname) {
+		this.advname = advname;
+	}
 	public int getAdvno() {
 		return advno;
 	}
@@ -78,13 +85,14 @@ public class Advertising {
 	public String toString() {
 		return "Advertising [advno=" + advno + ", advid=" + advid + ", advdate=" + advdate + ", advapprove="
 				+ advapprove + ", advtitle=" + advtitle + ", advprice=" + advprice + ", advstart=" + advstart
-				+ ", advend=" + advend + ", advcontent=" + advcontent + ", advfile=" + advfile + ", getAdvno()="
-				+ getAdvno() + ", getAdvid()=" + getAdvid() + ", getAdvdate()=" + getAdvdate() + ", getAdvapprove()="
-				+ getAdvapprove() + ", getAdvtitle()=" + getAdvtitle() + ", getAdvprice()=" + getAdvprice()
-				+ ", getAdvstart()=" + getAdvstart() + ", getAdvend()=" + getAdvend() + ", getAdvcontent()="
-				+ getAdvcontent() + ", getAdvfile()=" + getAdvfile() + "]";
-	} 
-
+				+ ", advend=" + advend + ", advcontent=" + advcontent + ", advfile=" + advfile + ", advname=" + advname
+				+ ", getAdvname()=" + getAdvname() + ", getAdvno()=" + getAdvno() + ", getAdvid()=" + getAdvid()
+				+ ", getAdvdate()=" + getAdvdate() + ", getAdvapprove()=" + getAdvapprove() + ", getAdvtitle()="
+				+ getAdvtitle() + ", getAdvprice()=" + getAdvprice() + ", getAdvstart()=" + getAdvstart()
+				+ ", getAdvend()=" + getAdvend() + ", getAdvcontent()=" + getAdvcontent() + ", getAdvfile()="
+				+ getAdvfile() + "]";
+	}
+	
 	
 	
 	

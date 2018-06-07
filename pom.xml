@@ -21,10 +21,24 @@
 			<id>oracle</id>
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
+		
+		<!-- 결제 API 아임포트 -->
+		
+
+		
+	
 	</repositories>
 	
-	
+
+
 	<dependencies>
+	<!-- 결제 API 아임포트 -->
+	
+	
+	
+	
+	
+	
 		<!-- JavaMail API 1.4.7 -->
 		<dependency>
 		    <groupId>javax.mail</groupId>

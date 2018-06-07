@@ -24,7 +24,7 @@
       
       <li><a class="fly" href="/traVlog/#.do">광고 내역</a></li>
       
-      <li><a class="fly" href="/traVlog/#.do">광고 신청</a></li>
+      <li><a class="fly" href="/traVlog/advertising.do">광고 신청</a></li>
       
       <li><a class="fly" href="/traVlog/#.do">결제 조회</a></li>
       

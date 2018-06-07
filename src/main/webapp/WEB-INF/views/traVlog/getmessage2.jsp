@@ -52,11 +52,11 @@ padding:20px;
 font-size:15px;
 font-family: Arial, Helvetica, sans-serif;}
 button{
-    background-color: #92A8D1;
+background-color: #92A8D1;
     color: white;
     padding: 10px 15px;
     margin: 8px 0;
-    margin-left: 20px;
+    margin-left: 250px;
     border: none;
     cursor: pointer;
     width: 50%;
@@ -64,6 +64,14 @@ button{
 }
 button:hover {
     opacity:1;
+}
+.btn-group{
+padding-right: 30px;
+    padding-bottom: 50px;
+    padding-top: 20px;
+    padding: ;
+    float: right;
+
 }
 }
 </style>

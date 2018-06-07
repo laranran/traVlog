@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import mvc.dto.Advertising;
 import mvc.dto.Member;
 import mvc.dto.Message;
 import mvc.dto.Report;
@@ -126,9 +127,6 @@ public class MypageController {
 		}
 		
 		
-		
-		
-		
 	//신고하기
 		@RequestMapping(value="/traVlog/report.do",method=RequestMethod.GET)
 		public void repor(Member member,Model model) {
@@ -144,21 +142,42 @@ public class MypageController {
 			memberService.report(report);
 				return "redirect:/traVlog/mypage.do";
 		}
-/*		
-		@RequestMapping(value="/traVlog/report.do", method=RequestMethod.POST)
-		public String reportProc(Member member) {
-			memberService.report(member);
-			
+
+		
+		
+		
+		//광고1
+				@RequestMapping(value="/traVlog/advertising.do",method=RequestMethod.GET)
+				public void advert(Member member,Model model) {
+					System.out.println("광고 : "+member);
+					model.addAttribute("member", member);
+				}
+				
+		
+		
+		//광고2
+		@RequestMapping(value="/traVlog/advertising.do",method=RequestMethod.POST)
+		public String advertising(Advertising advertising, HttpSession session) {
+			System.out.println("광고보내기 :" + advertising);
+			memberService.advertising(advertising);
 			return "redirect:/traVlog/mypage.do";
 		}
-		
-	*/
-		//광고
-		@RequestMapping(value="/traVlog/advertising.do")
-		public void advertising() {
+			
+			
+			
+			
+			
+			
+		//결제
+		@RequestMapping(value="/traVlog/payment.do")
+		public void payment() {
 			
 		}
+	
 		
+			
+	
+		//남의 페이지 보여주기
 		@RequestMapping(value="/traVlog/otherpage.do")
 		public void otherpage() {
 			

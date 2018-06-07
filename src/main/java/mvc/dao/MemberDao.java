@@ -3,6 +3,7 @@ package mvc.dao;
 import java.util.ArrayList;
 import java.util.Map;
 
+import mvc.dto.Advertising;
 import mvc.dto.Member;
 import mvc.dto.Report;
 
@@ -26,4 +27,6 @@ public interface MemberDao {
 	public ArrayList<Member> MemberInfo(String memid);
 
 	public void report(Report report);
+
+	public void advertising(Advertising advertising);
 }
