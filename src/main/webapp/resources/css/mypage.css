@@ -1,14 +1,23 @@
 @charset "UTF-8";
 
 /* container */
+#wrap{
+	border-bottom: 1px solid #bfbfbf;
+    height: 115px;
+    background-color: white;
+}
+
 .container  {min-height: 100%; margin-left: 160px;}
+
 .content-wrap {
+	
    position: relative;
    width: 1200px;
    height : 1300px;
    margin: 100px auto;
    background-color: white;
    opacity: 0.6;
+
 }
 
 .content-wrap .top{
@@ -20,7 +29,7 @@
 .content-wrap .buttom{
 	position: relative;
 	margin-top : 10px;
-	border-top: 1px solid #5e89da;
+	border-top: 1px solid #bfbfbf;
 	width: 1200px;
     height : 1020px;
 }

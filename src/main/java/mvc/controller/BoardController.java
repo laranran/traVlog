@@ -3,6 +3,7 @@ package mvc.controller;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,12 +34,10 @@ import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
-import mvc.dto.Member;
 import mvc.service.BoardService;
 import mvc.service.MemberService;
 import spring.board.email.Email;
 import spring.board.email.EmailSender;
-
 @Controller
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
@@ -112,13 +111,39 @@ public class BoardController {
 		//인기 사용자
 		ArrayList<Member> memList = mainService.topMember();
 		
+		//board List가져오기 .. 친구와 내 게시글을 포함하여 가장 최신것부터 위로..
+		Member boardMember = new Member();
+		boardMember.setMemid((String)session.getAttribute("memid"));
+		boardMember.setMemnick((String)session.getAttribute("memnick"));
+		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+		
+		System.out.println(boardList.get(0).toString());
+		
+		//일단 3개만 출력하기 위해 count도 보냄
+		int count = 2;
+		//가져오기 끝
+		model.addAttribute("count",count);
+		model.addAttribute("boardList",boardList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberList", memList);
 		
 		return "traVlog/main";
 	}
-	
+
+	// 메인페이지 무한스크롤시 AJax 작동메서드
+	@RequestMapping(value = "/traVlog/addBoardList.do", method = RequestMethod.GET)
+	public void addBoard(int count, HttpSession session, Model model) {
+		logger.info("무한스크롤 AddBoardList 요청");
+		count = count+2;
+		Member boardMember = new Member();
+		boardMember.setMemid((String)session.getAttribute("memid"));
+		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+		model.addAttribute("count",count);
+		model.addAttribute("boardList",boardList);
+		
+//		return "traVlog/addBoardList";
+	}
 	
 	@RequestMapping(value = "/traVlog/settingprofile.do", method = RequestMethod.GET)
 	public void settingProfile() {
@@ -215,40 +240,42 @@ public class BoardController {
 		logger.info("insertBoard 성공");
 		
 		//파일 업로드하기 ... 
-		List<MultipartFile> list = board.getUpload();
-		for(int i=0; i<list.size(); i++) {
-			System.out.println(list.get(i).getOriginalFilename());
-		}
-		String uID = UUID.randomUUID().toString().split("-")[0];
-		//파일 경로 가져오기
-		String realpath = context.getRealPath("upload");
-		
-		for(int i=0; i<list.size(); i++) {
-		//파일이 저장될 이름
-		String stored = list.get(i).getOriginalFilename()+"_"+uID;
-		
-		File dest = new File(realpath,stored);
-		logger.info(dest.getPath());
-			try {
-				list.get(i).transferTo(dest);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+			List<MultipartFile> list = board.getUpload();
+			if(list.get(0).getOriginalFilename() != null && list.get(0).getOriginalFilename()!="") {
+				
+			for(int i=0; i<list.size(); i++) {
+				System.out.println(list.get(i).getOriginalFilename());
 			}
+			String uID = UUID.randomUUID().toString().split("-")[0];
+			//파일 경로 가져오기
+			String realpath = context.getRealPath("/resources/upload");
 			
-			//Files는 디비(DTO)에있는 TB_FILES이다.
-			Files files = new Files();
-			files.setFiloriginfile(list.get(i).getOriginalFilename());
-			files.setFilsavefile(stored);
-			files.setFilsize(list.get(i).getSize());
+			for(int i=0; i<list.size(); i++) {
+			//파일이 저장될 이름
+			String stored = uID+"_"+list.get(i).getOriginalFilename();
 			
-			//글번호 가져오기
-			files.setBodno(boardService.getBoardNo(board));
-			//파일 집어넣기
-			boardService.insertFile(files);
+			File dest = new File(realpath,stored);
+			logger.info(dest.getPath());
+				try {
+					list.get(i).transferTo(dest);
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				//Files는 디비(DTO)에있는 TB_FILES이다.
+				Files files = new Files();
+				files.setFiloriginfile(list.get(i).getOriginalFilename());
+				files.setFilsavefile(stored);
+				files.setFilsize(list.get(i).getSize());
+				
+				//글번호 가져오기
+				files.setBodno(boardService.getBoardNo(board));
+				//파일 집어넣기
+				boardService.insertFile(files);
+			}
 		}
-		
 		/*해쉬태그 생성하기~~
 		 * 받아온 board의 bodhashtag를 trim() 한 후, split("#")으로 리스트를 생성해서
 		 * list.size()만큼 hashtag 생성.. */
@@ -295,36 +322,37 @@ public class BoardController {
 		//update이용해서 적용
 		String position;
 		String[] positionList;
-		if(latLng != null) {
-			latLng.setBodno(boardService.getBoardNo(board));
-			position = latLng.getPosition();
-			//가져오는 좌표값의 괄호 ( )를 없애기
+		if (latLng != null) {
+			if (latLng.getPosition() != null) {
+				latLng.setBodno(boardService.getBoardNo(board));
+				position = latLng.getPosition();
+				// 가져오는 좌표값의 괄호 ( )를 없애기
 				position = position.replace("(", "");
 				position = position.replace(")", "");
-				logger.info("전부 받는 좌표 값은?"+position);
+				logger.info("전부 받는 좌표 값은?" + position);
 				positionList = position.split(",");
-				
-			for(int i=0; i<positionList.length; i++) {
-				positionList[i] = positionList[i].trim();
-//				logger.info(positionList[i]);
-				
-				//x,y값 나눠서 set한 후 DB에 저장
-				if(i<1) {
-					latLng.setPositionx(Double.parseDouble(positionList[i]));//1,3,5번째 값을 x좌표로
-				}else {
-					if(i%2 == 0 ) {
-						latLng.setPositionx(Double.parseDouble(positionList[i]));//1,3,5번째 값을 x좌표로
-					}else if(i%2 == 1){
-						latLng.setPositiony(Double.parseDouble(positionList[i]));
-						//latlng삽입
-						boardService.insertLatLng(latLng);
-						logger.info("POSITION: insertLatLng 완료");
+
+				for (int i = 0; i < positionList.length; i++) {
+					positionList[i] = positionList[i].trim();
+					// logger.info(positionList[i]);
+
+					// x,y값 나눠서 set한 후 DB에 저장
+					if (i < 1) {
+						latLng.setPositionx(Double.parseDouble(positionList[i]));// 1,3,5번째 값을 x좌표로
+					} else {
+						if (i % 2 == 0) {
+							latLng.setPositionx(Double.parseDouble(positionList[i]));// 1,3,5번째 값을 x좌표로
+						} else if (i % 2 == 1) {
+							latLng.setPositiony(Double.parseDouble(positionList[i]));
+							// latlng삽입
+							boardService.insertLatLng(latLng);
+							logger.info("POSITION: insertLatLng 완료");
+						}
 					}
+
 				}
-				
 			}
 		}
-		
 		return "redirect:/traVlog/main.do";
 	}
 	
@@ -401,5 +429,21 @@ public class BoardController {
 			model.addAttribute("adList", adList);
 			
 			return "traVlog/followerFind";
+		}
+		
+		@RequestMapping(value="/traVlog/recommend.do", method=RequestMethod.GET)
+		public void boardRecommend(Board board,	Writer writer, HttpSession session) {
+			logger.info("board:"+board);
+			board.setMemnick( (String)session.getAttribute("memnick") );
+
+			boolean result = boardService.recommend(board);
+			
+			int recommend = boardService.getRecommend(board);
+			
+			try {
+				writer.write("{\"result\":"+result+", \"recommend\":"+recommend+"}");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 }

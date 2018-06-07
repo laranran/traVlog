@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TraVlog</title>
 
+<link href="/resources/css/main.css" rel="stylesheet">
 <link href="/resources/css/FollowerContainer.css" rel="stylesheet">
 
 <script type="text/javascript"
@@ -54,7 +55,7 @@
 		            <c:forEach items="${recList}" var="rec">
 	                    <tr>
 	                        <td class="Rimg" rowspan="2" ><img alt="" src="/resources/images/icon/user.png"></td>
-	                        <td class="Rnick"><a href="#" class="recA">${rec.recommend}</a></td>
+	                        <td><a href="#" class="recA">${rec.recommend}</a></td>
 	                    </tr>
 	                    <tr>
 	                        <td class="Rnick">내가 팔로잉하고 있는 사람 <strong>${rec.worth}명</strong>이 팔로잉하고 있어요!</td>
@@ -99,10 +100,10 @@
 		            <c:forEach items="${folList}" var="fol">
 	                    <tr>
 	                        <td class="Rimg" rowspan="2" ><img alt="" src="/resources/images/icon/user.png"></td>
-	                        <td class="Rnick"><a href="#" class="recA">${fol.memid}</a></td>
+	                        <td><a href="#" class="recA">${fol.memid}</a></td>
 	                    </tr>
 	                    <tr>
-	                    <td>나를 팔로잉하는 사람이예요!</td>
+	                    <td class="Rnick">나를 팔로잉하는 사람이예요!</td>
 	                    </tr>
 		            </c:forEach>
 	                </tbody>

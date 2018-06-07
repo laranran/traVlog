@@ -17,8 +17,20 @@ public class Board {
 	//여행 시작일, 마지막일 추가
 	private Date startdate;
 	private Date enddate;
-	
-	
+
+	//추천인 추가
+	private String memnick;
+	private int recommendCnt;
+	public int getRecommendCnt() {
+		return recommendCnt;
+	}
+
+	public void setRecommendCnt(int recommendCnt) {
+		this.recommendCnt = recommendCnt;
+	}
+
+	private int isExistsLikeData; 
+
 	public Date getStartdate() {
 		return startdate;
 	}
@@ -94,6 +106,23 @@ public class Board {
 		this.bodname = bodname;
 	}
 	
+
+	public String getMemnick() {
+		return memnick;
+	}
+
+	public void setMemnick(String memnick) {
+		this.memnick = memnick;
+	}
+
+	public int getIsExistsLikeData() {
+		return isExistsLikeData;
+	}
+
+	public void setIsExistsLikeData(int isExistsLikeData) {
+		this.isExistsLikeData = isExistsLikeData;
+	}
+
 	@Override
 	public String toString() {
 		return "BOARD =[ "
@@ -104,7 +133,8 @@ public class Board {
 				+", BODDATE : "+boddate
 				+", BODRECOMMEND : "+bodrecommend
 				+", start,end date : "+startdate+","+enddate
-				+", BODNAME : "+bodname + " ]";
+				+", BODNAME : "+bodname
+				+", ISEXISTSLIKEDATE :"+isExistsLikeData+"]";
 	}
 
 	public List<MultipartFile> getUpload() {

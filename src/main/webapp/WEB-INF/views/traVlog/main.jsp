@@ -14,37 +14,158 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
- var stmnLEFT = 10; // 오른쪽 여백 
- var stmnGAP1 = 0; // 위쪽 여백 
- var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
- var stmnBASE = 10; // 스크롤 시작위치 
- var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
- var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
- var stmnTimer; 
- 
- function RefreshStaticMenu() { 
-  var stmnStartPoint, stmnEndPoint; 
-  stmnStartPoint = parseInt(document.getElementById('STATICMENU').style.top, 10); 
-  stmnEndPoint = Math.max(document.documentElement.scrollTop, document.body.scrollTop) + stmnGAP2; 
-  if (stmnEndPoint < stmnGAP1) stmnEndPoint = stmnGAP1; 
-  if (stmnStartPoint != stmnEndPoint) { 
-   stmnScrollAmount = Math.ceil( Math.abs( stmnEndPoint - stmnStartPoint ) / 15 ); 
-   document.getElementById('STATICMENU').style.top = parseInt(document.getElementById('STATICMENU').style.top, 10) + ( ( stmnEndPoint<stmnStartPoint ) ? -stmnScrollAmount : stmnScrollAmount ) + 'px'; 
-   stmnRefreshTimer = stmnScrollSpeed; 
-   }
-  stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed); 
-  } 
- function InitializeStaticMenu() {
-  document.getElementById('STATICMENU').style.right = stmnLEFT + 'px';  //처음에 오른쪽에 위치. left로 바꿔도.
-  document.getElementById('STATICMENU').style.top = document.body.scrollTop + stmnBASE + 'px'; 
-  RefreshStaticMenu();
-  }
-</script>
+//  var stmnLEFT = 10; // 오른쪽 여백 
+//  var stmnGAP1 = 0; // 위쪽 여백 
+//  var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+//  var stmnBASE = 10; // 스크롤 시작위치 
+//  var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+//  var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
+//  var stmnTimer; 
+	
+// 	function RefreshStaticMenu() {
+// 		var stmnStartPoint, stmnEndPoint;
+// 		stmnStartPoint = parseInt(
+// 				document.getElementById('STATICMENU').style.top, 10);
+// 		stmnEndPoint = Math.max(document.documentElement.scrollTop,
+// 				document.body.scrollTop)
+// 				+ stmnGAP2;
+// 		if (stmnEndPoint < stmnGAP1)
+// 			stmnEndPoint = stmnGAP1;
+// 		if (stmnStartPoint != stmnEndPoint) {
+// 			stmnScrollAmount = Math.ceil(Math
+// 					.abs(stmnEndPoint - stmnStartPoint) / 15);
+// 			document.getElementById('STATICMENU').style.top = parseInt(document
+// 					.getElementById('STATICMENU').style.top, 10)
+// 					+ ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+// 							: stmnScrollAmount) + 'px';
+// 			stmnRefreshTimer = stmnScrollSpeed;
+// 		}
+// 		stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+// 	}
+// 	function InitializeStaticMenu() {
+// 		document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
+// 		document.getElementById('STATICMENU').style.top = document.body.scrollTop
+// 				+ stmnBASE + 'px';
+// 		RefreshStaticMenu();
+// 	}
 
+function recommend(a){
+		var bodno = a;
+		$.ajax({
+	 		type: "get"
+	 		, url: "/traVlog/recommend.do"
+	 		, dataType: "json"
+	 		, data: {
+				bodno: bodno
+	 		}
+	 		, success: function(data) {
+	 			alert("ajax성공");
+	 			console.log(data);
+
+	 			if(data.result) {
+	 				$(".like").prop("src", "/resources/images/icon/liked.png");
+	 			} else {
+	 				$(".like").prop("src", "/resources/images/icon/like.png");
+	 			}
+	 			console.log(data.recommend);
+ 				$("#recommend").html(data.recommend);
+	 			
+// 	 			var jsonData = {};
+// 	 			try{
+// 	 				jsonData = JSON.parse(data);
+// 	 			}catch(e){
+// 	 				jsonData.result = false;
+// 	 			}
+// 				console.log(jsonData);
+				
+// 	 			if(jsonData.result) {
+// 	 				$(".like").prop("src", "/resources/images/icon/like.png");
+// 	 			}
+	 		}
+	 		, error: function(e) {
+	 			alert("ajax에러");
+	 			console.log(e.responseText);
+	 		}
+	 	});
+		
+}
+
+// 	boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
+	$(document).ready(function () {
+		
+		var currentCount = ${count};
+		$(document).scroll(function() {
+	    var maxHeight = $(document).height();
+	    var currentScroll = $(window).scrollTop() + $(window).height();
+
+	    if (maxHeight <= currentScroll + 100) {
+	        // Append next contents
+	      $.ajax({
+	        type:'GET',
+	        url:'/main/addBoardList.do',
+	       	dataType:'json',
+	       	data:currentCount,
+	       	contentType: "application/json; charset=UTF-8",
+	       	success : function(data){
+	       		alert("성공");
+	       		
+	       	},error:function(data){
+	       		alert("실패");
+	       	}
+
+	      });
+	    }
+	  });
+		
+	
+		
+		
+	});
+
+// 		if(${recommend eq true}) {
+// 			$(".btnRecommend")
+// 				.toggleClass("btn-danger")
+// 				.text("추천 취소");
+// 		} else {
+// 			$(".btnRecommend")
+// 				.toggleClass("btn-primary")
+// 				.text("추천");
+// 		}
+// function recommend(bodno) {
+// // 		$(".recommendImg").prop("src", "/resources/images/icon/liked.png");
+	
+// 		$.ajax({
+// 		type: "get"
+// 		, url: "/traVlog/recommend.do"
+// 		, dataType: "json"
+// 		, data: {
+// 			memnick: '${sessionScope.memnick}'
+// 			, bodno: bodno
+// 		}
+// 		, success: function(data) {
+// 			console.log(data);
+// 			if(data.result) {
+// 				$("#btnRecommend")
+// 					.text("추천 취소")
+// 					.toggleClass("btn-primary")
+// 					.toggleClass("btn-danger");
+// 			} else {
+// 				$("#btnRecommend")
+// 					.text("추천")
+// 					.toggleClass("btn-danger")
+// 					.toggleClass("btn-primary");
+// 			}
+// 			$("#recommend").text(data.recommend);
+// 		}
+// 		, error: function(e) {
+// 			console.log(e.responseText);
+// 		}
+// 	});
+</script>
 
 </head>
 
-<body onload="InitializeStaticMenu();">
+<body>
 <div id="wrap">
 		
 <jsp:include page="/resources/util/Page/header.jsp" />
@@ -52,21 +173,58 @@
 <div id="container"><!-- Begin #container -->
 	<div class="content-wrap">
 		<div class="main">
+		<!-- BoardList 시작 -->
+			
+			<c:forEach items="${boardList }" var="board" varStatus="listNumber" begin="0" end="2">
+<%-- 			<c:forEach items="${boardList }" var="board" varStatus="listNumber">	 --%>
 			<div class="board">
-				<div class="memInfo">
+				<input type="hidden" id="bodno_${board.bodno }" name="bodno" value="${board.bodno }">
+				<div class="memInfo"> 
 				<img class="userimg" src="/resources/images/icon/user.png">
-				<strong class="nick">글쓴사람 닉네임</strong>
+				<strong class="nick">${board.bodname }</strong>
 				<img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
 				</div>
 				
-				<div><img></div>
-				<div class="content">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras egestas ligula tellus, ut hendrerit nisi pharetra a. Ut ultrices hendrerit ultricies. Ut nulla mauris, mollis ut feugiat at, dapibus ut arcu. Curabitur consectetur id nisl id tempor. Curabitur congue, libero ut tincidunt malesuada, diam massa rhoncus enim, ut aliquet elit felis sed erat. Ut posuere lorem nulla, at eleifend nisi tristique id. Maecenas quis mauris mattis, vestibulum urna ac, laoreet felis. Mauris ullamcorper, ante sed efficitur vulputate, sem enim consequat elit, eget vestibulum lectus nibh feugiat risus. Nulla ultrices sit amet neque ac luctus. Donec mauris lorem, dictum at turpis at, congue cursus mi. Fusce faucibus mauris in laoreet faucibus. Vivamus molestie est in auctor faucibus. Mauris aliquet, velit ac molestie hendrerit, erat nibh porta nisl, in rutrum leo enim et metus. Nunc iaculis feugiat lorem, at lobortis tellus porta vel. Quisque eu ligula eu nisi mattis feugiat.
-				Integer lobortis eros sit amet justo condimentum, quis pellentesque ex vulputate. Etiam hendrerit tempus urna, a imperdiet erat ornare non. Nullam tincidunt dolor sed orci pharetra rhoncus. Sed lacinia nec dolor vitae ultrices. In nec dolor magna. Quisque lacinia leo eu porttitor bibendum. Nunc dignissim dui nec nisi faucibus ornare. Aliquam finibus, velit at accumsan porttitor, libero orci dapibus eros, sed fermentum tortor lorem quis quam. Fusce posuere, ante eget sollicitudin fermentum, massa libero gravida lectus, sit amet pulvinar augue tellus nec felis. Maecenas laoreet metus non ex maximus finibus. Curabitur sit amet est at urna porta viverra eget sit amet quam. Vivamus euismod, quam id faucibus viverra, nibh nunc fermentum velit, nec ultricies urna ipsum a velit. Aliquam nibh lectus, porttitor sed quam tristique, aliquam pretium massa. Mauris ultricies convallis rutrum. Donec justo dui, efficitur et consectetur eu, maximus eget ex.
-				Nunc risus nulla, fermentum vel scelerisque quis, suscipit quis nulla. Mauris suscipit augue quis pellentesque lacinia. Sed ut nulla purus. Pellentesque et ante velit. Phasellus hendrerit urna ac mattis semper. Morbi eget porta ligula. Cras in cursus leo, at commodo lacus. Suspendisse nec maximus eros, vitae tempus nulla. In non lorem iaculis, bibendum ante tristique, dignissim dui. Aliquam erat volutpat. Vivamus fringilla justo ante, vitae rhoncus mi facilisis auctor. Praesent eget elit mauris. Etiam ut tortor tempus, posuere massa a, aliquam nisl. Aliquam erat volutpat. Cras gravida risus quis tellus congue interdum.
+				
+				<div class="boardInfo">
+				<strong class="title">${board.bodtitle }</strong>
+				<c:if test="${board.startdate != null && board.enddate!=null }">
+				<span class="Bdate">
+				<img class="calender" src="/resources/images/icon/calender.png">
+				${board.startdate }
+				<img class="airplane" src="/resources/images/icon/airplane.png">
+				${board.enddate }</span>
+				</c:if>
+				</div>
+				
+				<div class="boardImg">
+<%-- 				<c:if test="${board.imageList != null }"> --%>
+					<img class="contentImg"  src="/resources/images/BackGround/login.jpg">
+<%--  				</c:if> --%>
+				</div>
+				
+				<div class="icon">
+
+				<button class="btnRecommend" onclick="recommend(${board.bodno });">
+				<c:if test="${board.isExistsLikeData eq '1'}">
+				<img id="like" class="like" width="30px;" src="/resources/images/icon/liked.png" >
+				</c:if>
+				<c:if test="${board.isExistsLikeData eq '0'}">
+				<img id="like" class="like" width="30px;" src="/resources/images/icon/like.png">
+				</c:if>
+				</button>
+
+				<button><img class="comm" width="30px;" src="/resources/images/icon/comment.png"></button>
+				<button><img class="pin" width="30px;" src="/resources/images/icon/pin.png"></button>
+				</div>
+				<div class="Bcontent">
+				<label>좋아요 <span id="recommend">${board.recommendCnt } 개</span></label>
+				${board.bodcontent }
 				</div>
 			</div>
-				
+			</c:forEach>
+			<!-- boardList 끝 -->
+			
 		</div>
 		
 		<div class="right" id="STATICMENU">
