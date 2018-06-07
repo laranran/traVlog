@@ -138,6 +138,7 @@ public class BoardController {
 		count = count+2;
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
+		boardMember.setMemnick((String)session.getAttribute("memnick"));
 		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
 		model.addAttribute("count",count);
 		model.addAttribute("boardList",boardList);

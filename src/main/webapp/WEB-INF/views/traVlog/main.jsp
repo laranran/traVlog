@@ -14,43 +14,43 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
- var stmnLEFT = 10; // 오른쪽 여백 
- var stmnGAP1 = 0; // 위쪽 여백 
- var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
- var stmnBASE = 10; // 스크롤 시작위치 
- var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
- var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
- var stmnTimer; 
+//  var stmnLEFT = 10; // 오른쪽 여백 
+//  var stmnGAP1 = 0; // 위쪽 여백 
+//  var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+//  var stmnBASE = 10; // 스크롤 시작위치 
+//  var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+//  var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
+//  var stmnTimer; 
 	
-	function RefreshStaticMenu() {
-		var stmnStartPoint, stmnEndPoint;
-		stmnStartPoint = parseInt(
-				document.getElementById('STATICMENU').style.top, 10);
-		stmnEndPoint = Math.max(document.documentElement.scrollTop,
-				document.body.scrollTop)
-				+ stmnGAP2;
-		if (stmnEndPoint < stmnGAP1)
-			stmnEndPoint = stmnGAP1;
-		if (stmnStartPoint != stmnEndPoint) {
-			stmnScrollAmount = Math.ceil(Math
-					.abs(stmnEndPoint - stmnStartPoint) / 15);
-			document.getElementById('STATICMENU').style.top = parseInt(document
-					.getElementById('STATICMENU').style.top, 10)
-					+ ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
-							: stmnScrollAmount) + 'px';
-			stmnRefreshTimer = stmnScrollSpeed;
-		}
-		stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
-	}
-	function InitializeStaticMenu() {
-		document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
-		document.getElementById('STATICMENU').style.top = document.body.scrollTop
-				+ stmnBASE + 'px';
-		RefreshStaticMenu();
-	}
+// 	function RefreshStaticMenu() {
+// 		var stmnStartPoint, stmnEndPoint;
+// 		stmnStartPoint = parseInt(
+// 				document.getElementById('STATICMENU').style.top, 10);
+// 		stmnEndPoint = Math.max(document.documentElement.scrollTop,
+// 				document.body.scrollTop)
+// 				+ stmnGAP2;
+// 		if (stmnEndPoint < stmnGAP1)
+// 			stmnEndPoint = stmnGAP1;
+// 		if (stmnStartPoint != stmnEndPoint) {
+// 			stmnScrollAmount = Math.ceil(Math
+// 					.abs(stmnEndPoint - stmnStartPoint) / 15);
+// 			document.getElementById('STATICMENU').style.top = parseInt(document
+// 					.getElementById('STATICMENU').style.top, 10)
+// 					+ ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+// 							: stmnScrollAmount) + 'px';
+// 			stmnRefreshTimer = stmnScrollSpeed;
+// 		}
+// 		stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+// 	}
+// 	function InitializeStaticMenu() {
+// 		document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
+// 		document.getElementById('STATICMENU').style.top = document.body.scrollTop
+// 				+ stmnBASE + 'px';
+// 		RefreshStaticMenu();
+// 	}
 
 function recommend(a){
-		var bodno = a;
+	var bodno = a;
 		console.log("bodno : "+bodno);
 		$.ajax({
 	 		type: "get"
@@ -64,9 +64,9 @@ function recommend(a){
 	 			console.log(data);
 
 	 			if(data.result) {
-	 				$(".like").attr("src", "/resources/images/icon/liked.png");
+	 				$("#like_"+a).prop("src", "/resources/images/icon/liked.png");
 	 			} else {
-	 				$(".like").attr("src", "/resources/images/icon/like.png");
+	 				$("#like_"+a).prop("src", "/resources/images/icon/like.png");
 	 			}
 	 			console.log("AJAX a : "+a);
 	 			console.log(data.recommend);
@@ -113,41 +113,84 @@ function pin(a){
 	
 }
 
-// 	boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
-	$(document).ready(function () {
-		
-		var currentCount = ${count};
-		$(document).scroll(function() {
-	    var maxHeight = $(document).height();
-	    var currentScroll = $(window).scrollTop() + $(window).height();
+//boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
+var count = ${count};
+$(document).ready(function () {
+   $(document).scroll(function() {
+    var maxHeight = $(document).height();
+    var currentScroll = $(window).scrollTop() + $(window).height();
 
-	    if (maxHeight <= currentScroll + 100) {
-	        // Append next contents
-	      $.ajax({
-	        type:'GET',
-	        url:'/main/addBoardList.do',
-	       	dataType:'json',
-	       	data:currentCount,
-	       	contentType: "application/json; charset=UTF-8",
-	       	success : function(data){
-	       		alert("성공");
-	       		
-	       	},error:function(data){
-	       		alert("실패");
-	       	}
+    if (maxHeight == currentScroll) {
+        // Append next contents
+        //검색 기능 중
+//         if($("#search").val() != null && $("#search").val() != ""){
+//            console.log("search 값 존재");
+            
+//            $.ajax({
+//                type:'GET',
+//                url:'/traVlog/addBoardList.do',
+//                  dataType:'html',
+//                  data:{"count":count , "search":search},
+//                  success : function(data){
+//                     $("#main").html(data);
+//                     count += 2;
+//                     console.log(count);
+//                  },error:function(data){
+//                     alert("실패");
+//                  }
+//              }); // ajax 끝
+//         }
+//         else{
+           //일반 페이지 (not 검색)
+         $.ajax({
+           type:'GET',
+           url:'/traVlog/addBoardList.do',
+             dataType:'html',
+             data:{"count":count},
+             success : function(data){
+                $("#main").html(data);
+                count += 2;
+                console.log(count);
+             },error:function(data){
+                alert("실패");
+             }
+         });//ajax 끝
+//         } //else 끝
+    }//스크롤 바닥찍은거 끝
+  });
+});
 
-	      });
-	    }
-	  });
-		
-		
-	});
-
+function RefreshStaticMenu() {
+    var stmnStartPoint, stmnEndPoint;
+    stmnStartPoint = parseInt(
+          document.getElementById('STATICMENU').style.top, 10);
+    stmnEndPoint = Math.max(document.documentElement.scrollTop,
+          document.body.scrollTop)
+          + stmnGAP2;
+    if (stmnEndPoint < stmnGAP1)
+       stmnEndPoint = stmnGAP1;
+    if (stmnStartPoint != stmnEndPoint) {
+       stmnScrollAmount = Math.ceil(Math
+             .abs(stmnEndPoint - stmnStartPoint) / 15);
+       document.getElementById('STATICMENU').style.top = parseInt(document
+             .getElementById('STATICMENU').style.top, 10)
+             + ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+                   : stmnScrollAmount) + 'px';
+       stmnRefreshTimer = stmnScrollSpeed;
+    }
+    stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+ }
+ function InitializeStaticMenu() {
+    document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
+    document.getElementById('STATICMENU').style.top = document.body.scrollTop
+          + stmnBASE + 'px';
+    RefreshStaticMenu();
+ }
 </script>
 
 </head>
 
-<body onload="InitializeStaticMenu()">
+<body>
 <div id="wrap">
 		
 <jsp:include page="/resources/util/Page/header.jsp" />
@@ -264,3 +307,16 @@ function pin(a){
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
