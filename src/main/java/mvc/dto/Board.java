@@ -21,6 +21,7 @@ public class Board {
 	//추천인 추가
 	private String memnick;
 	private int recommendCnt;
+	
 	public int getRecommendCnt() {
 		return recommendCnt;
 	}
@@ -30,7 +31,10 @@ public class Board {
 	}
 
 	private int isExistsLikeData; 
-
+	
+	//무한 스크롤을 위한 number 추가
+	private int rnum;
+	
 	public Date getStartdate() {
 		return startdate;
 	}
@@ -143,5 +147,13 @@ public class Board {
 
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 }

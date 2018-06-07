@@ -30,6 +30,7 @@ public interface BoardDao {
 	public void insertLatLng(LatLng latLng);
 
 	//게시글에 여행날짜 업데이트하기.
+	
 	//날짜 없이 입력할 경우 insertBoard실행
 	public void updateDates(Board board);
 	
@@ -46,4 +47,5 @@ public interface BoardDao {
 	
 	/*총 추천 수 구하기 */
 	public int selectTotalRecommend(Board board);
+
 }
