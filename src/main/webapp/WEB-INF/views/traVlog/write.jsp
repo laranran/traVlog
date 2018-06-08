@@ -174,6 +174,15 @@ $(document).ready(function() {
 });
 </script>
 
+<style type="text/css">
+#map {
+	width: 80%;
+	height: 600px;
+	display: none;
+	margin: auto;
+	border: 10px solid #92A8D1;
+}
+</style>
 </head>
 
 <body>

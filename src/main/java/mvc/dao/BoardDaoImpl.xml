@@ -9,8 +9,7 @@
 	</select>
 	<insert id="insertBoard" parameterType="mvc.dto.Board">
 		insert into TB_BOARD(BODNO,BODTITLE,BODCONTENT,BODHASHTAG,BODDATE,BODRECOMMEND,BODNAME)
-		values(UP_BODAD_SEQ.nextval,#{bodtitle},#{bodcontent},#{bodhashtag}
-		,sysdate,0,#{bodname})
+		values(UP_BODAD_SEQ.nextval,#{bodtitle},#{bodcontent},#{bodhashtag},sysdate,0,#{bodname})
 	</insert>
 	<insert id="insertFile" parameterType="mvc.dto.Files">
 		insert into TB_FILES(BODNO,FILORIGINFILE,FILSAVEFILE,FILSIZE,FILDATE)
@@ -33,7 +32,7 @@
 	<update id="updateDates" parameterType="mvc.dto.Board">
 		UPDATE TB_BOARD SET STARTDATE = #{startdate}, ENDDATE = #{enddate} where BODNO = #{bodno}
 	</update>
-	
+
 	<select id="getBoardListByFollow" parameterType="mvc.dto.Member" resultType="mvc.dto.Board">
 		SELECT
 			b.*,
@@ -85,7 +84,6 @@
 		SELECT COUNT(*) FROM tb_recommend WHERE bodno = #{bodno }
 	</select>
 	
-	
 	<!-- 보관 -->
 	<select id="selectCountPin" parameterType="mvc.dto.Board"
 		resultType="int">
@@ -104,11 +102,5 @@
 		resultType="int">
 		SELECT COUNT(*) FROM tb_keep WHERE bodno = #{bodno }
 	</select>
-	
-	
-		
-	
-	
-	
 	
 </mapper>

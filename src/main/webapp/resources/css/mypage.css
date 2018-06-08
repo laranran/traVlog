@@ -8,11 +8,16 @@
 }
 
 .container  {min-height: 100%; margin-left: 160px;}
+
 .content-wrap {
+	
    position: relative;
    width: 1200px;
    height : 1300px;
-   margin: 60px auto;
+   margin: 100px auto;
+   background-color: white;
+   opacity: 0.6;
+
 }
 
 .content-wrap .top{

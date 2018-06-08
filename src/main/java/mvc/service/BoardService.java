@@ -53,6 +53,7 @@ public class BoardService {
 	}
 
 	public List<Board> getBoardListByFollow(Member boardMember) {
+
 		return boardDao.getBoardListByFollow(boardMember);
 	}
 	

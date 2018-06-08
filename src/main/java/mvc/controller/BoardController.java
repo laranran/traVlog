@@ -116,9 +116,9 @@ public class BoardController {
 		boardMember.setMemid((String)session.getAttribute("memid"));
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
 		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
-		
+
 		System.out.println(boardList.get(0).toString());
-		
+
 		//일단 3개만 출력하기 위해 count도 보냄
 		int count = 2;
 		//가져오기 끝
@@ -135,15 +135,19 @@ public class BoardController {
 	@RequestMapping(value = "/traVlog/addBoardList.do", method = RequestMethod.GET)
 	public void addBoard(int count, HttpSession session, Model model) {
 		logger.info("무한스크롤 AddBoardList 요청");
+		
 		count = count+2;
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
 		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+//		model.addAttribute("count",maxCount);
+		
 		model.addAttribute("count",count);
 		model.addAttribute("boardList",boardList);
 		
-//		return "traVlog/addBoardList";
+//		return "traVlog/main";
+
 	}
 	
 	@RequestMapping(value = "/traVlog/settingprofile.do", method = RequestMethod.GET)
@@ -154,11 +158,6 @@ public class BoardController {
 	@RequestMapping(value = "/traVlog/settingpass.do", method = RequestMethod.GET)
 	public void settingPass() {
 		logger.info("세팅페이지 비밀번호 변경 GET요청");
-	}
-
-	@RequestMapping(value = "/traVlog/mypage.do", method = RequestMethod.GET)
-	public void mypage() {
-		logger.info("마이페이지 GET요청");
 	}
 	
 	@RequestMapping(value = "/traVlog/mylist.do", method = RequestMethod.GET)

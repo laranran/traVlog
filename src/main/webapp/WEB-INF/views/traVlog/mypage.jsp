@@ -21,7 +21,6 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-
 </head>
 
 <body>
@@ -69,35 +68,17 @@
 
 				<div class="buttom">
 
-					<%-- 					<c:forEach items="ss" begin="0" end="3" var="i" step="1" varStatus="listNumber"> --%>
-					<%-- 						</c:forEach> --%>
 					<div class="mylist-content">
 						<div class="row">
-
+						
+							<c:forEach items="${selectpic }" var="i">
+										
 							<div class="pic col-md-4">
-								<a href="#"><img class="pic-src"
-									src="/resources/images/MyPage/test_1.png" alt="photo"></a>
+								<a href ="no${i.bodno }"><img class="pic-src"
+									src="/resources/upload/${i.filsavefile }.png" alt="photo"></a>
 							</div>
-
-							<div class="pic col-md-4">
-								<a href="#2"><img class="pic-src"
-									src="/resources/images/MyPage/test_2.png" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#3"><img class="pic-src"
-									src="/resources/images/MyPage/test_3.gif" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#4"><img class="pic-src"
-									src="/resources/images/MyPage/test_4.png" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#5"><img class="pic-src"
-									src="/resources/images/MyPage/test_5.png" alt="photo"></a>
-							</div>
+							
+							</c:forEach>
 
 						</div>
 					</div>
@@ -116,8 +97,8 @@
 
 		<div class="mask"></div>
 		<div class="window">
-			<a href="/post/test/list/detail/">
-			<img class="pic" src="/resources/images/MyPage/test_3.gif" alt="photo"></a> <input
+			<a href ="no${i.bodno }">
+			<img class="pic" src="/resources/upload/${i.filsavefile }.png" alt="photo"></a> <input
 				type="button" href="#" class="close" value="창닫기" />
 				
 		<div class="info">
@@ -126,8 +107,6 @@
 		
 		</div>
 		</div>
-
-		
 		
 	</div>
 
@@ -172,10 +151,10 @@
 		$('.pic-src').click(function(e) {
 			
 			// preventDefault는 href의 링크 기본 행동을 막는 기능입니다.
-			e.preventDefault();
+// 			e.preventDefault();
 			wrapWindowByMask();
+			
 		});
-
 
 		// 닫기(close)를 눌렀을 때 작동합니다.
 		$('.window .close').click(function(e) {
@@ -187,6 +166,12 @@
 		$('.mask').click(function() {
 			$(this).hide();
 			$('.window').hide();
+		});
+		
+		$("a").click(function() {
+			$("#"+$(this).attr("href")).show();
+			alert('실행대씀');
+			return false;
 		});
 	});
 	
