@@ -31,6 +31,7 @@ import mvc.service.MainService;
 import org.springframework.web.multipart.MultipartFile;
 
 import mvc.dto.Board;
+import mvc.dto.Claim;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
@@ -115,15 +116,25 @@ public class BoardController {
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
-		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+		if(member.getSearch() == null || member.getSearch() =="") {
+			//검색어가 없을때
+			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			model.addAttribute("boardList",boardList);
+			
+		}else if(member.getSearch() != null || member.getSearch() != "") {
+			//검색어가 있을때..
+			boardMember.setSearch(member.getSearch());
+			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
+			model.addAttribute("boardList",boardList);
+			System.out.println(boardList.get(0).toString());
+		}
 
-		System.out.println(boardList.get(0).toString());
 
 		//일단 3개만 출력하기 위해 count도 보냄
 		int count = 2;
 		//가져오기 끝
 		model.addAttribute("count",count);
-		model.addAttribute("boardList",boardList);
+//		model.addAttribute("boardList",boardList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberList", memList);
@@ -133,20 +144,28 @@ public class BoardController {
 
 	// 메인페이지 무한스크롤시 AJax 작동메서드
 	@RequestMapping(value = "/traVlog/addBoardList.do", method = RequestMethod.GET)
-	public void addBoard(int count, HttpSession session, Model model) {
-		logger.info("무한스크롤 AddBoardList 요청");
-		
-		count = count+2;
-		Member boardMember = new Member();
-		boardMember.setMemid((String)session.getAttribute("memid"));
-		boardMember.setMemnick((String)session.getAttribute("memnick"));
-		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
-//		model.addAttribute("count",maxCount);
+	public void addBoard(int count, String search, HttpSession session, Model model) {
+		logger.info("무한스크롤 AddBoardList1 요청");
+		if(search != "" && search != null) {
+			//검색 값이 존재할 떄
+//			count = count+2;
+			Member boardMember = new Member();
+			boardMember.setSearch(search);
+			boardMember.setMemid((String)session.getAttribute("memid"));
+			boardMember.setMemnick((String)session.getAttribute("memnick"));
+			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
+			model.addAttribute("boardList",boardList);
+		}else {
+			//검색 값이 없을 떄
+			count = count+2;
+			Member boardMember = new Member();
+			boardMember.setMemid((String)session.getAttribute("memid"));
+			boardMember.setMemnick((String)session.getAttribute("memnick"));
+			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			model.addAttribute("boardList",boardList);
+		}
 		
 		model.addAttribute("count",count);
-		model.addAttribute("boardList",boardList);
-		
-//		return "traVlog/main";
 
 	}
 	
@@ -466,5 +485,19 @@ public class BoardController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		
+		@RequestMapping(value="/traVlog/claim.do", method=RequestMethod.GET)
+		public void claim(Member member, Board board, HttpSession session, Model model) {
+			logger.info("신고 팝업창 요청");
+			//로그인한 사용자 아이디 가져오기
+			String memid = (String) session.getAttribute("memid");
+			logger.info(memid);
+			
+			//게시글 정보 가져오기
+//			Board claimBoard = boardService.getBoardInfo(board);
+//			System.out.println(claimBoard.toString());
+			
+//			model.addAttribute("claimBoard",claimBoard);
 		}
 }

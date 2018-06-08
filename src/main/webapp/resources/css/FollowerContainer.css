@@ -1,22 +1,26 @@
 @charset "UTF-8";
 
 /* container */
+.content-wrap-ff{
+    margin: 0 auto;
+    width: 1201px;
+}
 
-.content-wrap .left{
+.content-wrap-ff .left{
 	position: relative;
 	float: left;
 	width: 600px;
 	border-right: 1px solid #808080;
 }
 
-.content-wrap .right{
+.content-wrap-ff .right{
     position: relative;
     margin-left: 600px;
 	width: 600px;
 	border-left: 1px solid #808080;
 }
 
-.content-wrap strong{
+.content-wrap-ff strong{
 	color: #797979;
 }
 

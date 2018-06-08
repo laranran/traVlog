@@ -103,4 +103,8 @@ public class BoardService {
 		return boardDao.selectPin(board);
 	}
 	
+	public List<Board> getBoardListBySearch(Member boardMember) {
+		return boardDao.getBoardListBySearch(boardMember);
+	}
+	
 }

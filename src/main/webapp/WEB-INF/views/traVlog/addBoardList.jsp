@@ -12,9 +12,8 @@
             <div class="memInfo"> 
             <img class="userimg" src="/resources/images/icon/user.png">
             <strong class="nick">${board.bodname }</strong>
-            <img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
+            <a href="/traVlog/claim.do" onclick="claim(this.href,'name','400','400','yes');return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a> 
             </div>
-            
             
             <div class="boardInfo">
             <strong class="title">${board.bodtitle }</strong>
