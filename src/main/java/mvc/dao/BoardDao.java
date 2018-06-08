@@ -57,4 +57,6 @@ public interface BoardDao {
 	/*핀 개수 구하기*/
 	public int selectCountPin(Board board);
 
+	public List<Board> getBoardListBySearch(Member boardMember);
+	
 }

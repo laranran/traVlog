@@ -102,5 +102,10 @@ public class BoardService {
 	public int getPin(Board board) {
 		return boardDao.selectPin(board);
 	}
+
+	public List<Board> getBoardListBySearch(Member boardMember) {
+		// TODO Auto-generated method stub
+		return boardDao.getBoardListBySearch(boardMember);
+	}
 	
 }
