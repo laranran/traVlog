@@ -1,6 +1,7 @@
 package mvc.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,10 +83,16 @@ public class MemberService {
 			
 		}
 
+		public String showadvertising(Advertising advertising) {
+		
+			return memberDao.showadvertising(advertising);
+		}
+
 	}
 	
 	
-	
+
+
 	
 	
 	

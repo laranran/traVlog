@@ -22,7 +22,7 @@
       
       <li><a class="fly" href="/traVlog/setting.do">공개범위 및 보안</a></li>
       
-      <li><a class="fly" href="/traVlog/#.do">광고 내역</a></li>
+      <li><a class="fly" href="/traVlog/showadvertising.do">광고 내역</a></li>
       
       <li><a class="fly" href="/traVlog/advertising.do">광고 신청</a></li>
       

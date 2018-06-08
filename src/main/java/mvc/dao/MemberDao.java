@@ -1,6 +1,7 @@
 package mvc.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import mvc.dto.Advertising;
@@ -29,4 +30,6 @@ public interface MemberDao {
 	public void report(Report report);
 
 	public void advertising(Advertising advertising);
+
+	public String showadvertising(Advertising advertising);
 }

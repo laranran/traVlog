@@ -163,12 +163,19 @@ public class MypageController {
 			return "redirect:/traVlog/mypage.do";
 		}
 			
+		//광고 내역 보여주기
+				@RequestMapping(value="/traVlog/showadvertising.do")
+				public String showadvertising(Advertising advertising, Model model) {
+					logger.info("광고내역" + advertising);
+				
+				model.addAttribute("advertising", advertising);
+				return "traVlog/showadvertising";
+				}
 			
 			
 			
 			
-			
-		//결제
+		//결제하기
 		@RequestMapping(value="/traVlog/payment.do")
 		public void payment() {
 			

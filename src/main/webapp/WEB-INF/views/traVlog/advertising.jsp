@@ -21,8 +21,18 @@
 <link href="/resources/css/mainContainer.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+   <link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({
+      numberOfMonths: 3,
+      showButtonPanel: true
+    });
+  });
+  </script>
 
 
 <title>Insert title here</title>
@@ -96,7 +106,17 @@ label {
 
 						<label for="advname">광고 신청자 </label> <input type="text"
 							id="advname" name="advname" placeholder="이름을 입력해주세요">
-
+							
+							<label for="advstart">광고 시작일 </label> <input type="text"
+							id="datepicker" name="advstart">
+						
+							<label for="advtitle">광고 제목 </label> <input type="text"
+							id="advtitle" name="advtitle" placeholder="제목을 입력해주세요">
+					
+								
+	
+	
+	
 						<!--  <label for="advId">아이디</label> 
 						 
 						 <input type="text" id="advid" name="advid"

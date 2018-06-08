@@ -10,7 +10,7 @@ public class Advertising {
 	private int advapprove; 
 	private String advtitle; 
 	private int advprice; 
-	private Date advstart; 
+	private String advstart; 
 	private Date advend ;
 	private String advcontent; 
 	private String  advfile;
@@ -57,10 +57,10 @@ public class Advertising {
 	public void setAdvprice(int advprice) {
 		this.advprice = advprice;
 	}
-	public Date getAdvstart() {
+	public String getAdvstart() {
 		return advstart;
 	}
-	public void setAdvstart(Date advstart) {
+	public void setAdvstart(String advstart) {
 		this.advstart = advstart;
 	}
 	public Date getAdvend() {

@@ -33,14 +33,15 @@
 	<input type="hidden" name="clmtoid" value="${member.memnick }"/>
 	<input type="hidden" name="clmfromid" value="${sessionScope.memnick }"/>
 	<select name="clmcontent">
+<!-- 글 신고와 같은 번호 -->
+			<option value=1>욕설 및 인신공격</option>
+			<option value=2>음란성 / 사행성 게시글</option>
+			<option value=3>도배 게시글 / 댓글</option>
+			<option value=4>개인정보 노출 / 사생활 침해</option>
+			<option value=5>기타</option>
 
-			<option value=1>스팸</option>
-			<option value=2>스팸2</option>
-		<option value=3>스팸3</option>
-		<option value=4>스팸4</option>
-
-</select>
- 	<input type="submit" value="확인">
+		</select>
+ 	<input type="submit" value="보내기">
 
 
 
