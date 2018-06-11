@@ -88,6 +88,8 @@ public class MemberService {
 			return memberDao.showadvertising(advertising);
 		}
 
+	
+
 	}
 	
 	

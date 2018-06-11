@@ -133,6 +133,15 @@ label {
 						<label for="advcontent">상세내용을 쓰세요</label>
 						<textarea id="advcontent" name="advcontent"
 							placeholder="요구사항을 쓰세요" style="height: 200px"></textarea>
+							
+							
+							<label for="advfile">파일 업로드</label>
+							   <input type="file" id="advfile" name="advfile">
+
+
+							
+							
+							
 						<h4>* 관리자 승인 후 개별 연락 드립니다</h4>
 </div>
 						<input type="submit" value="보내기">

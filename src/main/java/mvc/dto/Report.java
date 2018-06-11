@@ -10,8 +10,8 @@ public class Report{
 			private String clmfromid; 
 			private String clmtoid; 
 			private Date clmdate; 
-			private int clmcontent; 
-			private int clming;
+			private int clmreason; 
+			private int clmcondition;
 			public int getUserclmno() {
 				return userclmno;
 			}
@@ -36,28 +36,26 @@ public class Report{
 			public void setClmdate(Date clmdate) {
 				this.clmdate = clmdate;
 			}
-			public int getClmcontent() {
-				return clmcontent;
+			public int getClmreason() {
+				return clmreason;
 			}
-			public void setClmcontent(int clmcontent) {
-				this.clmcontent = clmcontent;
+			public void setClmreason(int clmreason) {
+				this.clmreason = clmreason;
 			}
-			public int getClming() {
-				return clming;
+			public int getClmcondition() {
+				return clmcondition;
 			}
-			public void setClming(int clming) {
-				this.clming = clming;
+			public void setClmcondition(int clmcondition) {
+				this.clmcondition = clmcondition;
 			}
 			@Override
 			public String toString() {
 				return "Report [userclmno=" + userclmno + ", clmfromid=" + clmfromid + ", clmtoid=" + clmtoid
-						+ ", clmdate=" + clmdate + ", clmcontent=" + clmcontent + ", clming=" + clming
-						+ ", getUserclmno()=" + getUserclmno() + ", getClmfromid()=" + getClmfromid()
-						+ ", getClmtoid()=" + getClmtoid() + ", getClmdate()=" + getClmdate() + ", getClmcontent()="
-						+ getClmcontent() + ", getClming()=" + getClming() + "]";
+						+ ", clmdate=" + clmdate + ", clmreason=" + clmreason + ", clmcondition=" + clmcondition + "]";
 			}
-
+		
+		
+			
+			
 			
 }
-			
-		

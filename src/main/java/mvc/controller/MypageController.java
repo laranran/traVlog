@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import mvc.dto.Advertising;
 import mvc.dto.Member;
@@ -126,8 +128,10 @@ public class MypageController {
 	
 		}
 		
-		
+	
 	//신고하기
+		
+		
 		@RequestMapping(value="/traVlog/report.do",method=RequestMethod.GET)
 		public void repor(Member member,Model model) {
 			System.out.println("신고할 사용자 아이디 : "+member);
@@ -140,10 +144,9 @@ public class MypageController {
 			logger.info("신고됐나");
 			System.out.println("신고는?: "+ report);
 			memberService.report(report);
-				return "redirect:/traVlog/mypage.do";
+				return "redirect:/traVlog/otherpage.do";
 		}
-
-		
+	
 		
 		
 		//광고1
@@ -153,7 +156,6 @@ public class MypageController {
 					model.addAttribute("member", member);
 				}
 				
-		
 		
 		//광고2
 		@RequestMapping(value="/traVlog/advertising.do",method=RequestMethod.POST)
@@ -190,6 +192,10 @@ public class MypageController {
 			
 		}
 	
-	
+
+		
+		
+		
+		
 	
 }
