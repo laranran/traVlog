@@ -63,7 +63,9 @@
             <div class="Bcontent">
             <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
             <p class="Rcontent">${board.bodcontent }</p>
-            <p class="tag">${board.bodhashtag }</p>
+            <c:forTokens items="${board.bodhashtag }" delims="#" var="item">
+    		<a href="" class="tag">#${item}  </a>
+			</c:forTokens>
             </div>
          </div>
          </c:forEach>
