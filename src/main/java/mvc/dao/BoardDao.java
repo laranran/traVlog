@@ -3,6 +3,7 @@ package mvc.dao;
 import java.util.List;
 
 import mvc.dto.Board;
+import mvc.dto.Claim;
 import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
@@ -56,5 +57,11 @@ public interface BoardDao {
 	public int selectPin(Board board);
 	/*핀 개수 구하기*/
 	public int selectCountPin(Board board);
+	
+	public List<Board> getBoardListBySearch(Member boardMember);
+
+	public Board getBordInfo(Board board);
+
+	public void insertClaim(Claim claim);
 
 }

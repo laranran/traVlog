@@ -43,3 +43,10 @@
 	float: right;
 	padding-left: 30px;
 }
+
+#searchBtn{
+    display: inline-block;
+    position: relative;
+    width: 45px;
+    left: 322px;
+    }

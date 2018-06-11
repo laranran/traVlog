@@ -9,7 +9,7 @@
 	</select>
 	<insert id="insertBoard" parameterType="mvc.dto.Board">
 		insert into TB_BOARD(BODNO,BODTITLE,BODCONTENT,BODHASHTAG,BODDATE,BODRECOMMEND,BODNAME)
-		values(UP_BODAD_SEQ.nextval,#{bodtitle},#{bodcontent},#{bodhashtag},sysdate,0,#{bodname})
+		values(UP_BOARD_SEQ.nextval,#{bodtitle},#{bodcontent},#{bodhashtag},sysdate,0,#{bodname})
 	</insert>
 	<insert id="insertFile" parameterType="mvc.dto.Files">
 		insert into TB_FILES(BODNO,FILORIGINFILE,FILSAVEFILE,FILSIZE,FILDATE)
@@ -102,5 +102,39 @@
 		resultType="int">
 		SELECT COUNT(*) FROM tb_keep WHERE bodno = #{bodno }
 	</select>
+	
+		<!-- 검색 리스트 가져오기 -->
+	<select id="getBoardListBySearch" parameterType="mvc.dto.Member"
+	resultType="mvc.dto.Board">
+		SELECT b.*, 
+		( 
+		SELECT count(*) FROM tb_recommend r 
+		WHERE r.recName =	#{memnick } AND r.bodno = b.bodno 
+		) AS isExistsLikeData, 
+		(
+		SELECT count(*) FROM tb_recommend r 
+		WHERE r.bodno = b.bodno 
+		) AS recommendCnt,
+		( 
+		SELECT count(*) FROM tb_keep k WHERE
+		 k.kepnick = #{memnick } AND	k.bodno = b.bodno 
+		) AS isExistsPinData, (
+		SELECT count(*) FROM tb_keep k
+		WHERE k.bodno = b.bodno 
+		) AS pinCnt FROM
+		TB_BOARD b WHERE BODHASHTAG
+		LIKE '%'||#{search}||'%' ORDER BY BODDATE DESC
+	</select>
+	
+	<select id="getBordInfo" parameterType="mvc.dto.Board" resultType="mvc.dto.Board">
+	SELECT bodno, bodtitle, bodname FROM tb_board
+        WHERE bodno=#{bodno}
+	
+	</select>
+	
+	<insert id="insertClaim" parameterType="mvc.dto.Claim">
+	INSERT INTO tb_claim (clmno, bodno, clmname, clmDate,clmReason,clmcondition)  
+    VALUES(UP_clmNo.nextval, #{bodNo}, #{clmName}, sysdate, #{clmReason}, '0' )
+	</insert>
 	
 </mapper>
