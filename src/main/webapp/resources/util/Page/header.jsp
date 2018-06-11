@@ -17,9 +17,7 @@
 	<div class="search">
 	 <input id="search" class="search__input" type="text" name="search" placeholder="Search" required="required">
 	</div>
-	<div>
-	 <button id="searchBtn">검색</button>
-	</div>
+	<img id="searchBtn" alt="검색" src="/resources/images/icon/search.png">
 	<a class="mypage" href="/traVlog/mypage.do"><img alt="마이페이지" src="/resources/images/icon/user.png" width="50px;"></a>
 	<a class="find" href="/traVlog/followerfind.do"><img alt="친구찾기" src="/resources/images/icon/find.png" width="50px;"></a>
 	<a class="feed" href="/traVlog/main.do"><img alt="피드" src="/resources/images/icon/feed.png" width="50px;"></a>

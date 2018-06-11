@@ -19,7 +19,7 @@
  var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
  var stmnBASE = 10; // 스크롤 시작위치 
  var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
- var stmnScrollSpeed = 20; //스크롤 속도 (클수록 느림)
+ var stmnScrollSpeed = 1000; //스크롤 속도 (클수록 느림)
  var stmnTimer; 
    
    function RefreshStaticMenu() {
@@ -34,9 +34,8 @@
       if (stmnStartPoint != stmnEndPoint) {
          stmnScrollAmount = Math.ceil(Math
                .abs(stmnEndPoint - stmnStartPoint) / 15);
-         document.getElementById('STATICMENU').style.top = parseInt(document
-               .getElementById('STATICMENU').style.top, 10)
-               + ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+         document.getElementById('STATICMENU').style.top =
+            parseInt(document.getElementById('STATICMENU').style.top, 10) + ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
                      : stmnScrollAmount) + 'px';
          stmnRefreshTimer = stmnScrollSpeed;
       }
@@ -49,57 +48,6 @@
       RefreshStaticMenu();
    }
 
-//    boardList 갯수 3개씩 추가하기.. +무한스크롤과 ajax 이용해서
-   var count = ${count};
-   $(document).ready(function () {
-      $(document).scroll(function() {
-       var maxHeight = $(document).height();
-       var currentScroll = $(window).scrollTop() + $(window).height();
-
-       if (maxHeight <= currentScroll) {
-	    	count = 2;
-	    	var search = $("#search").val();
-	   		console.log("search : "+$("#search").val());
-	    	console.log("스크롤 맨밑찍음")
-	        // Append next contents
-	        //검색 기능 중
-	        if($("#search").val() != null || $("#search").val() != ""){
-	        	console.log("search 값 존재");
-	        	 
-	        	$.ajax({
-	 		        type:'GET',
-	 		        url:'/traVlog/addBoardList.do',
-	 		       	dataType:'html',
-	 		       	data:{"count":count , "search":search},
-	 		       	success : function(data){
-	 		       		$("#main").html(data);
-	 		       		count += 2;
-	 		       		console.log(count);
-	 		       	},error:function(data){
-	 		       		alert("실패");
-	 		       	}
-	 		      }); // ajax 끝
-	        }
-	        else if($("#search").val() == null || $("#search").val() == ""){
-	        	//일반 페이지 (not 검색)
-		      $.ajax({
-		        type:'GET',
-		        url:'/traVlog/addBoardList.do',
-		       	dataType:'html',
-		       	data:{"count":count},
-		       	success : function(data){
-		       		$("#main").html(data);
-		       		count += 2;
-		       		console.log(count);
-		       	},error:function(data){
-		       		alert("실패");
-		       	}
-		      });//ajax 끝
-	        } //else 끝
-       }//스크롤 바닥찍은거 끝
-     });
-   });
-   
    function recommend(a){
       var bodno = a;
          console.log("bodno : "+bodno);
@@ -111,7 +59,6 @@
                bodno: bodno
              }
              , success: function(data) {
-//                 alert("ajax성공");
                 console.log(data);
 
                 if(data.result) {
@@ -125,12 +72,11 @@
                 
              }
              , error: function(e) {
-                alert("좋아요 실패");
+                alert("좋아요 실패. 다음에 이용해주세요.");
                 console.log(e.responseText);
              }
           });
-         
-   }
+   }//function recommend(a) 끝
 
    function pin(a){
       var bodno = a;
@@ -143,7 +89,6 @@
             bodno: bodno
           }
           , success: function(data) {
-//              alert("ajax성공");
              console.log(data);
 
              if(data.result) {
@@ -157,15 +102,86 @@
              
           }
           , error: function(e) {
-             alert("보관실패");
+             alert("보관 실패. 다음에 이용해주세요.");
              console.log(e.responseText);
           }
        });
+   }//function pin(a) 끝
+
+//    boardList 갯수 2개씩 추가하기.. +무한스크롤과 ajax 이용해서
+   var count = ${count};
+   $(document).ready(function () {
       
-   }
-   
+    //header.jsp에 있는 검색버튼
+      $("#searchBtn").click(function(){
+         count =2;
+         var search = $("#search").val();
+         console.log("검색할 태그 :"+search);
+         
+         $.ajax({
+              type:'GET',
+              url:'/traVlog/addBoardList.do',
+                dataType:'html',
+                data:{"count":count , "search":search},
+                success : function(data){
+                   $("#main").html(data);
+                },error:function(data){
+                   alert("실패");
+                }
+            }); // ajax 끝
+      });
+      
+      $(document).scroll(function() {
+          var maxHeight = $(document).height();
+          var currentScroll = $(window).scrollTop() + $(window).height();
+
+          if (maxHeight <= currentScroll+100) {
+             var search = $("#search").val();
+               console.log("search : "+$("#search").val());
+             console.log("스크롤 도달")
+              // Append next contents
+              //검색 기능 중
+              if($("#search").val() != null || $("#search").val() != ""){
+                 console.log("search 값 존재");
+                  
+                 $.ajax({
+                     type:'GET',
+                     url:'/traVlog/addBoardList.do',
+                       dataType:'html',
+                       data:{"count":count , "search":search},
+                       success : function(data){
+                          $("#main").html(data);
+                          count += 2;
+                          console.log(count);
+                       },error:function(data){
+                          alert("실패");
+                       }
+                   }); // ajax 끝
+              }
+              else if($("#search").val() == null || $("#search").val() == ""){
+                 //일반 페이지 (not 검색)
+               $.ajax({
+                 type:'GET',
+                 url:'/traVlog/addBoardList.do',
+                   dataType:'html',
+                   data:{"count":count},
+                   success : function(data){
+                      $("#main").html(data);
+                      count += 2;
+                      console.log(count);
+                   },error:function(data){
+                      alert("실패");
+                   }
+               });//ajax 끝
+              } //else 끝
+          }//스크롤 바닥찍은거 끝
+        });
+      });
+
    var win= null;
-   function claim(mypage,myname,w,h,scroll){
+   function claim(mypage,myname,w,h,scroll,bodno){
+	   var claimBodno = bodno;
+	   console.log("claimBodno : "+claimBodno);
      var winl = (screen.width-w)/2;
      var wint = (screen.height-h)/2;
      var settings  ='height='+h+',';
@@ -177,12 +193,35 @@
      win=window.open(mypage,myname,settings);
      if(parseInt(navigator.appVersion) >= 4){win.window.focus();}
    }
+   
+//    function claim(a){
+// 	      var bodno = a;
+// 	      console.log("bodno : "+bodno);
+// 	      $.ajax({
+// 	          type: "get"
+// 	          , url: "/traVlog/claim.do"
+// 	          , dataType: "json"
+// 	          , data: {
+// 	            bodno: bodno
+// 	          }
+// 	          , success: function(data) {
+// 	             console.log(data);
+
+// // 	             console.log(data.pin);
+// // 	               $("#pin_"+a).html(data.pin);
+	             
+// 	          }
+// 	          , error: function(e) {
+// 	             alert("신고 실패. 다음에 이용해주세요.");
+// 	             console.log(e.responseText);
+// 	          }
+// 	       });
 </script>
 
 
 </head>
 
-<body onload="InitializeStaticMenu();">
+<body  onload="InitializeStaticMenu();">
 <div id="wrap">
       
 <jsp:include page="/resources/util/Page/header.jsp" />
@@ -198,7 +237,7 @@
             <div class="memInfo">
             <img class="userimg" src="/resources/images/icon/user.png">
             <strong class="nick">${board.bodname }</strong>
-            <a href="/traVlog/claim.do" onclick="claim(this.href,'name','600','400','yes');return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a>
+            <a href="/traVlog/claim.do?bodno=${board.bodno }" id="claim_${board.bodno }"  onclick="claim(this.href,'name','600','400','yes',${board.bodno});return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a>
             </div>
             
             
@@ -256,6 +295,7 @@
       </div>
       
       <div class="right" id="STATICMENU">
+
          <div class="user">
          <c:forEach items="${memberInfo}" var="member">
          <img class="userimg" src="/resources/images/icon/user.png">
@@ -291,7 +331,8 @@
                </c:forEach>
               </table>
          </div>
-      </div>
+      <div class="goTop" onclick="window.scrollTo(0,0);">TOP</div>
+      </div> <!-- End Right -->
 
    </div>   <!-- // End content-wrap -->
    </div> <!-- End container -->

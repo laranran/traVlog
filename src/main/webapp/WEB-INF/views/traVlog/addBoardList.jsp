@@ -12,7 +12,7 @@
             <div class="memInfo"> 
             <img class="userimg" src="/resources/images/icon/user.png">
             <strong class="nick">${board.bodname }</strong>
-            <a href="/traVlog/claim.do" onclick="claim(this.href,'name','400','400','yes');return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a> 
+            <a href="/traVlog/claim.do?bodno=${board.bodno }" id="claim_${board.bodno }"  onclick="claim(this.href,'name','600','400','yes',${board.bodno});return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a> 
             </div>
             
             <div class="boardInfo">
