@@ -232,7 +232,6 @@
       <!-- BoardList 시작 -->
          
          <c:forEach items="${boardList }" var="board" varStatus="listNumber" begin="0" end="2">
-<%--          <c:forEach items="${boardList }" var="board" varStatus="listNumber">    --%>
          <div class="board">
             <div class="memInfo">
             <img class="userimg" src="/resources/images/icon/user.png">
@@ -252,11 +251,15 @@
             </c:if>
             </div>
             
+         <c:forEach items="${filesList }" var="files" varStatus="listNumber" >   
             <div class="boardImg">
-<%--             <c:if test="${board.imageList != null }"> --%>
-               <img class="contentImg"  src="/resources/images/BackGround/login.jpg">
-<%--              </c:if> --%>
+            <c:if test="${files.filsavefile != null }">
+               <c:if test="${board.bodno == files.bodno }">
+                <img id="img_${files.filsavefile }" class="contentImg"  src="/resources/upload/${files.filsavefile }">
+               </c:if>
+             </c:if>
             </div>
+            </c:forEach>
             
 <div class="icon">
             <!-- 좋아요 기능  -->
@@ -285,7 +288,8 @@
             
             <div class="Bcontent">
             <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
-            ${board.bodcontent }
+            <p class="Rcontent">${board.bodcontent }</p>
+            <p class="tag">${board.bodhashtag }</p>
             </div>
             
          </div>

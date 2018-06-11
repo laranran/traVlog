@@ -117,5 +117,9 @@ public class BoardService {
 	public void insertClaim(Claim claim) {
 		boardDao.insertClaim(claim);
 	}
+
+	public List<Files> getFiles(Member boardMember) {
+		return boardDao.getFiles(boardMember);
+	}
 	
 }

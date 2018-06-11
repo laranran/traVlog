@@ -64,4 +64,6 @@ public interface BoardDao {
 
 	public void insertClaim(Claim claim);
 
+	public List<Files> getFiles(Member boardMember);
+
 }
