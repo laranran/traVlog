@@ -70,14 +70,15 @@
 
 					<div class="mylist-content">
 						<div class="row">
-						
+
 							<c:forEach items="${selectpic }" var="i">
-										
-							<div class="pic col-md-4">
-								<a href ="no${i.bodno }"><img class="pic-src"
-									src="/resources/upload/${i.filsavefile }.png" alt="photo"></a>
-							</div>
-							
+
+								<div class="pic col-md-4">
+									<a href="no${i.bodno }" onclick="contentview(${i.bodno });"><img
+										class="pic-src" src="/resources/upload/${i.filsavefile }.png"
+										alt="photo"></a>
+								</div>
+
 							</c:forEach>
 
 						</div>
@@ -97,17 +98,9 @@
 
 		<div class="mask"></div>
 		<div class="window">
-			<a href ="no${i.bodno }">
-			<img class="pic" src="/resources/upload/${i.filsavefile }.png" alt="photo"></a> <input
-				type="button" href="#" class="close" value="창닫기" />
-				
-		<div class="info">
-		
-		요기가 정보
-		
+
 		</div>
-		</div>
-		
+
 	</div>
 
 </body>
@@ -151,7 +144,7 @@
 		$('.pic-src').click(function(e) {
 			
 			// preventDefault는 href의 링크 기본 행동을 막는 기능입니다.
-// 			e.preventDefault();
+			e.preventDefault();
 			wrapWindowByMask();
 			
 		});
@@ -168,15 +161,36 @@
 			$('.window').hide();
 		});
 		
-		$("a").click(function() {
-			$("#"+$(this).attr("href")).show();
-			alert('실행대씀');
-			return false;
-		});
+// 		$("a").click(function() {
+// 			$("#"+$(this).attr("href")).show();
+// 			alert('실행대씀');
+// 			return false;
+// 		});
 	});
 	
-	
-	
+	function contentview(a){
+		   var bodno = a;
+		      console.log("bodno : "+bodno);
+		      $.ajax({
+		          type: "get"
+		          , url: "/traVlog/mycontent.do"
+		          , dataType: "html"
+		          , data: {
+		            bodno: bodno
+		          }
+		          , success: function(data) {
+		    
+		             $(".window").html(data);
+		             
+		          }
+		          , error: function(e) {
+		        	  alert("ajax실패");
+
+		          }
+		       });
+		      
+		}
+
 </script>
 
 </html>

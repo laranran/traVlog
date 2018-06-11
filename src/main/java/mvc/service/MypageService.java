@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import mvc.dao.MypageDao;
 import mvc.dto.Board;
 import mvc.dto.Files;
-import mvc.dto.HashTag;
-import mvc.dto.LatLng;
 
 @Service
 public class MypageService {
@@ -29,6 +27,21 @@ public class MypageService {
 		
 		return mypageDao.selectPic(memnick);
 	}
+	
+	// 해당 계정 상세 작성글 내용 불러오기
+	
+	public Board selectContent(int bodno) {
+		
+		return mypageDao.selectContent(bodno);
+	}
+		
+	// 해당 계정 상세 사진 불러오기
+		
+	public Files selectContentPic(int bodno) {
+		
+		return mypageDao.selectContentPic(bodno);
+	}
+
 
 	
 }

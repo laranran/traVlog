@@ -160,11 +160,6 @@ public class BoardController {
 		logger.info("세팅페이지 비밀번호 변경 GET요청");
 	}
 	
-	@RequestMapping(value = "/traVlog/mylist.do", method = RequestMethod.GET)
-	public void mylist() {
-		logger.info("컨텐츠 상세보기 페이지 GET요청");
-	}
-
 	@RequestMapping(value = "/traVlog/find.do", method = RequestMethod.GET)
 	public void find() {
 		logger.info("아이디/패스워드찾기 페이지 GET요청");
