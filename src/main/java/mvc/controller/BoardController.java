@@ -495,9 +495,32 @@ public class BoardController {
 			logger.info(memid);
 			
 			//게시글 정보 가져오기
-//			Board claimBoard = boardService.getBoardInfo(board);
-//			System.out.println(claimBoard.toString());
+			logger.info("가져온 게시글 정보"+board.toString());
+			Board claimBoard = boardService.getBoardInfo(board);
+			System.out.println(claimBoard.toString());
 			
-//			model.addAttribute("claimBoard",claimBoard);
+			model.addAttribute("claimBoard",claimBoard);
+		}
+		
+		@RequestMapping(value = "/traVlog/claim.do", method = RequestMethod.POST)
+		public ModelAndView joinProc(HttpSession session, Claim claim) {
+			logger.info("신고 처리");
+			ModelAndView mav;
+			String clmName = (String) session.getAttribute("memnick");
+			 
+			claim.setClmName(clmName);
+			logger.info(claim.toString());
+
+			boardService.insertClaim(claim);
+			logger.info("신고 처리 완료");
+
+			mav= new ModelAndView("util/alert");
+			mav.addObject("msg", "신고 처리가 완료 되었습니다.");
+	        mav.addObject("action", "window.close()");
+			return mav;
 		}
 }
+
+
+
+

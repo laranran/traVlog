@@ -126,4 +126,15 @@
 		LIKE '%'||#{search}||'%' ORDER BY BODDATE DESC
 	</select>
 	
+	<select id="getBordInfo" parameterType="mvc.dto.Board" resultType="mvc.dto.Board">
+	SELECT bodno, bodtitle, bodname FROM tb_board
+        WHERE bodno=#{bodno}
+	
+	</select>
+	
+	<insert id="insertClaim" parameterType="mvc.dto.Claim">
+	INSERT INTO tb_claim (clmno, bodno, clmname, clmDate,clmReason,clmcondition)  
+    VALUES(UP_clmNo.nextval, #{bodNo}, #{clmName}, sysdate, #{clmReason}, '0' )
+	</insert>
+	
 </mapper>
