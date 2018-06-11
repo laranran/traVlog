@@ -1,9 +1,9 @@
 package mvc.controller;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,18 +23,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import mvc.dto.FollowingRec;
-import mvc.dto.Member;
-import mvc.service.MainService;
-import org.springframework.web.multipart.MultipartFile;
-
 import mvc.dto.Board;
+import mvc.dto.Comment;
 import mvc.dto.Files;
+import mvc.dto.FollowingRec;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
 import mvc.service.BoardService;
+import mvc.service.CommentService;
+import mvc.service.MainService;
 import mvc.service.MemberService;
 import spring.board.email.Email;
 import spring.board.email.EmailSender;
@@ -42,6 +43,8 @@ import spring.board.email.EmailSender;
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+	@Autowired
+	CommentService commentService;
 	@Autowired
 	MainService mainService;
 	@Autowired
@@ -111,19 +114,31 @@ public class BoardController {
 		//인기 사용자
 		ArrayList<Member> memList = mainService.topMember();
 		
+		//파일리스트 가져오기
+		
 		//board List가져오기 .. 친구와 내 게시글을 포함하여 가장 최신것부터 위로..
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
-		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+		if(member.getSearch() == null || member.getSearch() =="") {
+			//검색어가 없을때
+			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			model.addAttribute("boardList",boardList);
+			
+		}else if(member.getSearch() != null || member.getSearch() != "") {
+			//검색어가 있을때..
+			boardMember.setSearch(member.getSearch());
+			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
+			model.addAttribute("boardList",boardList);
+			System.out.println(boardList.get(0).toString());
+		}
 
-		System.out.println(boardList.get(0).toString());
 
 		//일단 3개만 출력하기 위해 count도 보냄
 		int count = 2;
 		//가져오기 끝
 		model.addAttribute("count",count);
-		model.addAttribute("boardList",boardList);
+//		model.addAttribute("boardList",boardList);
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberList", memList);
@@ -133,20 +148,28 @@ public class BoardController {
 
 	// 메인페이지 무한스크롤시 AJax 작동메서드
 	@RequestMapping(value = "/traVlog/addBoardList.do", method = RequestMethod.GET)
-	public void addBoard(int count, HttpSession session, Model model) {
-		logger.info("무한스크롤 AddBoardList 요청");
-		
-		count = count+2;
-		Member boardMember = new Member();
-		boardMember.setMemid((String)session.getAttribute("memid"));
-		boardMember.setMemnick((String)session.getAttribute("memnick"));
-		List<Board> boardList = boardService.getBoardListByFollow(boardMember);
-//		model.addAttribute("count",maxCount);
+	public void addBoard(int count, String search, HttpSession session, Model model) {
+		logger.info("무한스크롤 AddBoardList1 요청");
+		if(search != "" && search != null) {
+			//검색 값이 존재할 떄
+//			count = count+2;
+			Member boardMember = new Member();
+			boardMember.setSearch(search);
+			boardMember.setMemid((String)session.getAttribute("memid"));
+			boardMember.setMemnick((String)session.getAttribute("memnick"));
+			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
+			model.addAttribute("boardList",boardList);
+		}else {
+			//검색 값이 없을 떄
+			count = count+2;
+			Member boardMember = new Member();
+			boardMember.setMemid((String)session.getAttribute("memid"));
+			boardMember.setMemnick((String)session.getAttribute("memnick"));
+			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			model.addAttribute("boardList",boardList);
+		}
 		
 		model.addAttribute("count",count);
-		model.addAttribute("boardList",boardList);
-		
-//		return "traVlog/main";
 
 	}
 	
@@ -466,5 +489,40 @@ public class BoardController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		
+		//댓글 작성AJAX
+		@RequestMapping(value="/traVlog/writeComment.do", method=RequestMethod.GET)
+		public void writeComment(Comment comment,HttpSession session,Model model,String commentDo) {
+			logger.info("writeComment.do페이지 get 요청");
+			//댓글 삭제,수정 파트
+			if(commentDo != null && commentDo !="") {
+				logger.info(commentDo);
+				if(commentDo.equals("delete")) {
+					commentService.deleteCommentByComno(comment);
+					logger.info("삭제완료");
+				}else if(commentDo.equals("update")) {
+					commentService.updateCommentByComno(comment);
+				}
+			}else {
+				//수정/삭제명령이 없을땐 댓글을 insert해주고 
+				if(comment.getComcontent() != null && comment.getComcontent() !="") {
+					comment.setComwriter((String)session.getAttribute("memnick"));
+					logger.info(comment.toString());
+					logger.info("댓글insert");
+					commentService.insertComment(comment);
+				}
+			}
+			
+			//새로 댓글 리스트를 가져와서 넘겨준다. ( 항상 마지막에 실행 )
+			Board commentBoard = new Board();
+			//댓글 가져오기 위해 bodno를 전달
+			commentBoard.setBodno(comment.getBodno());
+			//댓글 리스트 가져오기
+			List<Comment> commentList = commentService.getCommentListByBodno(commentBoard);
+			//대댓글 리스크 가져오기
+//			List<Comments> commentsList = commentService.getCommentsListByBodno(comment)
+			logger.info("리스트의 첫번째 인덱스값 : "+commentList.get(0).toString());
+			model.addAttribute("commentList",commentList);
 		}
 }

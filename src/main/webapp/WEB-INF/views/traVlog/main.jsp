@@ -12,8 +12,15 @@
 
 <script type="text/javascript"
    src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
+<style type="text/css">
+.showComment{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 550px;
+}
+</style>
 <script type="text/javascript">
+ var bodno;
  var stmnLEFT = 10; // 오른쪽 여백 
  var stmnGAP1 = 0; // 위쪽 여백 
  var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
@@ -49,7 +56,9 @@
    }
 
    function recommend(a){
-      var bodno = a;
+      bodno = a;
+      
+      
          console.log("bodno : "+bodno);
          $.ajax({
              type: "get"
@@ -80,7 +89,7 @@
    }//function recommend(a) 끝
 
    function pin(a){
-      var bodno = a;
+      bodno = a;
       console.log("bodno : "+bodno);
       $.ajax({
           type: "get"
@@ -193,6 +202,117 @@
      win=window.open(mypage,myname,settings);
      if(parseInt(navigator.appVersion) >= 4){win.window.focus();}
    }
+   
+   function searchTag(a){
+	 var search = a;
+	 count = 2;
+	 console.log("실행 검색어: "+search);
+	 
+     $.ajax({
+          type:'GET',
+          url:'/traVlog/addBoardList.do',
+            dataType:'html',
+            data:{"count":count , "search":search},
+            success : function(data){
+               $("#main").html(data);
+            },error:function(data){
+               alert("실패");
+            }
+        }); // ajax 끝
+   }
+   //댓글 작성function
+	function writeComment(bodnumber){
+		console.log(bodnumber);
+		bodno = bodnumber;
+		console.log($("#comment_"+bodno).val());
+		var comContent = $("#comment_"+bodno).val();
+		
+		if(comContent == "" || comContent==null){
+			alert("댓글을 입력하세요..");
+		}
+		else{
+		//댓글 작성 ajax...
+			$.ajax({
+				type:'get',
+				url:'/traVlog/writeComment.do',
+				dataType:'html',
+				data:{"bodno":bodno, "comcontent":comContent},
+				success : function(data){
+						console.log("성공?");
+		               $("#showComment_"+bodno).html(data);
+		               $("#showCommentBtn_"+bodno).text("댓글안보기");
+		            },error:function(data){
+		               alert("실패");
+		            }
+			});//ajax end
+		}
+	}
+   //댓글 보여주기
+   function showCommentBtn(bodnumber){
+	   console.log(bodnumber);
+	   bodno = bodnumber;
+	   var showStatus = $("#showCommentBtn_"+bodno).text();
+	   console.log($("#showCommentBtn_"+bodno).text());
+	   if(showStatus == "댓글보기"){
+		   $.ajax({
+			   type:'get',
+			   url:'/traVlog/writeComment.do',
+			   dataType:"html",
+			   data:{"bodno":bodno},
+			   success :function(data){
+				   console.log("성공?");
+	               $("#showComment_"+bodno).html(data);
+	               $("#showCommentBtn_"+bodno).text("댓글안보기");
+			   },error :function(e){
+				   alert("showCommentBtn 실패");
+			   }
+		   });//ajax 끝
+	   }else{//댓글감추기일때
+			$("#showComment_"+bodno).html(" ");	   
+			$("#showCommentBtn_"+bodno).text("댓글보기");
+	   }
+   }
+ 
+//  댓글 업데이트
+ function comUpdate(comno){
+	console.log("수정버튼 눌림");
+	var content = $("#showUpdateTag_"+comno).val();
+	var commentDo = 'update';
+	if(content == "" || content==null){
+		alert("내용을 입력하세요..");
+	}else{
+		$.ajax({
+			type:'get',
+			url:'/traVlog/writeComment.do',
+			data:{"comno":comno,"comcontent":content,"commentDo":commentDo,"bodno":bodno},
+			dataType:"html",
+			success:function(data){
+	 			console.log("수정 성공");
+				$("#showComment_"+bodno).html(data);
+			},error:function(e){
+	 			alert("실패");
+			}
+		});
+	}//else 끝
+ }
+ //댓글 삭제
+ function comDelete(comno){
+ 	console.log("삭제버튼 눌림 comno: "+comno+"bodno:"+bodno);
+ 	var commentDo = 'delete';
+ 	$.ajax({
+ 		type:'get',
+ 		url:'/traVlog/writeComment.do',
+ 		data:{"comno":comno,"commentDo":commentDo,"bodno":bodno},
+ 		dataType:"html",
+ 		success:function(data){
+            $("#showComment_"+bodno).html(data);
+ 			console.log("삭제 성공");
+ 		},error:function(e){
+ 			 alert("삭제버튼 실패");
+ 		}
+ 	});
+ }
+
 </script>
 
 
@@ -261,10 +381,20 @@
             </div>
             
             <div class="Bcontent">
-            <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
-            ${board.bodcontent }
+             <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
+             ${board.bodcontent }
             </div>
-            
+            <!-- 댓글 작성 시작 2018.06.09 -->
+            <div class="Bcomment">
+            <label><strong>${sessionScope.memnick }</strong></label>
+             <input type="text" id="comment_${board.bodno }" name="comment" 
+             placeholder="댓글을 입력하세요 ..." style="width:78%" required="required"></input>
+             <input type="button" id="commentBtn" value="댓글입력" style="width:13%;" onclick="javacript:writeComment('${board.bodno}')"></input> <br>
+             <div class="showComment" id="showComment_${board.bodno }">
+             
+             </div>
+             <a id="showCommentBtn_${board.bodno }" href="javascript:void(0);" onclick="showCommentBtn('${board.bodno}')" >댓글보기</a>
+            </div>
          </div>
          </c:forEach>
          <!-- boardList 끝 -->
@@ -286,7 +416,7 @@
                <c:forEach items="${tagList}" var="tag">
                 <tbody>
                     <tr>
-                        <td class="tagname"><a href="#" class="tagA">#${tag.tagname}</a></td>
+                        <td class="tagname"><a href="#" onclick="javascript:searchTag('${tag.tagname}');" class="tagA">#${tag.tagname}</a>
                         <td class="taghit">${tag.taghit}</td>
                     </tr>
                 </tbody>
