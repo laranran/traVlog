@@ -119,13 +119,19 @@ public class BoardController {
 		if(member.getSearch() == null || member.getSearch() =="") {
 			//검색어가 없을때
 			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			List<Files> filesList = boardService.getFiles(boardMember);
+			
 			model.addAttribute("boardList",boardList);
+			model.addAttribute("filesList",filesList);
+			System.out.println(boardList.get(0).toString());
 			
 		}else if(member.getSearch() != null || member.getSearch() != "") {
 			//검색어가 있을때..
 			boardMember.setSearch(member.getSearch());
 			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
 			model.addAttribute("boardList",boardList);
+			List<Files> filesList = boardService.getFiles(boardMember);
+			model.addAttribute("filesList",filesList);
 			System.out.println(boardList.get(0).toString());
 		}
 
@@ -153,8 +159,10 @@ public class BoardController {
 			boardMember.setSearch(search);
 			boardMember.setMemid((String)session.getAttribute("memid"));
 			boardMember.setMemnick((String)session.getAttribute("memnick"));
-			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
+			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("boardList",boardList);
+			model.addAttribute("filesList",filesList);
 		}else {
 			//검색 값이 없을 떄
 			count = count+2;
@@ -162,7 +170,9 @@ public class BoardController {
 			boardMember.setMemid((String)session.getAttribute("memid"));
 			boardMember.setMemnick((String)session.getAttribute("memnick"));
 			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("boardList",boardList);
+			model.addAttribute("filesList",filesList);
 		}
 		
 		model.addAttribute("count",count);
