@@ -68,7 +68,7 @@
                bodno: bodno
              }
              , success: function(data) {
-                alert("추천성공");
+                console.log("추천성공");
                 console.log(data);
 
                 if(data.result) {
@@ -82,7 +82,7 @@
                 
              }
              , error: function(e) {
-                alert("ajax에러");
+                alert("추천실패..");
                 console.log(e.responseText);
              }
           });
@@ -99,7 +99,7 @@
             bodno: bodno
           }
           , success: function(data) {
-             alert("ajax성공");
+             console.log("보관성공");
              console.log(data);
 
              if(data.result) {
@@ -113,7 +113,7 @@
              
           }
           , error: function(e) {
-             alert("ajax에러");
+             alert("보관실패..");
              console.log(e.responseText);
           }
        });
@@ -264,7 +264,7 @@
 	               $("#showComment_"+bodno).html(data);
 	               $("#showCommentBtn_"+bodno).text("댓글안보기");
 			   },error :function(e){
-				   alert("showCommentBtn 실패");
+				   alert("댓글이 없습니다. 댓글을 달아주세요!");
 			   }
 		   });//ajax 끝
 	   }else{//댓글감추기일때
@@ -419,7 +419,7 @@
 <%--              </c:if> --%>
             </div>
             
-<div class="icon">
+			<div class="icon">
             <!-- 좋아요 기능  -->
             <button id="recoBtn_${board.bodno}" class="btnRecommend" onclick="recommend(${board.bodno });">
             <c:if test="${board.isExistsLikeData eq '1'}">

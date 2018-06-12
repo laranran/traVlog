@@ -58,8 +58,19 @@
             
             </div>
             <div class="Bcontent">
-            <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
-            ${board.bodcontent }
+             <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
+             ${board.bodcontent }
+            </div>
+            <!-- 댓글 작성 시작 2018.06.09 -->
+            <div class="Bcomment">
+            <label><strong>${sessionScope.memnick }</strong></label>
+             <input type="text" id="comment_${board.bodno }" name="comment" 
+             placeholder="댓글을 입력하세요 ..." style="width:78%" required="required"></input>
+             <input type="button" id="commentBtn" value="댓글입력" style="width:13%;" onclick="javacript:writeComment('${board.bodno}')"></input> <br>
+             <div class="showComment" id="showComment_${board.bodno }">
+             
+             </div>
+             <a id="showCommentBtn_${board.bodno }" href="javascript:void(0);" onclick="showCommentBtn('${board.bodno}')" >댓글보기</a>
             </div>
          </div>
          </c:forEach>
