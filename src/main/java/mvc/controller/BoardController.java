@@ -123,7 +123,8 @@ public class BoardController {
 			
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
-			System.out.println(boardList.get(0).toString());
+			logger.info("여기 안돌아가냐?");
+			System.out.println("왜 안나와?"+boardList.get(0).toString());
 			
 		}else if(member.getSearch() != null || member.getSearch() != "") {
 			//검색어가 있을때..
@@ -134,7 +135,6 @@ public class BoardController {
 			model.addAttribute("filesList",filesList);
 			System.out.println(boardList.get(0).toString());
 		}
-
 
 		//일단 3개만 출력하기 위해 count도 보냄
 		int count = 2;
