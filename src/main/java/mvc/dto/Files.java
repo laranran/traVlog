@@ -13,7 +13,16 @@ public class Files {
 	private String filsavefile;
 	private long filsize;
 	private Date fildate;
+	private int filidx;
 	
+	public int getFilidx() {
+		return filidx;
+	}
+
+	public void setFilidx(int filidx) {
+		this.filidx = filidx;
+	}
+
 	public int getBodno() {
 		return bodno;
 	}

@@ -10,6 +10,7 @@
 window.onload = function() {
 	
 	alert('${msg}'); 
+	${action};
 	document.location.href = '${url}';
 };
 </script>

@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <!-- BoardList 시작 -->
 <div>
-      <!-- BoardList 시작 -->
          
          <c:forEach items="${boardList }" var="board" varStatus="listNumber" begin="0" end="${count }">
 <%--          <c:forEach items="${boardList }" var="board" varStatus="listNumber">    --%>
@@ -13,9 +12,8 @@
             <div class="memInfo"> 
             <img class="userimg" src="/resources/images/icon/user.png">
             <strong class="nick">${board.bodname }</strong>
-            <img class="claim" alt="신고하기" src="/resources/images/icon/claim.png">
+            <a href="/traVlog/claim.do?bodno=${board.bodno }" id="claim_${board.bodno }"  onclick="claim(this.href,'name','600','400','yes',${board.bodno});return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a> 
             </div>
-            
             
             <div class="boardInfo">
             <strong class="title">${board.bodtitle }</strong>

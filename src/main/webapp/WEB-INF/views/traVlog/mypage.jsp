@@ -37,7 +37,7 @@
 						<img class="userimg" src="/resources/images/icon/user.png">
 						<button class="profilebtn"
 							onclick="location.href='settingprofile.do'">프로필 편집</button>
-						<div class="usernick">닉네임</div>
+						<div class="usernick">${selectMember.memnick }</div>
 						<div class="setting">
 							<a href="message.do"><img class="messageimg"
 								src="/resources/images/icon/message.png"></a><br>
@@ -50,10 +50,10 @@
 					<div class="userfollower">
 
 						<div class="following">
-							<strong>10</strong><br /> <span>팔로우</span>
+							<strong>${selectMember.memfollwing }</strong><br /> <span>팔로우</span>
 						</div>
 						<div class="follower">
-							<strong>37</strong><br /> <span>팔로워</span>
+							<strong>${selectMember.memfollower }</strong><br /> <span>팔로워</span>
 						</div>
 						<div class="boardImg">
 							<strong>1</strong><br /> <span>게시글</span>
@@ -72,14 +72,16 @@
 						<div class="row">
 
 							<c:forEach items="${selectpic }" var="i">
-
-								<div class="pic col-md-4">
-									<a href="no${i.bodno }" onclick="contentview(${i.bodno });"><img
-										class="pic-src" src="/resources/upload/${i.filsavefile }.png"
-										alt="photo"></a>
-								</div>
-
+								<c:if test="${i.bodno != null }">
+									<div class="pic col-md-4">
+										<a href="no${i.bodno }" onclick="contentview(${i.bodno });">
+											<img class="pic-src"
+											src="/resources/upload/${i.filsavefile }" alt="photo">
+										</a>
+									</div>
+								</c:if>
 							</c:forEach>
+
 
 						</div>
 					</div>
@@ -97,9 +99,7 @@
 	<div class="setDiv">
 
 		<div class="mask"></div>
-		<div class="window">
-
-		</div>
+		<div class="window"></div>
 
 	</div>
 
@@ -134,6 +134,8 @@
 			'top' : top,
 			'position' : 'absolute'
 		});
+		
+		
 
 		// 레이어 팝업을 띄웁니다.
 		$('.window').show();
@@ -188,8 +190,12 @@
 
 		          }
 		       });
-		      
+		
 		}
+	
+	
+	
+	
 
 </script>
 

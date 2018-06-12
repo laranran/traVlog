@@ -21,7 +21,7 @@
 <jsp:include page="/resources/util/Page/header.jsp" />
 
 <div id="container"><!-- Begin #container -->
-	<div class="content-wrap">
+	<div class="content-wrap-ff">
 		<div class="left">
 		<strong class="title">알 수도 있는 사용자</strong>
 		

@@ -19,6 +19,9 @@ public class Member {
 	private int memfollwing;
 	private int memfollower;
 	
+	//검색용 단어 저장
+	private String search;
+	
 	public int getMemposting() {
 		return memposting;
 	}
@@ -103,5 +106,13 @@ public class Member {
 		return "member=[ " + "memid: " + memid + ", mempw: " + mempassword + ", memnick: " + memnick + ", memsex: "
 				+ memsex + ", memage: " + memage + ", mememail: " + mememail + ", memphone: "
 				+ memphone + " ]";
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 }
