@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import mvc.dao.CommentDao;
 import mvc.dto.Board;
 import mvc.dto.Comment;
+import mvc.dto.Comments;
 
 @Service
 public class CommentService {
@@ -30,6 +31,22 @@ public class CommentService {
 
 	public void updateCommentByComno(Comment comment) {
 		commentDao.updateCommentByComno(comment);
+	}
+
+	public List<Comments> getCommentsList() {
+		return commentDao.getCommentsList();
+	}
+
+	public void insertComments(Comments comments) {
+		commentDao.insertComments(comments);
+	}
+
+	public void deleteCommentsByCosno(Comments comments) {
+		commentDao.deleteCommentsByCosno(comments);
+	}
+
+	public void updateCommentsByCosno(Comments comments) {
+		commentDao.updateCommentsByCosno(comments);
 	}
 	
 }

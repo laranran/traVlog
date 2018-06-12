@@ -68,7 +68,7 @@
                bodno: bodno
              }
              , success: function(data) {
-                alert("ajax성공");
+                alert("추천성공");
                 console.log(data);
 
                 if(data.result) {
@@ -312,7 +312,71 @@
  		}
  	});
  }
-
+//대댓글 파트 시작 ..
+//대댓글 작성 (insert)
+	function writeComments(comno){
+		
+		console.log(comno);
+		console.log($("#comments_"+comno).val());
+		var coscontent = $("#comments_"+comno).val();
+		if(coscontent =="" || coscontent == null){
+			alert("대댓글(답글)을 입력하세요..");
+		}else{
+			$.ajax({
+				type:'get',
+				url:'/traVlog/writeComment.do',
+				data:{"comno":comno, "coscontent":coscontent,"bodno":bodno},
+				dataType:'html',
+				success:function(data){
+					$("#showComment_"+bodno).html(data);
+					console.log("대댓글 입력 성공");
+				},error:function(e){
+					alert("대댓글 입력 오류");
+				}
+			});//ajax끝
+		}
+	}
+	
+	//대댓글 삭제
+	 function cosDelete(cosno){
+	 	console.log("삭제버튼 눌림 cosno: "+cosno+"bodno:"+bodno);
+	 	var commentsDo = 'delete';
+	 	$.ajax({
+	 		type:'get',
+	 		url:'/traVlog/writeComment.do',
+	 		data:{"cosno":cosno,"commentsDo":commentsDo,"bodno":bodno},
+	 		dataType:"html",
+	 		success:function(data){
+	            $("#showComment_"+bodno).html(data);
+	 			console.log("대댓글 삭제 성공");
+	 		},error:function(e){
+	 			 alert("삭제버튼 실패");
+	 		}
+	 	});
+	 }
+ 
+	 function cosUpdate(cosno){
+			console.log("대댓글 수정버튼 눌림");
+			var content = $("#showUpdateCos_"+cosno).val();
+			var commentsDo = 'update';
+			if(content == "" || content==null){
+				alert("내용을 입력하세요..");
+			}else{
+				$.ajax({
+					type:'get',
+					url:'/traVlog/writeComment.do',
+					data:{"cosno":cosno,"coscontent":content,"commentsDo":commentsDo,"bodno":bodno},
+					dataType:"html",
+					success:function(data){
+			 			console.log("대댓글 수정 성공");
+						$("#showComment_"+bodno).html(data);
+					},error:function(e){
+			 			alert("실패");
+					}
+				});
+			}//else 끝
+		 }
+ //대댓글 파트 끝
 </script>
 
 

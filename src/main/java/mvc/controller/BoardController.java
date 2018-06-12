@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mvc.dto.Board;
 import mvc.dto.Comment;
+import mvc.dto.Comments;
 import mvc.dto.Files;
 import mvc.dto.FollowingRec;
 import mvc.dto.HashTag;
@@ -493,19 +494,21 @@ public class BoardController {
 		
 		//댓글 작성AJAX
 		@RequestMapping(value="/traVlog/writeComment.do", method=RequestMethod.GET)
-		public void writeComment(Comment comment,HttpSession session,Model model,String commentDo) {
+		public void writeComment(Comment comment,Comments comments,HttpSession session
+								,Model model,String commentDo,String commentsDo) {
 			logger.info("writeComment.do페이지 get 요청");
 			//댓글 삭제,수정 파트
 			if(commentDo != null && commentDo !="") {
 				logger.info(commentDo);
 				if(commentDo.equals("delete")) {
 					commentService.deleteCommentByComno(comment);
-					logger.info("삭제완료");
+					logger.info("댓글 삭제완료");
 				}else if(commentDo.equals("update")) {
 					commentService.updateCommentByComno(comment);
+					logger.info("댓글 수정완료");
 				}
 			}else {
-				//수정/삭제명령이 없을땐 댓글을 insert해주고 
+				//수정,삭제명령이 없을땐 댓글을 insert해주고 
 				if(comment.getComcontent() != null && comment.getComcontent() !="") {
 					comment.setComwriter((String)session.getAttribute("memnick"));
 					logger.info(comment.toString());
@@ -514,15 +517,36 @@ public class BoardController {
 				}
 			}
 			
+			if(commentsDo != null && commentsDo !="") {
+				logger.info(commentsDo);
+				if(commentsDo.equals("delete")) {
+					commentService.deleteCommentsByCosno(comments);
+					logger.info("대댓글 삭제완료");
+				}else if(commentsDo.equals("update")) {
+					commentService.updateCommentsByCosno(comments);
+					logger.info("대댓글 수정완료");
+				}
+			
+			}else {
+				if(comments.getCoscontent() != null && comments.getCoscontent() !="") {
+					comments.setCoswriter((String)session.getAttribute("memnick"));
+					logger.info(comments.toString());
+					logger.info("대댓글insert");
+					commentService.insertComments(comments);
+				}
+			}
 			//새로 댓글 리스트를 가져와서 넘겨준다. ( 항상 마지막에 실행 )
 			Board commentBoard = new Board();
+			
 			//댓글 가져오기 위해 bodno를 전달
 			commentBoard.setBodno(comment.getBodno());
-			//댓글 리스트 가져오기
+			
+			//댓글,대댓글 리스트 가져오기
 			List<Comment> commentList = commentService.getCommentListByBodno(commentBoard);
-			//대댓글 리스크 가져오기
-//			List<Comments> commentsList = commentService.getCommentsListByBodno(comment)
+			List<Comments> commentsList = commentService.getCommentsList();
+			
 			logger.info("리스트의 첫번째 인덱스값 : "+commentList.get(0).toString());
+			model.addAttribute("commentsList",commentsList);
 			model.addAttribute("commentList",commentList);
 		}
 }
