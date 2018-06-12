@@ -220,6 +220,16 @@ width: 280px;
 	
 }
 
+.Rcontent{
+	margin-top: 20px;
+    font-size: 18px;
+}
 
-
+.tag{
+	color: #3897f0 !important;
+	font-size: 16px;
+}
+.tag:hover{
+	text-decoration: underline;
+}
 
