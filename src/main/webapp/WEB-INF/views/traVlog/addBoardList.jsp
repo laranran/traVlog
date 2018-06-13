@@ -26,7 +26,7 @@
             </c:if>
             </div>
             
-			<c:forEach items="${filesList }" var="files" varStatus="listNumber" >   
+         <c:forEach items="${filesList }" var="files" varStatus="listNumber" >   
             <div class="boardImg">
             <c:if test="${files.filsavefile != null }">
                <c:if test="${board.bodno == files.bodno }">
@@ -58,15 +58,28 @@
             <img id="pin_${board.bodno}" class="pin" width="30px;" src="/resources/images/icon/pin.png">
             </c:if>
             </button>
-            
             </div>
+
             <div class="Bcontent">
             <label>좋아요 <strong id="recommend_${board.bodno }">${board.recommendCnt }</strong> 개</label>
             <p class="Rcontent">${board.bodcontent }</p>
             <c:forTokens items="${board.bodhashtag }" delims="#" var="item">
-    		<a href="" class="tag">#${item}  </a>
-			</c:forTokens>
+          <a href="" class="tag">#${item}  </a>
+         </c:forTokens>
             </div>
+
+         <!-- 댓글 작성 시작 2018.06.09 -->
+            <div class="Bcomment">
+            <label><strong class="commentNick">${sessionScope.memnick }</strong></label>
+             <input type="text" id="comment_${board.bodno }" name="comment" 
+             placeholder="댓글을 입력하세요 ..." style="width:78%" required="required"></input>
+             <a href="javascript:void(0);" id="commentBtn" style="width:13%;" onclick="javacript:writeComment('${board.bodno}')">댓글입력</a> <br>
+             <div class="showComment" id="showComment_${board.bodno }">
+             
+             </div>
+             <a id="showCommentBtn_${board.bodno }" href="javascript:void(0);" onclick="showCommentBtn('${board.bodno}')" >댓글보기</a>
+            </div>
+
          </div>
          </c:forEach>
          <!-- boardList 끝 -->

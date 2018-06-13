@@ -14,39 +14,40 @@
    src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
- var stmnLEFT = 10; // 오른쪽 여백 
- var stmnGAP1 = 0; // 위쪽 여백 
- var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
- var stmnBASE = 10; // 스크롤 시작위치 
- var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
- var stmnScrollSpeed = 1000; //스크롤 속도 (클수록 느림)
- var stmnTimer; 
-   
-   function RefreshStaticMenu() {
-      var stmnStartPoint, stmnEndPoint;
-      stmnStartPoint = parseInt(
-            document.getElementById('STATICMENU').style.top, 10);
-      stmnEndPoint = Math.max(document.documentElement.scrollTop,
-            document.body.scrollTop)
-            + stmnGAP2;
-      if (stmnEndPoint < stmnGAP1)
-         stmnEndPoint = stmnGAP1;
-      if (stmnStartPoint != stmnEndPoint) {
-         stmnScrollAmount = Math.ceil(Math
-               .abs(stmnEndPoint - stmnStartPoint) / 15);
-         document.getElementById('STATICMENU').style.top =
-            parseInt(document.getElementById('STATICMENU').style.top, 10) + ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
-                     : stmnScrollAmount) + 'px';
-         stmnRefreshTimer = stmnScrollSpeed;
-      }
-      stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
-   }
-   function InitializeStaticMenu() {
-      document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
-      document.getElementById('STATICMENU').style.top = document.body.scrollTop
-            + stmnBASE + 'px';
-      RefreshStaticMenu();
-   }
+var bodno;
+var stmnLEFT = 10; // 오른쪽 여백 
+var stmnGAP1 = 0; // 위쪽 여백 
+var stmnGAP2 = 10; // 스크롤시 브라우저 위쪽과 떨어지는 거리 
+var stmnBASE = 10; // 스크롤 시작위치 
+var stmnActivateSpeed = 35; //스크롤을 인식하는 딜레이 (숫자가 클수록 느리게 인식)
+var stmnScrollSpeed = 1000; //스크롤 속도 (클수록 느림)
+var stmnTimer; 
+  
+  function RefreshStaticMenu() {
+     var stmnStartPoint, stmnEndPoint;
+     stmnStartPoint = parseInt(
+           document.getElementById('STATICMENU').style.top, 10);
+     stmnEndPoint = Math.max(document.documentElement.scrollTop,
+           document.body.scrollTop)
+           + stmnGAP2;
+     if (stmnEndPoint < stmnGAP1)
+        stmnEndPoint = stmnGAP1;
+     if (stmnStartPoint != stmnEndPoint) {
+        stmnScrollAmount = Math.ceil(Math
+              .abs(stmnEndPoint - stmnStartPoint) / 15);
+        document.getElementById('STATICMENU').style.top =
+           parseInt(document.getElementById('STATICMENU').style.top, 10) + ((stmnEndPoint < stmnStartPoint) ? -stmnScrollAmount
+                    : stmnScrollAmount) + 'px';
+        stmnRefreshTimer = stmnScrollSpeed;
+     }
+     stmnTimer = setTimeout("RefreshStaticMenu();", stmnActivateSpeed);
+  }
+  function InitializeStaticMenu() {
+     document.getElementById('STATICMENU').style.right = stmnLEFT + 'px'; //처음에 오른쪽에 위치. left로 바꿔도.
+     document.getElementById('STATICMENU').style.top = document.body.scrollTop
+           + stmnBASE + 'px';
+     RefreshStaticMenu();
+  }
 
    function recommend(a){
       var bodno = a;
@@ -108,80 +109,80 @@
        });
    }//function pin(a) 끝
 
-//    boardList 갯수 2개씩 추가하기.. +무한스크롤과 ajax 이용해서
-   var count = ${count};
-   $(document).ready(function () {
+// boardList 갯수 2개씩 추가하기.. +무한스크롤과 ajax 이용해서
+var count = ${count};
+$(document).ready(function () {
+   
+ //header.jsp에 있는 검색버튼
+   $("#searchBtn").click(function(){
+      count =2;
+      var search = $("#search").val();
+      console.log("검색할 태그 :"+search);
       
-    //header.jsp에 있는 검색버튼
-      $("#searchBtn").click(function(){
-         count =2;
-         var search = $("#search").val();
-         console.log("검색할 태그 :"+search);
-         
-         $.ajax({
+      $.ajax({
+           type:'GET',
+           url:'/traVlog/addBoardList.do',
+             dataType:'html',
+             data:{"count":count , "search":search},
+             success : function(data){
+                $("#main").html(data);
+             },error:function(data){
+                alert("실패");
+             }
+         }); // ajax 끝
+   });
+   
+   $(document).scroll(function() {
+       var maxHeight = $(document).height();
+       var currentScroll = $(window).scrollTop() + $(window).height();
+
+       if (maxHeight <= currentScroll+100) {
+          var search = $("#search").val();
+            console.log("search : "+$("#search").val());
+          console.log("스크롤 도달")
+           // Append next contents
+           //검색 기능 중
+           if($("#search").val() != null || $("#search").val() != ""){
+              console.log("search 값 존재");
+               
+              $.ajax({
+                  type:'GET',
+                  url:'/traVlog/addBoardList.do',
+                    dataType:'html',
+                    data:{"count":count , "search":search},
+                    success : function(data){
+                       $("#main").html(data);
+                       count += 2;
+                       console.log(count);
+                    },error:function(data){
+                       alert("실패");
+                    }
+                }); // ajax 끝
+           }
+           else if($("#search").val() == null || $("#search").val() == ""){
+              //일반 페이지 (not 검색)
+            $.ajax({
               type:'GET',
               url:'/traVlog/addBoardList.do',
                 dataType:'html',
-                data:{"count":count , "search":search},
+                data:{"count":count},
                 success : function(data){
                    $("#main").html(data);
+                   count += 2;
+                   console.log(count);
                 },error:function(data){
                    alert("실패");
                 }
-            }); // ajax 끝
-      });
-      
-      $(document).scroll(function() {
-          var maxHeight = $(document).height();
-          var currentScroll = $(window).scrollTop() + $(window).height();
-
-          if (maxHeight <= currentScroll+100) {
-             var search = $("#search").val();
-               console.log("search : "+$("#search").val());
-             console.log("스크롤 도달")
-              // Append next contents
-              //검색 기능 중
-              if($("#search").val() != null || $("#search").val() != ""){
-                 console.log("search 값 존재");
-                  
-                 $.ajax({
-                     type:'GET',
-                     url:'/traVlog/addBoardList.do',
-                       dataType:'html',
-                       data:{"count":count , "search":search},
-                       success : function(data){
-                          $("#main").html(data);
-                          count += 2;
-                          console.log(count);
-                       },error:function(data){
-                          alert("실패");
-                       }
-                   }); // ajax 끝
-              }
-              else if($("#search").val() == null || $("#search").val() == ""){
-                 //일반 페이지 (not 검색)
-               $.ajax({
-                 type:'GET',
-                 url:'/traVlog/addBoardList.do',
-                   dataType:'html',
-                   data:{"count":count},
-                   success : function(data){
-                      $("#main").html(data);
-                      count += 2;
-                      console.log(count);
-                   },error:function(data){
-                      alert("실패");
-                   }
-               });//ajax 끝
-              } //else 끝
-          }//스크롤 바닥찍은거 끝
-        });
-      });
+            });//ajax 끝
+           } //else 끝
+       }//스크롤 바닥찍은거 끝
+     });
+   });
 
    var win= null;
    function claim(mypage,myname,w,h,scroll,bodno){
-	   var claimBodno = bodno;
-	   console.log("claimBodno : "+claimBodno);
+      var claimBodno = bodno;
+      console.log("claimBodno : "+claimBodno);
      var winl = (screen.width-w)/2;
      var wint = (screen.height-h)/2;
      var settings  ='height='+h+',';
@@ -194,28 +195,181 @@
      if(parseInt(navigator.appVersion) >= 4){win.window.focus();}
    }
    
-//    function claim(a){
-// 	      var bodno = a;
-// 	      console.log("bodno : "+bodno);
-// 	      $.ajax({
-// 	          type: "get"
-// 	          , url: "/traVlog/claim.do"
-// 	          , dataType: "json"
-// 	          , data: {
-// 	            bodno: bodno
-// 	          }
-// 	          , success: function(data) {
-// 	             console.log(data);
 
-// // 	             console.log(data.pin);
-// // 	               $("#pin_"+a).html(data.pin);
-	             
-// 	          }
-// 	          , error: function(e) {
-// 	             alert("신고 실패. 다음에 이용해주세요.");
-// 	             console.log(e.responseText);
-// 	          }
-// 	       });
+   function searchTag(a){
+    var search = a;
+    count = 2;
+    console.log("실행 검색어: "+search);
+    
+     $.ajax({
+          type:'GET',
+          url:'/traVlog/addBoardList.do',
+            dataType:'html',
+            data:{"count":count , "search":search},
+            success : function(data){
+               $("#main").html(data);
+            },error:function(data){
+               alert("실패");
+            }
+        }); // ajax 끝
+   }
+   //댓글 작성function
+   function writeComment(bodnumber){
+      console.log(bodnumber);
+      bodno = bodnumber;
+      console.log($("#comment_"+bodno).val());
+      var comContent = $("#comment_"+bodno).val();
+      
+      if(comContent == "" || comContent==null){
+         alert("댓글을 입력하세요..");
+      }
+      else{
+      //댓글 작성 ajax...
+         $.ajax({
+            type:'get',
+            url:'/traVlog/writeComment.do',
+            dataType:'html',
+            data:{"bodno":bodno, "comcontent":comContent},
+            success : function(data){
+                  console.log("성공?");
+                     $("#showComment_"+bodno).html(data);
+                     $("#showCommentBtn_"+bodno).text("댓글안보기");
+                  },error:function(data){
+                     alert("실패");
+                  }
+         });//ajax end
+      }
+   }
+   //댓글 보여주기
+   function showCommentBtn(bodnumber){
+      console.log(bodnumber);
+      bodno = bodnumber;
+      var showStatus = $("#showCommentBtn_"+bodno).text();
+      console.log($("#showCommentBtn_"+bodno).text());
+      if(showStatus == "댓글보기"){
+         $.ajax({
+            type:'get',
+            url:'/traVlog/writeComment.do',
+            dataType:"html",
+            data:{"bodno":bodno},
+            success :function(data){
+               console.log("성공?");
+                  $("#showComment_"+bodno).html(data);
+                  $("#showCommentBtn_"+bodno).text("댓글안보기");
+            },error :function(e){
+               alert("댓글이 없습니다. 댓글을 달아주세요!");
+            }
+         });//ajax 끝
+      }else{//댓글감추기일때
+         $("#showComment_"+bodno).html(" ");      
+         $("#showCommentBtn_"+bodno).text("댓글보기");
+      }
+   }
+ 
+//  댓글 업데이트
+ function comUpdate(comno){
+   console.log("수정버튼 눌림");
+   var content = $("#showUpdateTag_"+comno).val();
+   var commentDo = 'update';
+   if(content == "" || content==null){
+      alert("내용을 입력하세요..");
+   }else{
+      $.ajax({
+         type:'get',
+         url:'/traVlog/writeComment.do',
+         data:{"comno":comno,"comcontent":content,"commentDo":commentDo,"bodno":bodno},
+         dataType:"html",
+         success:function(data){
+             console.log("수정 성공");
+            $("#showComment_"+bodno).html(data);
+         },error:function(e){
+             alert("실패");
+         }
+      });
+   }//else 끝
+ }
+ //댓글 삭제
+ function comDelete(comno){
+    console.log("삭제버튼 눌림 comno: "+comno+"bodno:"+bodno);
+    var commentDo = 'delete';
+    $.ajax({
+       type:'get',
+       url:'/traVlog/writeComment.do',
+       data:{"comno":comno,"commentDo":commentDo,"bodno":bodno},
+       dataType:"html",
+       success:function(data){
+            $("#showComment_"+bodno).html(data);
+          console.log("삭제 성공");
+       },error:function(e){
+           alert("삭제버튼 실패");
+       }
+    });
+ }
+//대댓글 파트 시작 ..
+//대댓글 작성 (insert)
+   function writeComments(comno){
+      
+      console.log(comno);
+      console.log($("#comments_"+comno).val());
+      var coscontent = $("#comments_"+comno).val();
+      if(coscontent =="" || coscontent == null){
+         alert("대댓글(답글)을 입력하세요..");
+      }else{
+         $.ajax({
+            type:'get',
+            url:'/traVlog/writeComment.do',
+            data:{"comno":comno, "coscontent":coscontent,"bodno":bodno},
+            dataType:'html',
+            success:function(data){
+               $("#showComment_"+bodno).html(data);
+               console.log("대댓글 입력 성공");
+            },error:function(e){
+               alert("대댓글 입력 오류");
+            }
+         });//ajax끝
+      }
+   }
+   
+   //대댓글 삭제
+    function cosDelete(cosno){
+       console.log("삭제버튼 눌림 cosno: "+cosno+"bodno:"+bodno);
+       var commentsDo = 'delete';
+       $.ajax({
+          type:'get',
+          url:'/traVlog/writeComment.do',
+          data:{"cosno":cosno,"commentsDo":commentsDo,"bodno":bodno},
+          dataType:"html",
+          success:function(data){
+               $("#showComment_"+bodno).html(data);
+             console.log("대댓글 삭제 성공");
+          },error:function(e){
+              alert("삭제버튼 실패");
+          }
+       });
+    }
+ 
+    function cosUpdate(cosno){
+         console.log("대댓글 수정버튼 눌림");
+         var content = $("#showUpdateCos_"+cosno).val();
+         var commentsDo = 'update';
+         if(content == "" || content==null){
+            alert("내용을 입력하세요..");
+         }else{
+            $.ajax({
+               type:'get',
+               url:'/traVlog/writeComment.do',
+               data:{"cosno":cosno,"coscontent":content,"commentsDo":commentsDo,"bodno":bodno},
+               dataType:"html",
+               success:function(data){
+                   console.log("대댓글 수정 성공");
+                  $("#showComment_"+bodno).html(data);
+               },error:function(e){
+                   alert("실패");
+               }
+            });
+         }//else 끝
+       }
+ //대댓글 파트 끝
 </script>
 
 
@@ -291,8 +445,22 @@
             <p class="Rcontent">${board.bodcontent }</p>
             
             <c:forTokens items="${board.bodhashtag }" delims="#" var="item">
-    		<a href="javascript:void(0);" onclick="javascript:" class="tag">#${item}</a>
-			</c:forTokens>
+          <a href="javascript:void(0);" onclick="javascript:" class="tag">#${item}</a>
+         </c:forTokens>
+
+         <!-- 댓글 작성 시작 2018.06.09 -->
+            <div class="Bcomment">
+            <label><strong class="commentNick">${sessionScope.memnick }</strong></label>
+             <input type="text" id="comment_${board.bodno }" name="comment" 
+             placeholder="댓글을 입력하세요 ..." style="width:78%" required="required"></input>
+             <a href="javascript:void(0);" id="commentBtn" style="width:13%;" onclick="javacript:writeComment('${board.bodno}')">댓글입력</a> <br>
+             <div class="showComment" id="showComment_${board.bodno }">
+             
+             </div>
+             <a id="showCommentBtn_${board.bodno }" href="javascript:void(0);" onclick="showCommentBtn('${board.bodno}')" >댓글보기</a>
+            </div>
+
+
 
 
             </div>

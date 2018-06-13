@@ -1,9 +1,9 @@
 package mvc.controller;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,19 +23,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import mvc.dto.FollowingRec;
-import mvc.dto.Member;
-import mvc.service.MainService;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import mvc.dto.Board;
 import mvc.dto.Claim;
+import mvc.dto.Comment;
+import mvc.dto.Comments;
 import mvc.dto.Files;
+import mvc.dto.FollowingRec;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
 import mvc.service.BoardService;
+import mvc.service.CommentService;
+import mvc.service.MainService;
 import mvc.service.MemberService;
 import spring.board.email.Email;
 import spring.board.email.EmailSender;
@@ -43,6 +45,8 @@ import spring.board.email.EmailSender;
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+	@Autowired
+	CommentService commentService;
 	@Autowired
 	MainService mainService;
 	@Autowired
@@ -112,6 +116,8 @@ public class BoardController {
 		//인기 사용자
 		ArrayList<Member> memList = mainService.topMember();
 		
+		//파일리스트 가져오기
+		
 		//board List가져오기 .. 친구와 내 게시글을 포함하여 가장 최신것부터 위로..
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
@@ -131,10 +137,12 @@ public class BoardController {
 			boardMember.setSearch(member.getSearch());
 			List<Board> boardList = boardService.getBoardListBySearch(boardMember);
 			model.addAttribute("boardList",boardList);
+
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("filesList",filesList);
 			System.out.println(boardList.get(0).toString());
 		}
+
 
 		//일단 3개만 출력하기 위해 count도 보냄
 		int count = 2;
@@ -159,10 +167,12 @@ public class BoardController {
 			boardMember.setSearch(search);
 			boardMember.setMemid((String)session.getAttribute("memid"));
 			boardMember.setMemnick((String)session.getAttribute("memnick"));
+
 			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
+
 		}else {
 			//검색 값이 없을 떄
 			count = count+2;
@@ -170,9 +180,11 @@ public class BoardController {
 			boardMember.setMemid((String)session.getAttribute("memid"));
 			boardMember.setMemnick((String)session.getAttribute("memnick"));
 			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
+
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
+
 		}
 		
 		model.addAttribute("count",count);
@@ -523,6 +535,65 @@ public class BoardController {
 			mav.addObject("msg", "신고 처리가 완료 되었습니다.");
 	        mav.addObject("action", "window.close()");
 			return mav;
+		}
+
+		//댓글 작성AJAX
+		@RequestMapping(value="/traVlog/writeComment.do", method=RequestMethod.GET)
+		public void writeComment(Comment comment,Comments comments,HttpSession session
+								,Model model,String commentDo,String commentsDo) {
+			logger.info("writeComment.do페이지 get 요청");
+			//댓글 삭제,수정 파트
+			if(commentDo != null && commentDo !="") {
+				logger.info(commentDo);
+				if(commentDo.equals("delete")) {
+					commentService.deleteCommentByComno(comment);
+					logger.info("댓글 삭제완료");
+				}else if(commentDo.equals("update")) {
+					commentService.updateCommentByComno(comment);
+					logger.info("댓글 수정완료");
+				}
+			}else {
+				//수정,삭제명령이 없을땐 댓글을 insert해주고 
+				if(comment.getComcontent() != null && comment.getComcontent() !="") {
+					comment.setComwriter((String)session.getAttribute("memnick"));
+					logger.info(comment.toString());
+					logger.info("댓글insert");
+					commentService.insertComment(comment);
+				}
+			}
+			
+			if(commentsDo != null && commentsDo !="") {
+				logger.info(commentsDo);
+				if(commentsDo.equals("delete")) {
+					commentService.deleteCommentsByCosno(comments);
+					logger.info("대댓글 삭제완료");
+				}else if(commentsDo.equals("update")) {
+					commentService.updateCommentsByCosno(comments);
+					logger.info("대댓글 수정완료");
+				}
+			
+			}else {
+				if(comments.getCoscontent() != null && comments.getCoscontent() !="") {
+					comments.setCoswriter((String)session.getAttribute("memnick"));
+					logger.info(comments.toString());
+					logger.info("대댓글insert");
+					commentService.insertComments(comments);
+				}
+			}
+			//새로 댓글 리스트를 가져와서 넘겨준다. ( 항상 마지막에 실행 )
+			Board commentBoard = new Board();
+			
+			//댓글 가져오기 위해 bodno를 전달
+			commentBoard.setBodno(comment.getBodno());
+			
+			//댓글,대댓글 리스트 가져오기
+			List<Comment> commentList = commentService.getCommentListByBodno(commentBoard);
+			List<Comments> commentsList = commentService.getCommentsList();
+			
+			logger.info("리스트의 첫번째 인덱스값 : "+commentList.get(0).toString());
+			model.addAttribute("commentsList",commentsList);
+			model.addAttribute("commentList",commentList);
+
 		}
 }
 
