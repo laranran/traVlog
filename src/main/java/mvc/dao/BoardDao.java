@@ -8,6 +8,7 @@ import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
 import mvc.dto.Member;
+import mvc.dto.Profile;
 
 public interface BoardDao {
 
@@ -65,5 +66,7 @@ public interface BoardDao {
 	public void insertClaim(Claim claim);
 
 	public List<Files> getFiles(Member boardMember);
+
+	public List<Profile> getProfileList(Member boardMember);
 
 }

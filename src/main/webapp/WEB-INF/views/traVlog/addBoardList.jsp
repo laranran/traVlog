@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <!-- BoardList 시작 -->
 <div>
@@ -10,7 +11,15 @@
          <div class="board">
             <input type="hidden" id="bodno_${board.bodno }" name="bodno" value="${board.bodno }">
             <div class="memInfo"> 
-            <img class="userimg" src="/resources/images/icon/user.png">
+            <!--      정민   06.13 게시글별 프로필 이미지 넣기 완료 -->
+	         <c:forEach items="${profileList}" var="Bprofile">
+	         <c:if test="${Bprofile.pfSavefile != null }">
+	         <img class="userimg" src="/resources/upload/${Bprofile.pfSavefile }">
+	         </c:if>
+	         <c:if test="${Bprofile.pfSavefile == null }">
+	         <img class="userimg" src="/resources/upload/icon/user.png">
+	         </c:if>
+	         </c:forEach>
             <strong class="nick">${board.bodname }</strong>
             <a href="/traVlog/claim.do?bodno=${board.bodno }" id="claim_${board.bodno }"  onclick="claim(this.href,'name','600','400','yes',${board.bodno});return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a> 
             </div>
@@ -26,15 +35,22 @@
             </c:if>
             </div>
             
-			<c:forEach items="${filesList }" var="files" varStatus="listNumber" >   
+<!--             06.14 정민 이미지, 동영상 처리 -->
+         <c:forEach items="${filesList }" var="files" varStatus="listNumber" >   
             <div class="boardImg">
             <c:if test="${files.filsavefile != null }">
                <c:if test="${board.bodno == files.bodno }">
-                <img class="contentImg"  src="/resources/upload/${files.filsavefile }">
+               <c:set var="filetype" value="${files.filtype }" />
+               <c:if test="${fn:contains(filetype, 'image')}">
+                <img id="img_${files.filsavefile }" class="contentImg"  src="/resources/upload/${files.filsavefile }">
+               </c:if>
+               <c:if test="${fn:contains(filetype, 'video')}">
+                <video id="video_${files.filsavefile }" class="contentImg"  src="/resources/upload/${files.filsavefile }" controls></video>
+               </c:if>
                </c:if>
              </c:if>
             </div>
-            </c:forEach>
+         </c:forEach>
             
             <div class="icon">
             <!-- 좋아요 기능  -->

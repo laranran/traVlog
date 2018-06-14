@@ -23,16 +23,19 @@
 	</insert>
 	
 	<select id="findId" parameterType="java.util.Map" resultType="String">
-		SELECT memid from TB_MEMBER where memname=#{idmemname} AND mememail=#{idmememail}
+		SELECT memid FROM TB_MEMBER where memname=#{idmemname} AND mememail=#{idmememail}
 	</select>
 	
 	<select id="findPw" parameterType="HashMap" resultType="String">
-		SELECT mempassword from TB_MEMBER where memname=#{pwmemname} AND memid=#{pwmemid} AND mememail=#{pwmememail}
+		SELECT mempassword FROM TB_MEMBER where memname=#{pwmemname} AND memid=#{pwmemid} AND mememail=#{pwmememail}
 	</select>
 	
 	<select id="MemberInfo" parameterType="String" resultType="mvc.dto.Member">
-		Select memid, memnick From tb_member where memid =#{memid}
+		SELECT memid, memnick FROM tb_member where memid =#{memid}
 	</select>
 	
+	<select id="getProfile" parameterType="String" resultType="mvc.dto.Profile">
+		SELECT * FROM tb_profile WHERE memid=#{memid}
+	</select>
 	
 </mapper>

@@ -13,6 +13,7 @@ public class Files {
 	private String filsavefile;
 	private long filsize;
 	private Date fildate;
+	private String filtype;
 	
 	public int getBodno() {
 		return bodno;
@@ -53,4 +54,13 @@ public class Files {
 	public void setFildate(Date fildate) {
 		this.fildate = fildate;
 	}
+
+	public String getFiltype() {
+		return filtype;
+	}
+
+	public void setFiltype(String filtype) {
+		this.filtype = filtype;
+	}
+
 }

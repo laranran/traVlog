@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -194,28 +195,6 @@
      if(parseInt(navigator.appVersion) >= 4){win.window.focus();}
    }
    
-//    function claim(a){
-// 	      var bodno = a;
-// 	      console.log("bodno : "+bodno);
-// 	      $.ajax({
-// 	          type: "get"
-// 	          , url: "/traVlog/claim.do"
-// 	          , dataType: "json"
-// 	          , data: {
-// 	            bodno: bodno
-// 	          }
-// 	          , success: function(data) {
-// 	             console.log(data);
-
-// // 	             console.log(data.pin);
-// // 	               $("#pin_"+a).html(data.pin);
-	             
-// 	          }
-// 	          , error: function(e) {
-// 	             alert("신고 실패. 다음에 이용해주세요.");
-// 	             console.log(e.responseText);
-// 	          }
-// 	       });
 </script>
 
 
@@ -234,11 +213,18 @@
          <c:forEach items="${boardList }" var="board" varStatus="listNumber" begin="0" end="2">
          <div class="board">
             <div class="memInfo">
-            <img class="userimg" src="/resources/images/icon/user.png">
+            <!--      정민   06.13 게시글별 프로필 이미지 넣기 완료 -->
+	         <c:forEach items="${profileList}" var="Bprofile">
+	         <c:if test="${Bprofile.pfSavefile != null }">
+	         <img class="userimg" src="/resources/upload/${Bprofile.pfSavefile }">
+	         </c:if>
+	         <c:if test="${Bprofile.pfSavefile == null }">
+	         <img class="userimg" src="/resources/upload/icon/user.png">
+	         </c:if>
+	         </c:forEach>
             <strong class="nick">${board.bodname }</strong>
             <a href="/traVlog/claim.do?bodno=${board.bodno }" id="claim_${board.bodno }"  onclick="claim(this.href,'name','600','400','yes',${board.bodno});return false"><img class="claim" alt="신고하기" src="/resources/images/icon/claim.png" ></a>
             </div>
-            
             
             <div class="boardInfo">
             <strong class="title">${board.bodtitle }</strong>
@@ -250,16 +236,23 @@
                ${board.enddate }</span>
             </c:if>
             </div>
-            
+<!--             06.14 정민 이미지, 동영상 처리 -->
          <c:forEach items="${filesList }" var="files" varStatus="listNumber" >   
             <div class="boardImg">
             <c:if test="${files.filsavefile != null }">
                <c:if test="${board.bodno == files.bodno }">
+               <c:set var="filetype" value="${files.filtype }" />
+               
+               <c:if test="${fn:contains(filetype, 'image')}">
                 <img id="img_${files.filsavefile }" class="contentImg"  src="/resources/upload/${files.filsavefile }">
+               </c:if>
+               <c:if test="${fn:contains(filetype, 'video')}">
+                <video id="video_${files.filsavefile }" class="contentImg"  src="/resources/upload/${files.filsavefile }" controls></video>
+               </c:if>
                </c:if>
              </c:if>
             </div>
-            </c:forEach>
+         </c:forEach>
             
 <div class="icon">
             <!-- 좋아요 기능  -->
@@ -306,8 +299,17 @@
       <div class="right" id="STATICMENU">
 
          <div class="user">
+<!--      정민   06.13 프로필 이미지 넣기 완료 -->
+         <c:forEach items="${profile}" var="profile">
+         <c:if test="${profile.pfSavefile != null }">
+         <img class="userimg" src="/resources/upload/${profile.pfSavefile }">
+         </c:if>
+         <c:if test="${profile.pfSavefile == null }">
+         <img class="userimg" src="/resources/upload/icon/user.png">
+         </c:if>
+         </c:forEach>
+         
          <c:forEach items="${memberInfo}" var="member">
-         <img class="userimg" src="/resources/images/icon/user.png">
          <span class="nick">${member.memnick}</span><br>
          <span class="id">${member.memid}</span>
          </c:forEach>

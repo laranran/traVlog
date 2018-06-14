@@ -1,9 +1,11 @@
 package mvc.controller;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,19 +25,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import mvc.dto.FollowingRec;
-import mvc.dto.Member;
-import mvc.service.MainService;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import mvc.dto.Board;
 import mvc.dto.Claim;
 import mvc.dto.Files;
+import mvc.dto.FollowingRec;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
+import mvc.dto.Member;
+import mvc.dto.Profile;
 import mvc.service.BoardService;
+import mvc.service.MainService;
 import mvc.service.MemberService;
 import spring.board.email.Email;
 import spring.board.email.EmailSender;
@@ -90,7 +92,7 @@ public class BoardController {
 	}
 	
 	//logout
-//	@RequestMapping(value = "/traVlog/login.do", method = RequestMethod.GET)
+//	@RequestMapping(value = "/traVlog/logout.do", method = RequestMethod.GET)
 //	public String logout(Member member, HttpSession session) {
 //		session.invalidate();
 //		return "traVlog/login";
@@ -105,6 +107,7 @@ public class BoardController {
 		
 		//사용자 정보 가져오기
 		ArrayList<Member> memberInfo = memberService.MemberInfo(memid);
+		ArrayList<Profile> profile = memberService.getProfile(memid);
 		
 		//인기 해시태그
 		ArrayList<HashTag> tagList = mainService.topHash();
@@ -116,15 +119,22 @@ public class BoardController {
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
+		
+		
 		if(member.getSearch() == null || member.getSearch() =="") {
 			//검색어가 없을때
 			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
 			List<Files> filesList = boardService.getFiles(boardMember);
+			List<Profile> profileList = boardService.getProfileList(boardMember);
 			
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
+			model.addAttribute("profileList",profileList);
+			
+			logger.info("대체 여기엔 뭐가들어있는데?"+boardMember.getMemid());
 			logger.info("여기 안돌아가냐?");
 			System.out.println("왜 안나와?"+boardList.get(0).toString());
+			System.out.println("프로필 사진 정보가 들어있나요?"+profileList.get(0).toString());
 			
 		}else if(member.getSearch() != null || member.getSearch() != "") {
 			//검색어가 있을때..
@@ -133,6 +143,9 @@ public class BoardController {
 			model.addAttribute("boardList",boardList);
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("filesList",filesList);
+			//06.13 게시글 프로필 사진 추가
+			List<Profile> profileList = boardService.getProfileList(boardMember);
+			model.addAttribute("profileList",profileList);
 			System.out.println(boardList.get(0).toString());
 		}
 
@@ -144,10 +157,13 @@ public class BoardController {
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberList", memList);
+		model.addAttribute("profile", profile);
 		
 		return "traVlog/main";
 	}
 
+	
+	
 	// 메인페이지 무한스크롤시 AJax 작동메서드
 	@RequestMapping(value = "/traVlog/addBoardList.do", method = RequestMethod.GET)
 	public void addBoard(int count, String search, HttpSession session, Model model) {
@@ -163,6 +179,9 @@ public class BoardController {
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
+			//06.13 게시글 프로필 사진 추가
+			List<Profile> profileList = boardService.getProfileList(boardMember);
+			model.addAttribute("profileList",profileList);
 		}else {
 			//검색 값이 없을 떄
 			count = count+2;
@@ -173,6 +192,9 @@ public class BoardController {
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
+			//06.13 게시글 프로필 사진 추가
+			List<Profile> profileList = boardService.getProfileList(boardMember);
+			model.addAttribute("profileList",profileList);
 		}
 		
 		model.addAttribute("count",count);
@@ -279,6 +301,7 @@ public class BoardController {
 				
 			for(int i=0; i<list.size(); i++) {
 				System.out.println(list.get(i).getOriginalFilename());
+				System.out.println("이건가?"+list.get(i).getContentType());
 			}
 			String uID = UUID.randomUUID().toString().split("-")[0];
 			//파일 경로 가져오기
@@ -287,6 +310,7 @@ public class BoardController {
 			for(int i=0; i<list.size(); i++) {
 			//파일이 저장될 이름
 			String stored = uID+"_"+list.get(i).getOriginalFilename();
+			String fileType = list.get(i).getContentType();
 			
 			File dest = new File(realpath,stored);
 			logger.info(dest.getPath());
@@ -303,6 +327,8 @@ public class BoardController {
 				files.setFiloriginfile(list.get(i).getOriginalFilename());
 				files.setFilsavefile(stored);
 				files.setFilsize(list.get(i).getSize());
+				//파일 타입 추가
+				files.setFiltype(fileType);
 				
 				//글번호 가져오기
 				files.setBodno(boardService.getBoardNo(board));
