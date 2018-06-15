@@ -12,6 +12,7 @@ import mvc.dto.Files;
 import mvc.dto.HashTag;
 import mvc.dto.LatLng;
 import mvc.dto.Member;
+import mvc.dto.Profile;
 
 @Service
 public class BoardService {
@@ -121,6 +122,10 @@ public class BoardService {
 
 	public List<Files> getFiles(Member boardMember) {
 		return boardDao.getFiles(boardMember);
+	}
+	//게시글 프로필 정보
+	public List<Profile> getProfileList(Member boardMember) {
+		return boardDao.getProfileList(boardMember);
 	}
 	
 }

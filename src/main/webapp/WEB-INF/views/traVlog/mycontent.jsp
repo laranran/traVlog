@@ -21,9 +21,10 @@
 
 	<div class="contents">
 	
-	                   <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">더보기
-    <span class="caret"></span></button>
+	<div class="dropdown">
+    <button class="morebutton dropdown-toggle" id="menu1" type="button" data-toggle="dropdown">
+    <img class="more" width="30px;" src="/resources/images/icon/more.png">
+    </button>
     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
       <li role="presentation"><a role="menuitem" tabindex="-1" href="traVlog/update.do">수정</a></li>
       <li role="presentation"><a role="menuitem" tabindex="-1" href="#">삭제</a></li>

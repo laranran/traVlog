@@ -3,6 +3,8 @@ package mvc.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,7 @@ import mvc.dto.LatLng;
 import mvc.dto.Member;
 import mvc.service.BoardService;
 import mvc.service.CommentService;
+import mvc.dto.Profile;
 import mvc.service.MainService;
 import mvc.service.MemberService;
 import spring.board.email.Email;
@@ -94,7 +97,7 @@ public class BoardController {
 	}
 	
 	//logout
-//	@RequestMapping(value = "/traVlog/login.do", method = RequestMethod.GET)
+//	@RequestMapping(value = "/traVlog/logout.do", method = RequestMethod.GET)
 //	public String logout(Member member, HttpSession session) {
 //		session.invalidate();
 //		return "traVlog/login";
@@ -109,6 +112,7 @@ public class BoardController {
 		
 		//사용자 정보 가져오기
 		ArrayList<Member> memberInfo = memberService.MemberInfo(memid);
+		ArrayList<Profile> profile = memberService.getProfile(memid);
 		
 		//인기 해시태그
 		ArrayList<HashTag> tagList = mainService.topHash();
@@ -122,15 +126,22 @@ public class BoardController {
 		Member boardMember = new Member();
 		boardMember.setMemid((String)session.getAttribute("memid"));
 		boardMember.setMemnick((String)session.getAttribute("memnick"));
+		
+		
 		if(member.getSearch() == null || member.getSearch() =="") {
 			//검색어가 없을때
 			List<Board> boardList = boardService.getBoardListByFollow(boardMember);
 			List<Files> filesList = boardService.getFiles(boardMember);
+			List<Profile> profileList = boardService.getProfileList(boardMember);
 			
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
+			model.addAttribute("profileList",profileList);
+			
+			logger.info("대체 여기엔 뭐가들어있는데?"+boardMember.getMemid());
 			logger.info("여기 안돌아가냐?");
-			System.out.println("왜 안나와?"+boardList.get(0).toString());
+//			System.out.println("왜 안나와?"+boardList.get(0).toString());
+//			System.out.println("프로필 사진 정보가 들어있나요?"+profileList.get(0).toString());
 			
 		}else if(member.getSearch() != null || member.getSearch() != "") {
 			//검색어가 있을때..
@@ -140,6 +151,9 @@ public class BoardController {
 
 			List<Files> filesList = boardService.getFiles(boardMember);
 			model.addAttribute("filesList",filesList);
+			//06.13 게시글 프로필 사진 추가
+			List<Profile> profileList = boardService.getProfileList(boardMember);
+			model.addAttribute("profileList",profileList);
 			System.out.println(boardList.get(0).toString());
 		}
 
@@ -152,10 +166,13 @@ public class BoardController {
 		model.addAttribute("memberInfo", memberInfo);
 		model.addAttribute("tagList", tagList);
 		model.addAttribute("memberList", memList);
+		model.addAttribute("profile", profile);
 		
 		return "traVlog/main";
 	}
 
+	
+	
 	// 메인페이지 무한스크롤시 AJax 작동메서드
 	@RequestMapping(value = "/traVlog/addBoardList.do", method = RequestMethod.GET)
 	public void addBoard(int count, String search, HttpSession session, Model model) {
@@ -173,7 +190,7 @@ public class BoardController {
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
 
-		}else {
+		    }else {
 			//검색 값이 없을 떄
 			count = count+2;
 			Member boardMember = new Member();
@@ -185,6 +202,9 @@ public class BoardController {
 			model.addAttribute("boardList",boardList);
 			model.addAttribute("filesList",filesList);
 
+			//06.13 게시글 프로필 사진 추가
+			List<Profile> profileList = boardService.getProfileList(boardMember);
+			model.addAttribute("profileList",profileList);
 		}
 		
 		model.addAttribute("count",count);
@@ -286,6 +306,7 @@ public class BoardController {
 				
 			for(int i=0; i<list.size(); i++) {
 				System.out.println(list.get(i).getOriginalFilename());
+				System.out.println("이건가?"+list.get(i).getContentType());
 			}
 			String uID = UUID.randomUUID().toString().split("-")[0];
 			//파일 경로 가져오기
@@ -294,6 +315,7 @@ public class BoardController {
 			for(int i=0; i<list.size(); i++) {
 			//파일이 저장될 이름
 			String stored = uID+"_"+list.get(i).getOriginalFilename();
+			String fileType = list.get(i).getContentType();
 			
 			File dest = new File(realpath,stored);
 			logger.info(dest.getPath());
@@ -311,6 +333,10 @@ public class BoardController {
 				files.setFilsavefile(stored);
 				files.setFilsize(list.get(i).getSize());
 				files.setFilidx(i);
+
+				//파일 타입 추가
+				files.setFiltype(fileType);
+				
 				//글번호 가져오기
 				files.setBodno(boardService.getBoardNo(board));
 				//파일 집어넣기

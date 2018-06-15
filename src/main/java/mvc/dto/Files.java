@@ -14,7 +14,7 @@ public class Files {
 	private long filsize;
 	private Date fildate;
 	private int filidx;
-	
+	private String filtype;
 	public int getFilidx() {
 		return filidx;
 	}
@@ -62,4 +62,13 @@ public class Files {
 	public void setFildate(Date fildate) {
 		this.fildate = fildate;
 	}
+
+	public String getFiltype() {
+		return filtype;
+	}
+
+	public void setFiltype(String filtype) {
+		this.filtype = filtype;
+	}
+
 }

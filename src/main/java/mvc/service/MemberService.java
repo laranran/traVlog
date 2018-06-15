@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import mvc.dao.MemberDao;
 import mvc.dto.Member;
+import mvc.dto.Profile;
 
 @Service
 public class MemberService {
@@ -44,6 +45,10 @@ public class MemberService {
 
 	public ArrayList<Member> MemberInfo(String memid) {
 		return memberDao.MemberInfo(memid);
+	}
+
+	public ArrayList<Profile> getProfile(String memid) {
+		return memberDao.getProfile(memid);
 	}
 
 }
