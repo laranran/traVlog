@@ -9,17 +9,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>TraVlog Mypage</title>
 
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	
 <link href="/resources/css/main.css" rel="stylesheet">
 <link href="/resources/css/mypage.css" rel="stylesheet">
 <link href="/resources/css/mylist.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://staticassets-a.styleshare.kr/1ea27d2f8b/css/web.scss.css" />
+
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 
 </head>
 
@@ -63,6 +67,7 @@
 							<a href="settingprofile.do"><img class="settingimg"
 								src="/resources/images/icon/setting.png"></a><br>
 						</div>
+	
 					</div>
 				</div>
 
@@ -96,7 +101,7 @@
 	</div>
 	<!-- // End #wrap -->
 
-	<div class="setDiv">
+	<div class="setLayer">
 
 		<div class="mask"></div>
 		<div class="window"></div>
