@@ -100,9 +100,10 @@ text-aling:center;}
 	<thead>
 		<tr>
 		    <th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
-			<th><input type="checkbox" name="checkRow" value="번호"/></th>
-			<th>사용자 아이디</th>
-			<th>받은 날짜 </th>
+			<th>번호</th>
+			<th>받은 사람</th>
+			<th>보낸 내용 </th>
+			<th>보낸 날짜 </th>
 			
 		</tr>
 		
@@ -112,7 +113,11 @@ text-aling:center;}
 			<tr>
 			    <td class="center"><input type="checkbox" name="checkRow" value="${content.IDX}" /></td>
 				<td>${d.m_no }</td>
-				<td><a href="/traVlog/messageDetail.do?memid=${d.memid }">${d.memid }</a> </td>
+				 <td><a href="/traVlog/messageDetail.do?memid=${d.memid }">${d.memid }</a> </td> 
+				
+				<%-- <td>${d.memid }</td> --%>
+				
+				<td>${d.mescontent }</td>
 				<td> ${d.mesdate }</td>
 				
 				

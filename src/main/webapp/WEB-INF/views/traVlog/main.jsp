@@ -576,7 +576,7 @@ $(document).ready(function () {
 							<c:forEach items="${memberList}" var="mem">
 								<tbody>
 									<tr>
-										<td class="memnick"><a href="#" class="memA">${mem.memnick}</a></td>
+										<td class="memnick"><a href="mypage.do?memnick=${mem.memnick }" class="memA">${mem.memnick}</a></td>
 										<td class="memfollower">${mem.memfollower}</td>
 									</tr>
 								</tbody>

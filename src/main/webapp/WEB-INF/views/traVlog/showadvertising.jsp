@@ -98,13 +98,14 @@ label {
         
         <th>광고 시작일</th>
        
-         <th>광고 제목</th>
+        
          
-         <th>승인 처리 과정</th>
+         <th>광고 제목 </th>
        
-         <th>광고 가격</th>
+         <th>상태 </th>
         
          <th>광고 이미지</th>
+         <th>결제하기</th>
           </tr>
    
     </thead>
@@ -115,19 +116,43 @@ label {
        <c:forEach items="${a_list }" var="a">
 							
 				 <tr>					
+				
+										
 										<td>${a.advid }</td>
 									     <td>${a.advstart}</td>
-										<td>${a.advname }</td>
+										
 										<td>${a.advtitle }</td>
-										<td>${a.advapprove }</td>
+										<td>
+										<c:choose>
+											<c:when test="${a.advapprove  eq 0}">
+											<pre>관리자 승인대기</pre>
+											</c:when>
+											<c:when test="${a.advapprove  eq 1}">
+											<pre>관리자 승인</pre>
+											</c:when>
+											<c:when test="${a.advapprove  eq 2}">
+											<pre>관리자 거절</pre>
+											</c:when>
+										</c:choose>
+										</td>
 										<td>${a.advfile }</td>
-											
-          							 <tr>		
+										
+											<c:if test="${a.advapprove eq 1}">
+											<td><a href="payment.do?advno=${a.advno }">
+											<img class="messageimg"
+								src="/resources/images/icon/message.png"></a></td>
+          							 </c:if>
+          						
+          							 
+          				
+          						
+          							 <tr>	
        
     
         
 
      </c:forEach>
+     
     </tbody>
   </table>
 </div>				

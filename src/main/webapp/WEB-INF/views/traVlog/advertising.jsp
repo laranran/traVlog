@@ -56,14 +56,18 @@ input[type=text], select, textarea {
 	margin-top: 6px;
 	margin-bottom: 16px;
 	resize: vertical;
+
 }
 input[type=submit] {
+
 	background-color: #E89DA2;
 	color: white;
 	padding: 12px 20px;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	margin-left:90px;
+	width:40%;
 
 }
 .form-group {
@@ -74,6 +78,16 @@ label {
 }
 .container {
 	margin: 100px ;
+}
+input[type=button] {
+margin-left: 30px;
+	background-color: #E89DA2;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	width:40%;
 }
 
 </style>
@@ -96,7 +110,8 @@ label {
 					<div class="form-group">
 						<input type="hidden" name="advid" value="${sessionScope.memid }" />
 
-						<label for="advname">광고 신청자 </label> <input type="text"
+						<label for="advname">광고 신청자 </label> 
+						<input type="text"
 							id="advname" name="advname" placeholder="이름을 입력해주세요"> <label
 							for="advstart">광고 시작일 </label> <input type="text" id="datepicker"
 							name="advstart"> <label for="advtitle">광고 제목 </label> <input
@@ -113,9 +128,9 @@ label {
 						placeholder="아이디를 입력해주세요">  -->
 						<label for="advprice">가격을 선택하세요</label> <select id="advprice"
 							name="advprice">
-							<option value="1">1개월 = 50,000원</option>
-							<option value="2">2개월 = 90,000원</option>
-							<option value="3">3개월 = 130,000원</option>
+							<option value="50000">1개월 = 50,000원</option>
+							<option value="90000">2개월 = 90,000원</option>
+							<option value="130000">3개월 = 130,000원</option>
 						</select> <label for="advcontent"></label>
 						<textarea id="advcontent" name="advcontent"
 							placeholder="요구사항을 써주세요 " style="height: 200px"></textarea>
@@ -131,10 +146,10 @@ label {
 						<h4>* 관리자 승인 후 개별 연락 드립니다</h4>
 					</div>
 					<input type="submit" value="보내기">
+					
+						 <input type="button" value="광고 내역보기 " onClick="location.href='/traVlog/showadvertising.do'">
 				</form>
-			</div>
-		</div>
-	</div>
+
 
 
 

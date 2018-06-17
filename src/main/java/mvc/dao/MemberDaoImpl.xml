@@ -51,8 +51,18 @@
 	</insert>
 	
 	<select id="showadvertising"  parameterType="mvc.dto.Advertising" resultType="mvc.dto.Advertising" >
-		SELECT advid, advstart, advname, advtitle, advfile, advapprove FROM TB_ADVERTISING 
+		SELECT advno,advid, advstart, advname, advtitle, advfile, advapprove FROM TB_ADVERTISING where advid=#{advid}
 	</select>
+	
+	<select id="getAdvertisingByAd"  parameterType="mvc.dto.Advertising" resultType="mvc.dto.Advertising" >
+		SELECT * FROM TB_ADVERTISING where advid=#{advid} and advno = #{advno}
+	</select>
+	
+	<select id="getMemberByMemId" parameterType="mvc.dto.Member" resultType="mvc.dto.Member">
+	SELECT MEMID,MEMNICK,MEMEMAIL,MEMPHONE FROM TB_MEMBER WHERE MEMID=#{memid}
+	</select>
+	
+	
 	
 	<insert id="qnapage2" parameterType="mvc.dto.Question">
 	INSERT INTO TB_QUESTION(qusno, memid,qustitle, qusname, quscontent, qusdate) values(UP_qusNo.nextval,#{memid},#{qustitle}, #{qusname},#{quscontent},sysdate)

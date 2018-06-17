@@ -124,48 +124,50 @@ public class MypageController {
 		model.addAttribute("m_list", m_list);
 		return "traVlog/messageDetail";
 	}
-	
-	//메세지 보내기
-	@RequestMapping(value="/traVlog/sendmessage.do")
-	public String sendingmessage(Message message,HttpSession session,Member member) {
-		System.out.println("www : "+message);
-		message.setMemid("memid");
-		System.out.println("변한 객체 :"+message);
-		memberService.sendingmessage(message);
-		
-		return "redirect:/traVlog/otherpage.do";
-
-	}
+//	
 //	//메세지 보내기
-//		@RequestMapping(value="/traVlog/sendmessage2.do",method=RequestMethod.POST)
-//		public String sendmessage2(Message message,HttpSession session,Member member) {
-//			System.out.println("www : "+message);
+//	@RequestMapping(value="/traVlog/sendmessage.do",method=RequestMethod.GET)
+//	public String sendingmessage(Message message,HttpSession session,Member member) {
+//		System.out.println("www : "+message);
+////message.setMemid("memid");
+//message.setMesname("mesname");
+//		System.out.println("변한 객체 :"+message);
+//		memberService.sendingmessage(message);
+//		
+//		return "traVlog/getmessage2.do";
+
+//	}
+	//메세지 보내기
+		@RequestMapping(value="/traVlog/sendmessage.do",method=RequestMethod.POST)
+		public String sendingmessage(Message message,HttpSession session,Member member) {
+			System.out.println("www : "+message);
 //			message.setMemid("memid");
-//			System.out.println("변한 객체 :"+message);
-//			memberService.sendingmessage(message);
-//			
-//			return "redirect:/traVlog/otherpage.do";
-//
-//		}
-//	
-//	
-	
-	
-	//남한테 메세지 보내기 
-			@RequestMapping(value="/traVlog/sendmessage2.do",method=RequestMethod.GET)
-			public void sending(Message message,Model model) {
-				System.out.println("message : "+message);
-				model.addAttribute("message", message);
-			}
+			message.setMesname("mesname");
+			System.out.println("변한 객체 :"+message);
+			memberService.sendingmessage(message);
 			
+			return "redirect:/traVlog/getmessage2.do";
+
+		}
 	
-			//남한테 메세지 보내기 
-	@RequestMapping(value="/traVlog/sendmessage2.do",method=RequestMethod.POST)
-	public String sendmessage2(Message message, HttpSession session) {
-		System.out.println("message :" + message);
-		memberService.message(message);
-		return "redirect:/traVlog/otherpage.do";
-	}
+	
+	
+	
+//	//남한테 메세지 보내기 
+//			@RequestMapping(value="/traVlog/sendmessage2.do",method=RequestMethod.GET)
+//			public void sending(Message message,Model model) {
+//				System.out.println("message : "+message);
+//				model.addAttribute("message", message);
+//			}
+//			
+//	
+//			//남한테 메세지 보내기 
+//	@RequestMapping(value="/traVlog/sendmessage2.do",method=RequestMethod.POST)
+//	public String sendmessage2(Message message, HttpSession session) {
+//		System.out.println("message :" + message);
+//		memberService.message(message);
+//		return "redirect:/traVlog/otherpage.do";
+//	}
 
 		
 //신고하기
@@ -201,33 +203,44 @@ public class MypageController {
 	public String advertising(Advertising advertising, HttpSession session) {
 		System.out.println("광고보내기 :" + advertising);
 		memberService.advertising(advertising);
-		return "redirect:/traVlog/mypage.do";
+		return "traVlog/advertising";
 	}
 		
 	//광고 내역 보여주기
-			@RequestMapping(value="/traVlog/showadvertising.do")
-			public String showadvertising(Advertising advertising, Model model) {
-				logger.info("광고내역" + advertising);
-			List a_list = memberService.showadvertising(advertising);
-			logger.info("리스트 :"+ a_list);
-			model.addAttribute("a_list", a_list);
-			return "traVlog/showadvertising";
-			}
+	@RequestMapping(value="/traVlog/showadvertising.do")
+	public String showadvertising(Advertising advertising, Model model,HttpSession session) {
+		logger.info("광고내역" + advertising);
+		advertising.setAdvid((String)session.getAttribute("memid"));
+	List a_list = memberService.showadvertising(advertising);
+	logger.info("리스트 :"+ a_list);
+	model.addAttribute("a_list", a_list);
+	return "traVlog/showadvertising";
+	}
 	
 		
 	//결제하기
-	@RequestMapping(value="/traVlog/payment.do")
-	public void payment() {
+	@RequestMapping(value="/traVlog/payment.do", method=RequestMethod.GET)
+	public void payment(HttpSession session, Model model,Advertising ad) {
+		Member member = new Member();
+		logger.info((String)session.getAttribute("memid"));
+		member.setMemid((String)session.getAttribute("memid")); 
+		member = memberService.getMemberByMemId(member);
+		Advertising adInfo = new Advertising();
+		adInfo.setAdvid((String)session.getAttribute("memid"));
+		adInfo.setAdvno(ad.getAdvno());
+		adInfo = memberService.getAdvertisingByAd(adInfo);
 		
+		model.addAttribute("adInfo",adInfo);
+		model.addAttribute("member",member);
 	}
 		
 
-	//남의 페이지 보여주기
-	@RequestMapping(value="/traVlog/otherpage.do")
-	public String otherpage(Model model, Member member) {
-		model.addAttribute("member",member);
-	return "traVlog/otherpage";
-	}
+//	//남의 페이지 보여주기
+//	@RequestMapping(value="/traVlog/otherpage.do")
+//	public String otherpage(Model model, Member member) {
+//		model.addAttribute("member",member);
+//	return "traVlog/otherpage";
+//	}
 
 
 	//Qna 페이지 (질문 페이지)

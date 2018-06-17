@@ -62,6 +62,7 @@ input[type=submit] {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	width: 100%;
 }
 
 
@@ -93,6 +94,7 @@ input[type=button] {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
+	
 }
 
 </style>
@@ -110,6 +112,9 @@ input[type=button] {
 
 
 			<div class="container">
+
+
+ <input type="button" value="내가 작성한 질문 보기" onClick="location.href='/traVlog/showquestion.do'">
 
 				<form action="/traVlog/qnapage2.do" method="post">
 					<div class="form-group">
@@ -144,8 +149,7 @@ input[type=button] {
 						
 						 
 
-						 <input type="button" value="내가 작성한 질문 보기" onClick="location.href='/traVlog/showquestion.do'">
-
+						
 
 						 
 						 

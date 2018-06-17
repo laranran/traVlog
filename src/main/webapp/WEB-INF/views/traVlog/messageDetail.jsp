@@ -17,7 +17,9 @@
 <!-- Latest compiled JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="/resources/css/main.css" rel="stylesheet">
+<link href="/resources/css/mypage.css" rel="stylesheet">
+<link href="/resources/css/mylist.css" rel="stylesheet">
+
 <link href="/resources/css/mainContainer.css" rel="stylesheet">
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -217,7 +219,7 @@ hr {
 
 
 					<div class="main">
-						<h6>받은 메시지</h6>
+
 						<table class="table">
 
 
@@ -225,9 +227,9 @@ hr {
 
 							<thead>
 								<tr>
-									<th>아이디</th>
-									<th>받는 사람</th>
-									<th>받은 내용</th>
+								
+									<th>보낸 사람</th>
+									<th>내용</th>
 									<th>받은 날짜</th>
 									<th>메세지 보내기</th>
 								</tr>
@@ -236,8 +238,8 @@ hr {
 
 							<tbody>
 								<c:forEach items="${m_list }" var="m">
-									<tr id="tr${m.memid }">
-										<td>${m.memid }</td>
+									<%-- <tr id="tr${m.memid }"> --%>
+										<input type="hidden" id="tr${m.memid }" name="memid" />	
 										<td>${m.mesname }</td>
 										<td>${m.mescontent }</td>
 										<td>${m.mesdate }</td>
@@ -264,6 +266,7 @@ hr {
 								class="close" title="Close Modal">&times;</span>
 							<form action="/traVlog/sendmessage.do" method="post">
 								<input type="hidden" id="toMemid" name="memid" />
+								<input type="hidden" id="fromMemid" name="mesname" />
 								<div class="modal-content">
 									<div class="container_1">
 										<h1>	Message</h1>
@@ -293,20 +296,17 @@ hr {
 					
 			</div>
 		</div>
+	</div>	<!-- // End content-wrap -->
+	</div> <!-- End container -->
+	</div>	<!-- // End #wrap -->
+
+
+	<div class="setLayer">
+
+		<div class="mask"></div>
+		<div class="window"></div>
+
 	</div>
-
-</div>
-
-
-
-
-
-	<div class="right">
-	</div>
-
-
-
-</div>
 
 </body>
 </html>

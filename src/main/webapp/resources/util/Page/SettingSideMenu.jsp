@@ -27,7 +27,7 @@
       
       <li><a class="fly" href="/traVlog/advertising.do">광고 신청</a></li>
       
-      <li><a class="fly" href="/traVlog/#.do">결제 조회</a></li>
+      <li><a class="fly" href="/traVlog/showpayment.do">결제 조회</a></li>
       
       <li><a class="fly" href="/traVlog/qnapage2.do">고객센터</a></li>
 	</ul>

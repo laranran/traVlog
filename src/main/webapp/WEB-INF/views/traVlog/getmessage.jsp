@@ -120,7 +120,8 @@ padding-right: 30px;
 
 
 			<th>번호</th>
-			<th>사용자 아이디</th>
+			<th>보낸 사람</th>
+			
 			<th>받은 날짜 </th>
 			
 		</tr>

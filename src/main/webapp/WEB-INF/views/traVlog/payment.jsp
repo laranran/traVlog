@@ -23,12 +23,122 @@
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js">	</script>
+ <script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+ <script>
  
- <script language="javascript">
-  function showPopup() { window.open("report.do?memnick='${memnick }'", "a", "width=400, height=300, left=100, top=50"); }
-  </script>
+ 
+ 
+ var IMP = window.IMP; // 생략가능
+ IMP.init('imp37840187');  // 가맹점 식별 코드
+ var memberEmail = '${member.mememail}';
+ console.log("no?"+memberEmail);
 
+ IMP.request_pay({
+	    pg : 'inicis',
+	    pay_method : 'card',
+	    merchant_uid : 'traVlog_' + new Date().getTime(),
+	    name : '${adInfo.advno}_${adInfo.advdate}',
+	    amount : ${adInfo.advprice},
+	    buyer_email : "${member.mememail}",
+	    buyer_name : "${member.memnick}",
+	    buyer_tel : "${member.memphone}"
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	$.ajax({
+	    		url: "/traVlog/payment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid,
+		    		//기타 필요한 데이터가 있으면 추가 전달
+		    		"advno":${adInfo.advno},
+		    		"payid":${member.memberid},
+		    		"paystart":${adInfo.advdate},
+		    		"paytitle":"${adInfo.advno}_${adInfo.advdate}",
+		    		"payprice":${adInfo.advprice},
+		    		"payway":'card'
+	    		}
+	    	}).done(function(data) {
+	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	    		if ( everythings_fine ) {
+	    			var msg = '결제가 완료되었습니다.';
+	    			msg += '\n고유ID : ' + rsp.imp_uid;
+	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	    			msg += '\결제 금액 : ' + rsp.paid_amount;
+	    			msg += '카드 승인번호 : ' + rsp.apply_num;
 
+	    			alert(msg);
+	    		} else {
+	    			//[3] 아직 제대로 결제가 되지 않았습니다.
+	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	    		}
+	    	});
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+
+	        alert(msg);
+	    }
+	});
+/*  
+ var IMP = window.IMP; // 생략가능
+	IMP.init('imp37840187'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+	IMP.request_pay({
+	    pg : 'inicis', // version 1.1.0부터 지원.
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'traVlog',
+	    amount : amount,
+	    buyer_email : email,
+	    buyer_name : name,
+	    buyer_tel : tel,
+	    buyer_addr : addr,
+	    meeting_no : meeting_no,
+	    group_no : group_no,
+	    m_redirect_url : '/pay.do'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	jQuery.ajax({
+	    		url: "/pay.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		"imp_uid" : rsp.imp_uid,
+		    		"res_id" : res_id,
+		    		"meeting_no" : meeting_no
+		    		//기타 필요한 데이터가 있으면 추가 전달
+	    		}
+	    	}).done(function(data) {
+	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	    		if ( everythings_fine ) {
+	    			var msg = '결제가 완료되었습니다.';
+	    			msg += '\결제 금액 : ' + rsp.paid_amount;
+	    			msg += '카드 승인번호 : ' + rsp.apply_num;
+	    			alert(msg);
+	    			
+	    		} else {
+	    			//[3] 아직 제대로 결제가 되지 않았습니다.
+	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	    			alert("결제 오류로 자동 취소처리되었습니다.");
+	    		}
+	    	});
+	    	
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        alert(msg);
+//	        self.close();
+	    }
+	    close();
+	});
+	
+}); */
+ 
+ 
+ 
+ </script>
 
 
 
@@ -57,47 +167,10 @@ body {
 		<div id="container">
 			<!-- Begin #container -->
 			<div class="content-wrap">
-				<div class="top">
-					<div class="userProfile">
-						<img class="userimg" src="/resources/images/icon/user.png">
-						
-						<div class="usernick">${memnick }</div>
-						<div class="setting">
-				<%-- 	
-				<a  href="report.do?memnick=${memnick }">
-				 <img class="reportimg" 
-					src="/resources/images/icon/report.png" ></a> --%>
-								 
-							
-								<a onclick="showPopup();" style="cursor:pointer"><img class="reportimg"
-								src="/resources/images/icon/report.png" ></a>
+	
 								
 								
 								
-						 	<a href="getmessage.do"><img class="messageimg"
-								src="/resources/images/icon/message.png"></a><br>
-								
-						</div>
-						<div class="userinfo">아몰랑 여기는 소개적는 칸. 글자수 제한을 두는것이 좋겠어요 한
-							80글자 정도로??? 내려온다. 대한 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈
-							오아이스도 스며들어 풍부</div>
-					</div>
-
-					<div class="userfollower">
-
-						<div class="following">
-							<strong>10</strong><br /> <span>팔로우</span>
-						</div>
-						<div class="follower">
-							<strong>37</strong><br /> <span>팔로워</span>
-						</div>
-						<div class="board">
-							<strong>1</strong><br /> <span>게시글</span>
-						</div>
-
-						<div class="setting">
-							<a href="settingprofile.do"><img class="settingimg"
-								src="/resources/images/icon/setting.png"></a><br>
 								
 								
 								
@@ -107,42 +180,7 @@ body {
 					</div>
 				</div>
 
-				<div class="buttom">
-
-					<%-- 					<c:forEach items="ss" begin="0" end="3" var="i" step="1" varStatus="listNumber"> --%>
-					<%-- 						</c:forEach> --%>
-					<div class="mylist-content">
-						<div class="row">
-
-							<div class="pic col-md-4">
-								<a href="#"><img class="pic-src"
-									src="/resources/images/MyPage/chatest1.jpg" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#2"><img class="pic-src"
-									src="/resources/images/MyPage/chatest2.jpg" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#3"><img class="pic-src"
-									src="/resources/images/MyPage/chatest3.jpg" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#4"><img class="pic-src"
-									src="/resources/images/MyPage/chatest4.jpg" alt="photo"></a>
-							</div>
-
-							<div class="pic col-md-4">
-								<a href="#5"><img class="pic-src"
-									src="/resources/images/MyPage/test_5.png" alt="photo"></a>
-							</div>
-
-						</div>
-					</div>
-
-				</div>
+				
 
 			</div>
 			<!-- // End content-wrap -->

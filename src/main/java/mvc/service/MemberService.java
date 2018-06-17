@@ -93,6 +93,14 @@ public class MemberService {
 		memberDao.message(message);
 	}
 
+	public Member getMemberByMemId(Member member) {
+		return memberDao.getMemberByMemId(member);
+	}
+
+	public Advertising getAdvertisingByAd(Advertising adInfo) {
+		return memberDao.getAdvertisingByAd(adInfo);
+	}
+
 
 
 }

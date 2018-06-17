@@ -44,4 +44,8 @@ public interface MemberDao {
 	public List showquestion(Question question);
 
 	public void message(Message message);
+
+	public Member getMemberByMemId(Member member);
+
+	public Advertising getAdvertisingByAd(Advertising adInfo);
 }
