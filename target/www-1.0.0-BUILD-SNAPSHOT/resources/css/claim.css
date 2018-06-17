@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.claimBtn{
+position: absolute;
+width: 130px;
+height: 25px;
+background-color: white;
+border: 1px solid #92A8D1;
+border-radius: 5px;
+}
+.claimBtn:hover {
+	cursor: pointer;
+	background-color: #92A8D1;
+	color: white;
+}
+
+.close{
+position: absolute;
+width: 130px;
+height: 25px;
+margin-left:170px;
+background-color: white;
+border: 1px solid #ff0000;
+border-radius: 5px;
+}
+.close:hover {
+	cursor: pointer;
+	background-color: #ff0000;
+	color: white;
+}
+
+.btnDiv{
+	width : 300px;
+	margin: 20px auto;
+}

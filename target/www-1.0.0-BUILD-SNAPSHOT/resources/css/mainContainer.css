@@ -1,0 +1,245 @@
+@charset "UTF-8";
+
+/* container */
+
+.content-wrap-main .main{
+	position: relative;
+    float: left;
+    width: 700px;
+    margin-top: 50px;
+    left: 16%;
+}
+
+.content-wrap-main .right{
+    position: relative;
+    margin-left: 900px;
+	width: 290px;
+	height: 100%;
+}
+
+.right .user{
+margin-top: 20px;
+width:290px;
+height: 60px;
+}
+
+.right .hashTag{
+border-top:2px solid #606060;
+width:290px;
+min-height: 100px;
+max-height: 200px;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+
+.right .follower{
+border-top:2px solid #606060;
+width:290px;
+min-height: 100px;
+max-height: 200px;
+overflow-y: scroll;
+overflow-x: hidden;
+}
+
+.hashTag .tagA{
+color: #3897F0;
+}
+
+.hashTag .tagA:hover{
+font-style: italic;	
+}
+
+.follower .memA{
+color: #767676;
+}
+
+.follower .memA:hover{
+font-style: italic;	
+}
+
+
+
+/*main board*/
+
+.board{
+	width: 650px;
+    border: 1px solid #adadad;
+    margin: 30px auto;
+    background-color: white;
+}
+
+.memInfo{
+	height: 50px;
+}
+
+.boardInfo{
+	height: 50px;
+	margin-top: 10px;
+}
+
+.boardImg .viewpic {
+	
+		width: 100%;
+	height: 613px;
+	float: left;
+	position: relative;
+	overflow: hidden;
+	
+}
+
+
+.contentImg{
+	width: 650px;
+	height: 750px;
+	width: 100%;
+    height: 100%;
+    position: relative;
+    display: block;
+    float: left;
+}
+.contentImg:hover{
+	cursor: pointer;
+}
+
+.memInfo strong{
+	padding-top: 15px;
+    display: inline-block;
+    color: black;
+    font-size: 15px;
+}
+
+.board .claim{
+	float: right;
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+}
+
+.board .claim:hover{
+	cursor: pointer;
+}
+
+.boardInfo .title{
+    width: 350px;
+    font-size: 25px;
+    display: inline-block;
+    margin-left: 10px;	
+    height: 40px;
+    color: #767676;
+}
+
+.boardInfo .Bdate{
+	vertical-align: middle;
+	font-size: 15px; 
+}
+
+.boardInfo .calender{
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.boardInfo .airplane{
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.icon img{
+	margin: 5px;
+}
+
+.icon img:hover{
+	cursor: pointer;
+}
+
+.icon button{
+	border: none;
+	background-color: unset;
+}
+
+/*right navigation*/
+
+.userimg{
+position: relative;
+float: left;
+width: 50px;
+height: 50px;
+margin: 5px;
+}
+
+.user .nick{
+font-size: 17px;
+font-weight: bold;
+}
+
+.user .id{
+font-size: 13px;
+}
+
+.right strong {
+float:left;
+margin-top: 25px;
+margin-left: 15px;
+margin-bottom: 15px;
+font-size: 15px;
+width: 280px;
+}
+
+.topTag{
+	margin-left: 30px;
+}
+.topTag .tagname{
+	font-size:15px;
+	width: 200px;
+
+}
+.topTag .taghit{
+	font-size:11px;
+}
+
+.topMember{
+	margin-left: 30px;
+}
+.topMember .memnick{
+	font-size:15px;
+	width: 200px;
+
+}
+.topMember .memfollower{
+	font-size:11px;
+}
+
+#STATICMENU { 
+	margin: 0pt;
+    margin-top: 130px;
+    padding: 0pt;
+    position: absolute;
+    left: 63%;
+}
+
+.Bcontent p{
+	font-size: 15px;
+}
+
+.goTop{
+	margin-top : 20px;
+	cursor:pointer;
+	text-align: center;
+	font-size: 15px;
+	
+}
+
+.Rcontent{
+	margin-top: 20px;
+    font-size: 18px;
+}
+
+.tag{
+	color: #3897f0 !important;
+	font-size: 16px;
+}
+.tag:hover{
+	text-decoration: underline;
+}
+

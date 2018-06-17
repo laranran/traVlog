@@ -38,4 +38,33 @@
 		SELECT * FROM tb_profile WHERE memid=#{memid}
 	</select>
 	
+	<insert id="report" parameterType="mvc.dto.Report">
+	INSERT
+	 INTO TB_CLAIM(clmNo,CLMFROMID,CLMTOID,clmdate,CLMREASON,clmCondition) values(UP_clmNo.nextval, #{clmfromid},#{clmtoid}, sysdate,#{clmreason},0)
+
+	</insert>
+
+	
+	<insert id="advertising" parameterType="mvc.dto.Advertising">
+	INSERT INTO TB_ADVERTISING(advno,advid,advname,advstart,advtitle,advprice,advdate,advfile) values(UP_advNo.nextval, #{advid}, #{advname},#{advstart},#{advtitle},#{advprice},sysdate,#{advfile})
+	
+	</insert>
+	
+	<select id="showadvertising"  parameterType="mvc.dto.Advertising" resultType="mvc.dto.Advertising" >
+		SELECT advid, advstart, advname, advtitle, advfile, advapprove FROM TB_ADVERTISING 
+	</select>
+	
+	<insert id="qnapage2" parameterType="mvc.dto.Question">
+	INSERT INTO TB_QUESTION(qusno, memid,qustitle, qusname, quscontent, qusdate) values(UP_qusNo.nextval,#{memid},#{qustitle}, #{qusname},#{quscontent},sysdate)
+	
+	</insert>
+	
+	<select id="showquestion"  parameterType="mvc.dto.Question" resultType="mvc.dto.Question" >
+		SELECT memid,qusname, qustitle, quscontent, qusdate FROM TB_QUESTION
+	</select>
+	
+<!-- 	<select id="otherpage"  parameterType="mvc.dto.Member" resultType="mvc.dto.Member" >
+	select memid, memnick, memfollowing, memfollower, memposting FROM TB_MEMBER
+	</select> -->
+	
 </mapper>

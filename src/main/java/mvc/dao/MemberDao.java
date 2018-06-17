@@ -1,10 +1,15 @@
 package mvc.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import mvc.dto.Advertising;
 import mvc.dto.Member;
+import mvc.dto.Message;
 import mvc.dto.Profile;
+import mvc.dto.Question;
+import mvc.dto.Report;
 
 public interface MemberDao {
 	
@@ -26,4 +31,17 @@ public interface MemberDao {
 	public ArrayList<Member> MemberInfo(String memid);
 
 	public ArrayList<Profile> getProfile(String memid);
+	
+
+	public void report(Report report);
+
+	public void advertising(Advertising advertising);
+
+	public List showadvertising(Advertising advertising);
+
+	public void qnapage2(Question question);
+
+	public List showquestion(Question question);
+
+	public void message(Message message);
 }

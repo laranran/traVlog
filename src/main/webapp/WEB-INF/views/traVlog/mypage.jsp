@@ -43,9 +43,10 @@
 							onclick="location.href='settingprofile.do'">프로필 편집</button>
 						<div class="usernick">${selectMember.memnick }</div>
 						<div class="setting">
-							<a href="message.do"><img class="messageimg"
+							<a href="getmessage.do"><img class="messageimg"
 								src="/resources/images/icon/message.png"></a><br>
 						</div>
+						
 						<div class="userinfo">아몰랑 여기는 소개적는 칸. 글자수 제한을 두는것이 좋겠어요 한
 							80글자 정도로??? 내려온다. 대한 물방아 수 사람은 귀는 튼튼하며, 어디 살 아름다우냐? 피어나기 되려니와, 뼈
 							오아이스도 스며들어 풍부</div>
@@ -205,3 +206,7 @@
 </script>
 
 </html>
+
+
+
+

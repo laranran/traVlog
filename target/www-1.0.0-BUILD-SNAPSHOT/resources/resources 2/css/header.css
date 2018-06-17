@@ -1,0 +1,45 @@
+@charset "UTF-8";
+   
+.header {
+	display: block;
+	padding-top: 30px;
+	width:1200px;
+	height: 55px;
+	margin: 0 auto;
+}
+   
+.header .logo {
+	display: block;
+	float: left;
+	padding-left: 10px;
+}
+
+.header .search{
+	display: block;
+	float: left;
+}
+
+
+.header .write{
+	display: block;
+	float: right;
+	padding-left: 30px;
+}
+
+.header .mypage{
+	display: block;
+	float: right;
+	padding-left: 30px;
+}
+
+.header .find{
+	display: block;
+	float: right;
+	padding-left: 30px;
+}
+
+.header .feed{
+	display: block;
+	float: right;
+	padding-left: 30px;
+}

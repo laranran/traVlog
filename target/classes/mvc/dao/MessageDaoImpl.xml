@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mvc.dao.MessageDao">
+	
+	
+	<select id="getMessageList" resultType="mvc.dto.Message">
+	select rownum m_no, m.* from(SELECT distinct memid FROM TB_MESSAGE WHERE mesname=#{mesname}) m ORDER BY m_no DESC
+	</select>
+	
+	<select id="getMessageDetail" parameterType="mvc.dto.Message" resultType="mvc.dto.Message">
+		SELECT * FROM TB_MESSAGE WHERE memid = #{memid}
+	</select>
+	
+	<insert id="sendingmessage" parameterType="mvc.dto.Message">
+	INSERT INTO TB_MESSAGE values(UP_mesNo.nextval, #{memid}, #{mesname},#{mescontent},sysdate)
+	
+	</insert>
+	<select id="sentMessageList" resultType="mvc.dto.Message" parameterType="String">
+	select rownum m_no, m.* from(SELECT distinct memid FROM TB_MESSAGE WHERE memid=#{myId}) m ORDER BY m_no DESC
+	</select>
+	
+		<insert id="message" parameterType="mvc.dto.Message">
+	INSERT INTO TB_MESSAGE values(UP_mesNo.nextval, #{memid}, #{mesname},#{mescontent},sysdate)
+	</insert>
+	
+</mapper>

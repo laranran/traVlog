@@ -28,4 +28,10 @@ public interface MypageDao {
 	
 	public List selectContentPic(int bodno);
 
+	
+	
+	
+	
+	
+	
 }
