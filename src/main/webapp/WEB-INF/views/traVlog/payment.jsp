@@ -32,7 +32,7 @@
  IMP.init('imp37840187');  // 가맹점 식별 코드
  var memberEmail = '${member.mememail}';
  console.log("no?"+memberEmail);
-
+ 
  IMP.request_pay({
 	    pg : 'inicis',
 	    pay_method : 'card',
@@ -46,17 +46,17 @@
 	    if ( rsp.success ) {
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	    	$.ajax({
-	    		url: "/traVlog/payment.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+	    		url: '/traVlog/payment.do', //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 	    		type: 'POST',
 	    		dataType: 'json',
 	    		data: {
 		    		imp_uid : rsp.imp_uid,
 		    		//기타 필요한 데이터가 있으면 추가 전달
-		    		"advno":${adInfo.advno},
-		    		"payid":${member.memberid},
-		    		"paystart":${adInfo.advdate},
-		    		"paytitle":"${adInfo.advno}_${adInfo.advdate}",
-		    		"payprice":${adInfo.advprice},
+		    		"advno":'${adInfo.advno}',
+		    		"payid":'${member.memid}',
+// 		    		"paystart":startDate,
+		    		"paytitle":"${adInfo.advno}_$ {adInfo.advdate}",
+		    		"payprice":'${adInfo.advprice}',
 		    		"payway":'card'
 	    		}
 	    	}).done(function(data) {
@@ -67,7 +67,6 @@
 	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 	    			msg += '\결제 금액 : ' + rsp.paid_amount;
 	    			msg += '카드 승인번호 : ' + rsp.apply_num;
-
 	    			alert(msg);
 	    		} else {
 	    			//[3] 아직 제대로 결제가 되지 않았습니다.
@@ -77,67 +76,10 @@
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
-
 	        alert(msg);
+	        window.history.back();
 	    }
 	});
-/*  
- var IMP = window.IMP; // 생략가능
-	IMP.init('imp37840187'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-	IMP.request_pay({
-	    pg : 'inicis', // version 1.1.0부터 지원.
-	    pay_method : 'card',
-	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : 'traVlog',
-	    amount : amount,
-	    buyer_email : email,
-	    buyer_name : name,
-	    buyer_tel : tel,
-	    buyer_addr : addr,
-	    meeting_no : meeting_no,
-	    group_no : group_no,
-	    m_redirect_url : '/pay.do'
-	}, function(rsp) {
-	    if ( rsp.success ) {
-	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-	    	jQuery.ajax({
-	    		url: "/pay.do", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
-	    		type: 'POST',
-	    		dataType: 'json',
-	    		data: {
-		    		"imp_uid" : rsp.imp_uid,
-		    		"res_id" : res_id,
-		    		"meeting_no" : meeting_no
-		    		//기타 필요한 데이터가 있으면 추가 전달
-	    		}
-	    	}).done(function(data) {
-	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-	    		if ( everythings_fine ) {
-	    			var msg = '결제가 완료되었습니다.';
-	    			msg += '\결제 금액 : ' + rsp.paid_amount;
-	    			msg += '카드 승인번호 : ' + rsp.apply_num;
-	    			alert(msg);
-	    			
-	    		} else {
-	    			//[3] 아직 제대로 결제가 되지 않았습니다.
-	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-	    			alert("결제 오류로 자동 취소처리되었습니다.");
-	    		}
-	    	});
-	    	
-	    } else {
-	        var msg = '결제에 실패하였습니다.';
-	        msg += '에러내용 : ' + rsp.error_msg;
-	        alert(msg);
-//	        self.close();
-	    }
-	    close();
-	});
-	
-}); */
- 
- 
- 
  </script>
 
 

@@ -22,8 +22,8 @@
 <link href="/resources/css/mypage.css" rel="stylesheet">
 <link href="/resources/css/mylist.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://staticassets-a.styleshare.kr/1ea27d2f8b/css/web.scss.css" />
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!-- <script type="text/javascript" -->
+<!-- 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script> -->
 
 
  
@@ -138,7 +138,7 @@ label {
 										<td>${a.advfile }</td>
 										
 											<c:if test="${a.advapprove eq 1}">
-											<td><a href="payment.do?advno=${a.advno }">
+											<td><a href="/traVlog/payment.do?advno=${a.advno }">
 											<img class="messageimg"
 								src="/resources/images/icon/message.png"></a></td>
           							 </c:if>

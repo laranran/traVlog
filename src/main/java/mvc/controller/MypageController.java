@@ -1,6 +1,8 @@
 package mvc.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,7 @@ import mvc.dto.Board;
 import mvc.dto.Files;
 import mvc.dto.Member;
 import mvc.dto.Message;
+import mvc.dto.Payment;
 import mvc.dto.Question;
 import mvc.dto.Report;
 import mvc.service.MemberService;
@@ -234,6 +237,14 @@ public class MypageController {
 		model.addAttribute("member",member);
 	}
 		
+	@RequestMapping(value="/traVlog/payment.do", method=RequestMethod.POST)
+	public Map<Object,Object> paymentData(HttpSession session, Model model,Payment payment) {
+		logger.info("결제 정보 저장페이지 요청.. 결제정보 : "+payment.toString());
+		
+		Map<Object,Object> answer = new HashMap<>();
+		answer.put("msg", "success");
+		return answer;
+	}
 
 //	//남의 페이지 보여주기
 //	@RequestMapping(value="/traVlog/otherpage.do")
