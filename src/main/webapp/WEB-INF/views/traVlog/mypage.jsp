@@ -24,6 +24,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
  <script language="javascript">
   function showPopup() { window.open("report.do?memnick='${memnick }'", "a", "width=400, height=300, left=100, top=50"); }
+  function showPoppop() { window.open("message.do?memid='${selectMember.memid }'", "a", "width=800, height=500, left=100, top=50"); }
+
   </script>
 
 
@@ -50,9 +52,16 @@
 						<div class="setting">
 						<c:if test="${sessionScope.memnick ne selectMember.memnick}">
 														<a onclick="showPopup();" style="cursor:pointer"><img class="messageimg"
+								src="/resources/images/icon/siren.png" ></a>
+								
+								
+								<a onclick="showPoppop();" style="cursor:pointer"><img class="messageimg"
 								src="/resources/images/icon/message.png" ></a>
-						 	<a href="sendmessage.do?memid=${selectMember.memid }"><img class="messageimg"
-								src="/resources/images/icon/message.png"></a><br>
+								
+								
+								
+						 <%-- 	<a href="message.do?memid=${selectMember.memid }"><img class="messageimg"
+								src="/resources/images/icon/message.png"></a><br> --%>
 						</c:if>
 						<c:if test="${sessionScope.memnick eq selectMember.memnick}">
 							 <a href="getmessage.do">
@@ -120,12 +129,12 @@
 
 	</div>
 	<!-- // End #wrap -->
-
+<!-- 
 	<div class="setLayer">
 
 		<div class="mask"></div>
 		<div class="window"></div>
-
+ -->
 	</div>
 
 </body>

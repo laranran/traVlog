@@ -10,7 +10,7 @@ public interface MessageDao {
 
 	public List getMessageDetail(Message message);
 
-	public void sendingmessage(Message message);
+	public void sendmessage(Message message);
 	
 	public List sentMessageList(String myId);
 	

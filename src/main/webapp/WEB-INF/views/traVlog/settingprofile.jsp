@@ -11,7 +11,7 @@
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	
+<!-- 	
 <style type="text/css">
 body {
    background-image: url('/resources/images/BackGround/main.jpg');
@@ -19,7 +19,7 @@ body {
    background-size: cover;
 }
 
-</style>
+</style> -->
 </head>
 
 <body>

@@ -41,10 +41,13 @@
 </head>
 <style type="text/css">
 body {
-	background-image: url('/resources/images/BackGround/main.jpg');
+
+font-size:12px;
+}
+	/*background-image: url('/resources/images/BackGround/main.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-}
+} */
 input[type=text], select, textarea {
 	width: 100%;
 	padding: 12px;
@@ -94,7 +97,7 @@ input[type=button] {
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
-	
+	float:right;
 }
 
 </style>
@@ -135,9 +138,9 @@ input[type=button] {
 	
 	
 						
-						<label for="quscontent">상세 문의 내용을 쓰세요</label>
+						<label for="quscontent">상세 문의</label>
 						<textarea id="quscontent" name="quscontent"
-							placeholder="문의사항을 쓰세요" style="height: 200px"></textarea>
+							placeholder="문의사항을 입력해 주세요" style="height: 200px"></textarea>
 							
 							
 							

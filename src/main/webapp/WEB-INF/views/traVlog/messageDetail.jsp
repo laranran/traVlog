@@ -39,6 +39,7 @@
 		document.getElementById('id01').style.display='block';
 		$("#toMemid").val(memid);
 		$("#toMemname").val(memname);
+	
 	}
 </script>
 <title>Insert title here</title>
@@ -49,66 +50,23 @@
 
 
 
-
 <style>
 body {
-	background-image: url('/resources/images/BackGround/main.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
 	font-size: 15px;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
 * {
 	box-sizing: border-box
 }
-/* Full-width input fields */
-input
-[
-type
-=
-text
-]
-,
-{
-width
-:
- 
-100%;
-padding
-:
- 
-15
-px
-;
-    
-margin
-:
- 
-5
-px
- 
-0
-22
-px
- 
-0;
-display
-:
- 
-inline-block
-;
-    
-border
-:
- 
-none
-;
-    
-background
-:
- 
-#f1f1f1
-;
+
+input[type=text]{
+width:100%;
+padding:15px;
+margin:5px 0 22px 0;
+display:inline-block;
+border:none;
+background:#f1f1f1;
 }
 /* Add a background color when the inputs get focus */
 input[type=text]:focus, input[type=password]:focus {
@@ -126,11 +84,14 @@ button {
 	width: 80%;
 	opacity: 0.9;
 }
+
 button:hover {
 	opacity: 1;
 }
-text-align
-:center
+
+text-align :center
+
+
 ;
 }
 .table {
@@ -139,12 +100,12 @@ text-align
 	text-align: center;
 }
 /* Extra styles for the cancel button */
-.cancelbtn, .signupbtn {
+.cancelbtn, .send {
 	padding: 14px 20px;
 	background-color: #92A8D1;
 }
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.cancelbtn, .send {
 	margin-top: 10px;
 	float: left;
 	width: 50%;
@@ -171,6 +132,7 @@ text-align
 	background-color: #fefefe;
 	margin: 10% auto 20% auto;
 	/* 5% from the top, 15% from the bottom and centered */
+	padding:15px 15px 15px 15px;
 	border: 1px solid #888;
 	width: 80%; /* Could be more or less, depending on screen size */
 }
@@ -188,6 +150,7 @@ hr {
 	font-weight: bold;
 	color: #f1f1f1;
 }
+
 .close:hover, .close:focus {
 	color: #f44336;
 	cursor: pointer;
@@ -200,7 +163,7 @@ hr {
 }
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
-	.cancelbtn, .signupbtn {
+	.cancelbtn, .send {
 		width: 100%;
 	}
 }
@@ -240,7 +203,7 @@ hr {
 								<c:forEach items="${m_list }" var="m">
 									<%-- <tr id="tr${m.memid }"> --%>
 										<input type="hidden" id="tr${m.memid }" name="memid" />	
-										<td>${m.mesname }</td>
+										<td>${m.memid }</a> </td>
 										<td>${m.mescontent }</td>
 										<td>${m.mesdate }</td>
 										<td><button
@@ -265,14 +228,14 @@ hr {
 								onclick="document.getElementById('id01').style.display='none'"
 								class="close" title="Close Modal">&times;</span>
 							<form action="/traVlog/sendmessage.do" method="post">
-								<input type="hidden" id="toMemid" name="memid" />
-								<input type="hidden" id="fromMemid" name="mesname" />
+								<input type="hidden" id="toMemname" name="memid" />
+								 <input type="hidden" id="fromMemid" name="mesname" /> 
 								<div class="modal-content">
 									<div class="container_1">
 										<h1>	Message</h1>
 										<hr>
-										<label for="nickname='${memid }'"><b>받는사람</b></label> 
-										<input type="text" readonly="readonly" id="toMemname"/>
+										<label for="nickname='${member.memnick }'"><b>받는사람</b></label> 
+										<input type="text" readonly="readonly" id="toMemid" />
 										<p>
 											<label for="content"><b>내용</b></label>
 										</p>
@@ -286,7 +249,7 @@ hr {
 
 						<div class="clearfix">
 
-							<button type="submit" class="signupbtn">send</button>
+							<button type="submit" class="send" onclick="self.close()">send</button>
 							<button type="button"
 								onclick="document.getElementById('id01').style.display='none'"
 								class="cancelbtn">cancel</button>

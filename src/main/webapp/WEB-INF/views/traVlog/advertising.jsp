@@ -43,9 +43,7 @@
 </head>
 <style type="text/css">
 body {
-	background-image: url('/resources/images/BackGround/main.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
+font-size:13px;
 }
 input[type=text], select, textarea {
 	width: 100%;

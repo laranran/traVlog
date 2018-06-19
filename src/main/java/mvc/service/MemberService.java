@@ -57,10 +57,10 @@ public class MemberService {
 	public ArrayList<Profile> getProfile(String memid) {
 		return memberDao.getProfile(memid);
 	}
-	
-	 public void sendingmessage(Message message) {
-		  messageDao.sendingmessage(message);
-	   }
+//	
+//	 public void sendingmessage(Message message) {
+//		  messageDao.sendingmessage(message);
+//	   }
 	/*public void reportProc(Member member,Report report) {
 		return memberDao.reportProc(member,report);
 	}	*/
@@ -101,6 +101,12 @@ public class MemberService {
 		return memberDao.getAdvertisingByAd(adInfo);
 	}
 
+	public void sendmessage(Message message) {
+		  messageDao.sendmessage(message);
+		
+	}
+
+	
 
 
 }

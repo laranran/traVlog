@@ -11,11 +11,12 @@
 
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-	
+
 <link href="/resources/css/main.css" rel="stylesheet">
 <link href="/resources/css/mypage.css" rel="stylesheet">
 <link href="/resources/css/mylist.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="https://staticassets-a.styleshare.kr/1ea27d2f8b/css/web.scss.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://staticassets-a.styleshare.kr/1ea27d2f8b/css/web.scss.css" />
 
 
 <link rel="stylesheet"
@@ -25,34 +26,20 @@
 
 
 <script>
-function checkAll(){
-    if( $("#th_checkAll").is(':checked') ){
-      $("input[name=checkRow]").prop("checked", true);
-    }else{
-      $("input[name=checkRow]").prop("checked", false);
-    }
-    
-    $('input[name=checkRow]').on('change', function(){
-    	  $('input[name=checkRow]').prop('checked', this.checked);
-    	});
-}
+	function checkAll() {
+		if ($("#th_checkAll").is(':checked')) {
+			$("input[name=checkRow]").prop("checked", true);
+		} else {
+			$("input[name=checkRow]").prop("checked", false);
+		}
+
 </script>
 
 
-
-
-
-
-
-
 <script type="text/javascript">
-function getmessage(){	
-	location.href="/traVlog/getmessage.do";
-}
-function getmessage2(){
-	location.href="/traVlog/getmessage2.do";
-	
-}
+	function getmessage() {
+		location.href = "/traVlog/getmessage.do";
+	}
 </script>
 
 
@@ -65,34 +52,43 @@ function getmessage2(){
 </head>
 <style>
 body {
-padding:20px;
- background-image: url('/resources/images/BackGround/main.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
-font-size:15px;
-font-family: Arial, Helvetica, sans-serif;}
-button{
- background-color: #92A8D1;
-    color: white;
-    padding: 10px 15px;
-    margin: 8px 0;
-    margin-left: 250px;
-    border: none;
-    cursor: pointer;
-    width: 50%;
-    opacity: 0.9;
-}
-button:hover {
-    opacity:1;
-}
-.btn-group{
-padding-right: 30px;
-    padding-bottom: 50px;
-    padding-top: 20px;
-    padding: ;
-    float: right;
+
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:15px;
 }
 
+button {
+	background-color: #E89DA2;
+	color: white;
+	padding: 20px 15px;
+	margin: 8px 0;
+	margin-left: 250px;
+	border: none;
+	cursor: pointer;
+	width: 40%;
+	
+}
+th{
+
+text-align:center;
+}
+td{
+text-align:center;}	
+
+	
+
+
+button:hover {
+	opacity: 1;
+}
+
+.btn-group {
+	padding-right: 30px;
+	padding-bottom: 50px;
+	padding-top: 20px;
+	width: 70%;
+	float: right;
+}
 </style>
 <body>
 
@@ -100,68 +96,76 @@ padding-right: 30px;
 
 		<jsp:include page="/resources/util/Page/header.jsp" />
 
-<div id="container">
-<!-- Begin #container -->
-	<div class="content-wrap">
-	
-
-<div class="main">
-		<div class="btn-group">
-  <button type="button" class="btn btn-primary" onclick="getmessage()">받은메세지</button>
-  <button type="button" class="btn btn-primary" onclick="getmessage2()">보낸메세지</button>
-  </div>
+		<div id="container">
+			<!-- Begin #container -->
+			<div class="content-wrap">
 
 
+				<div class="main">
+					<div class="btn-group">
+						<!-- <button type="button" class="btn btn-primary"
+							onclick="getmessage()">받은 메세지</button> -->
+	<button type="button" class="btn btn-primary"
+							>받은 메세지</button>
 
-<table class="table table-striped">
-	<thead>
-		<tr>
-		    <th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
-
-
-			<th>번호</th>
-			<th>보낸 사람</th>
-			
-			<th>받은 날짜 </th>
-			
-		</tr>
-		
-	</thead>
+					</div>
 
 
 
-<tbody>
-		<c:forEach items="${mList }" var="c" >
-			<tr>
-			    <td class="center">
-			    <input type="checkbox" name="checkRow" value="${content.IDX}" class='memberChk' /></td>
+					<table class="table table">
+						<thead>
+							<tr>
+								<th><input type="checkbox" name="checkAll" id="th_checkAll"
+									onclick="checkAll();" /></th>
 
-				<td>${c.m_no }</td>
-				<td><a href="/traVlog/messageDetail.do?memid=${c.memid }">${c.memid }</a> </td>
+
+								<th>번호</th>
+								<th>보낸 사람</th>
+
+								<th>받은 날짜</th>
+
+							</tr>
+
+						</thead>
+
+
+
+						<tbody>
+							<c:forEach items="${mList }" var="c">
+								<tr>
+									<td class="center"><input type="checkbox" name="checkRow"
+										value="${content.IDX}" class='memberChk' /></td>
+
+									<td>${c.m_no }</td>
+									<td><a href="/traVlog/messageDetail.do?memid=${c.memid }">${c.memid }</a>
+									</td>
+
+									<td>${c.mesdate }</td>
+
+
+								</tr>
+							</c:forEach>
+						</tbody>
+
+					</table>
 				
-				<td> ${c.mesdate }</td>
-				
-				
-			</tr>
-		</c:forEach>
-	</tbody>
-	
-	</table>
-	
-	<button>삭제</button>
-	
-	
+						<button >삭제</button>
+
+
+
+
+</div>
+
+
+
+
+
+			</div>
+			<!-- // End content-wrap -->
+		</div>
+		<!-- End container -->
 	</div>
-
-
-
-
-
-
-
-	</div>	<!-- // End content-wrap -->
-	</div> <!-- End container -->
-	</div>	<!-- // End #wrap -->
+	<!-- // End #wrap -->
 
 
 	<div class="setLayer">

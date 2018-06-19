@@ -73,8 +73,10 @@
 		SELECT memid,qusname, qustitle, quscontent, qusdate FROM TB_QUESTION
 	</select>
 	
-<!-- 	<select id="otherpage"  parameterType="mvc.dto.Member" resultType="mvc.dto.Member" >
-	select memid, memnick, memfollowing, memfollower, memposting FROM TB_MEMBER
-	</select> -->
+<insert id="message" parameterType="mvc.dto.Message">
+	INSERT INTO TB_MESSAGE values(UP_mesNo.nextval, #{memid}, #{mesname},#{mescontent},sysdate)
 	
+
+	</insert>
+
 </mapper>

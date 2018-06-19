@@ -14,7 +14,7 @@
 		SELECT * FROM TB_MESSAGE WHERE memid = #{memid}
 	</select>
 	
-	<insert id="sendingmessage" parameterType="mvc.dto.Message">
+	<insert id="sendmessage" parameterType="mvc.dto.Message">
 	INSERT INTO TB_MESSAGE values(UP_mesNo.nextval, #{memid}, #{mesname},#{mescontent},sysdate)
 	
 	</insert>
@@ -22,6 +22,5 @@
 	select rownum m_no, m.* from(SELECT distinct memid FROM TB_MESSAGE WHERE memid=#{myId}) m ORDER BY m_no DESC
 	</select>
 	
-
 	
 </mapper>

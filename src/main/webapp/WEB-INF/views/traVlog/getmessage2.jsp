@@ -93,8 +93,8 @@ text-aling:center;}
 	
 <div class="main">
 		<div class="btn-group">
-  <button type="button" class="btn btn-primary" onclick="getmessage()">받은메세지</button>
-  <button type="button" class="btn btn-primary" onclick="getmessage2()">보낸메세지</button>
+  <button type="button" class="btn btn-primary" onclick="getmessage()">받은 메세지</button>
+  <button type="button" class="btn btn-primary" onclick="getmessage2()">보낸 메세지</button>
   </div>
 <table class="table table-striped">
 	<thead>
@@ -102,8 +102,8 @@ text-aling:center;}
 		    <th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
 			<th>번호</th>
 			<th>받은 사람</th>
-			<th>보낸 내용 </th>
-			<th>보낸 날짜 </th>
+			<th>받은 내용 </th>
+			<th>받은 날짜 </th>
 			
 		</tr>
 		
@@ -113,7 +113,8 @@ text-aling:center;}
 			<tr>
 			    <td class="center"><input type="checkbox" name="checkRow" value="${content.IDX}" /></td>
 				<td>${d.m_no }</td>
-				 <td><a href="/traVlog/messageDetail.do?memid=${d.memid }">${d.memid }</a> </td> 
+				
+				 <td>${d.mesname } </td> 
 				
 				<%-- <td>${d.memid }</td> --%>
 				

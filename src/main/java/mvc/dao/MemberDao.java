@@ -48,4 +48,6 @@ public interface MemberDao {
 	public Member getMemberByMemId(Member member);
 
 	public Advertising getAdvertisingByAd(Advertising adInfo);
+
+
 }

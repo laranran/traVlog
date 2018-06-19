@@ -33,10 +33,12 @@
 </head>
 <style type="text/css">
 body {
-	background-image: url('/resources/images/BackGround/main.jpg');
+font-size:14px;
+font-family: "돋움", dotum, arial, helvetica, sans-serif;
+/* 	background-image: url('/resources/images/BackGround/main.jpg');
 	background-repeat: no-repeat;
-	background-size: cover;
-}
+ */	background-size: cover;
+} 
 input[type=text], select, textarea {
 	width: 100%;
 	padding: 12px;
@@ -55,6 +57,8 @@ input[type=submit] {
 	border-radius: 4px;
 	cursor: pointer;
 }
+td, th{
+text-align: center;}
 input[type=submit]:hover {
 	background-color: #45a049;
 }
@@ -125,22 +129,22 @@ label {
 										<td>
 										<c:choose>
 											<c:when test="${a.advapprove  eq 0}">
-											<pre>관리자 승인대기</pre>
+											<p>관리자 승인대기</p>
 											</c:when>
 											<c:when test="${a.advapprove  eq 1}">
-											<pre>관리자 승인</pre>
+											<p>관리자 승인</p>
 											</c:when>
 											<c:when test="${a.advapprove  eq 2}">
-											<pre>관리자 거절</pre>
+											<p>관리자 거절</p>
 											</c:when>
 										</c:choose>
 										</td>
-										<td>${a.advfile }</td>
+									<td><img src="/resources/util/img/mountain.jpg" width="120" height="80"></td>	
 										
 											<c:if test="${a.advapprove eq 1}">
 											<td><a href="/traVlog/payment.do?advno=${a.advno }">
 											<img class="messageimg"
-								src="/resources/images/icon/message.png"></a></td>
+								src="/resources/images/icon/creditcard.png"></a></td>
           							 </c:if>
           						
           							 

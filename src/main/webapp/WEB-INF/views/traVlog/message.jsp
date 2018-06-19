@@ -23,39 +23,49 @@
 	src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script>
 function done(){
-	alert(" 신고 완료 되었습니다.");
-}
+	alert("메세지 전송 완료 되었습니다.");}
+
+
+
 </script>
 
 <title>Insert title here</title>
 
 <style>
+
+body{
+padding-left:10px;
+padding-right:10px;
+}
 select {
-    width: 200px;
-    height: 30px;
-    margin-top:20px;
-    margin-left:20px;
-    padding-left: 30px;
-    padding-top:30px;
-    font-size: 18px;
-    color: gray;
-    border: 1px solid #E89DA2;
-    border-radius: 3px;
+	width: 250px;
+	height: 30px;
+	margin-top:20px;
+	margin-left:50px;
+	padding-left: 30px;
+	font-size: 18px;
+	color: gray;
+	border: 1px solid #E89DA2;
+	border-radius: 3px;
 }
-input{
-
-width: 50px;
-    height: 27px;
-    padding-left: 10px;
-    text-align : left;
-    margin-top:20px;
-
-    font-size: 12px;
-    color: gray;
-    border: 1px solid #E89DA2;
-    border-radius: 3px;
-
+b{
+font-size:15px;
 }
+input {
+margin-top:20px;
+	width: 90px;
+	height: 30px;
+	padding-left: 3px;
+	text-align: center;
+	font-size: 18px;
+	color: gray;
+	border: 1px solid #E89DA2;
+	border-radius: 10px;
+	
+}
+
+
+
 </style>
 
 </head>
@@ -63,31 +73,31 @@ width: 50px;
 
 
 
-	<form action="/traVlog/report.do" method="post">
-		<input type="hidden" name="clmtoid" value="${member.memnick }" /> <input
-			type="hidden" name="clmfromid" value="${sessionScope.memnick }" />
 
-			<select class="selectpicker" name="clmreason">
-			<!-- 글 신고와 같은 번호 -->
-		
-			<option value=1>욕설 및 인신공격</option>
-			<option value=2>음란성 / 사행성 게시글</option>
-			<option value=3>도배 게시글 / 댓글</option>
-			<option value=4>개인정보 노출 / 사생활 침해</option>
-			<option value=5>기타</option>
-
-</select>
+	<form action="/traVlog/message.do" method="post">
 
 
+	<input type="hidden" name="memid" value="${sessionScope.memid }" />
+		<h1>Message</h1>
+		<hr>
+		 		<label for="mesname='${member.memnick}'"><b>받는사람</b></label>  
+		 		
+		<p><input type="text" readonly="readonly" name="mesname"
+			value="${member.memid }" /></p>
+		<p>
 
-
+			<label for="content"><b>내용</b></label>
+		</p>
+		<textarea class="form-control col-sm-3" name="mescontent" rows="8"></textarea>
 
 
 
-	 <input type="submit" id=button value="보내기"
-	 onclick="done();self.close();"> 
-	 <input type="button"
-			value="닫 기" onclick="self.close();" />
+
+
+
+
+		<input type="submit" id=button value="보내기" onclick="done();self.close();">
+		<input type="button" value="닫 기" onclick="self.close();" />
 
 
 
@@ -103,7 +113,7 @@ width: 50px;
 
 
 
-</div>
+	</div>
 
 	<div class="right"></div>
 
