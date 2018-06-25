@@ -93,29 +93,6 @@ public class MypageController {
 		return "traVlog/getmessage";
 	}
 
-//
-//	//보낸 메세지 리스트
-//	@RequestMapping(value = "/traVlog/getmessage2.do", method = RequestMethod.GET)
-//	public String getmessage2(Model model,HttpSession session) {
-//		String myId = (String)session.getAttribute("memnick");
-//		List sList = messageService.sentMessageList(myId);
-//		System.out.println(sList);
-//		model.addAttribute("sList", sList);
-//		return "traVlog/getmessage2";
-//	}
-
-
-//
-//	//보낸 메세지함
-//	@RequestMapping(value="/traVlog/getmessage2.do", method=RequestMethod.POST)
-//	public String getmessage2(Model model, Message message) {
-//		System.out.println("보낸거");
-//
-//		model.addAttribute("message",message);
-//
-//		return "traVlog/getmessage2";
-//
-//	}
 
 
 

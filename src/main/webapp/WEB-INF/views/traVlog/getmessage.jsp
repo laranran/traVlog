@@ -36,11 +36,7 @@
 </script>
 
 
-<script type="text/javascript">
-	function getmessage() {
-		location.href = "/traVlog/getmessage.do";
-	}
-</script>
+
 
 
 
@@ -102,14 +98,6 @@ button:hover {
 
 
 				<div class="main">
-					<div class="btn-group">
-						<!-- <button type="button" class="btn btn-primary"
-							onclick="getmessage()">받은 메세지</button> -->
-	<button type="button" class="btn btn-primary"
-							>받은 메세지</button>
-
-					</div>
-
 
 
 					<table class="table table">
